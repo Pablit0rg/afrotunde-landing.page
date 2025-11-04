@@ -1,0 +1,418 @@
+/* ======== 1. IMPORTAÇÃO DAS FONTES ======== */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500&display=swap');
+
+/* ======== 2. RESET BÁSICO ======== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+/* ======== 3. VARIÁVEIS DE COR E FONTES (O MENU) ======== */
+:root {
+    /* TEMA DARK (GRAFITE) - PADRÃO */
+    --cor-fundo: #1a1820; /* Grafite/Berinjela escuro */
+    --cor-fundo-destaque: #2a2730; /* Um tom mais claro para os cards */
+    --cor-texto-principal: #f0f0f0; /* Branco suave */
+    --cor-texto-secundario: #a0a0a0; /* Cinza claro */
+    --cor-destaque-ori: #D4AF37; /* Dourado */
+
+    /* Cor da Navbar semi-transparente */
+    --cor-fundo-navbar: rgba(26, 24, 32, 0.85); /* 85% opacidade do grafite */
+
+    /* FONTES */
+    --font-titulo: 'Cormorant Garamond', serif;
+    --font-texto: 'Inter', sans-serif;
+}
+
+[data-theme="light"] {
+    /* TEMA LIGHT (BRANCO) - OPCIONAL */
+    --cor-fundo: #FCFCFC; /* Branco puro */
+    --cor-fundo-destaque: #f0f0f0; /* Cinza bem claro para os cards */
+    --cor-texto-principal: #1f1f1f; /* Grafite */
+    --cor-texto-secundario: #555555; /* Cinza médio */
+    --cor-destaque-ori: #C0A062; /* Bronze (funciona melhor no branco) */
+
+    /* Cor da Navbar semi-transparente */
+    --cor-fundo-navbar: rgba(252, 252, 252, 0.85); /* 85% opacidade do branco */
+}
+
+/* ======== 4. CONFIGURAÇÕES GLOBAIS ======== */
+html {
+    scroll-behavior: smooth; /* A rolagem suave! */
+    font-size: 16px; /* Base para o 'rem' responsivo */
+}
+
+body {
+    font-family: var(--font-texto);
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto-principal);
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ======== 5. ESTRUTURA E UTILITÁRIOS ======== */
+.container {
+    width: 90%; /* Perfeito para mobile-first */
+    max-width: 1100px; /* Limite no desktop */
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.section {
+    padding: 60px 0; /* Espaçamento padrão entre seções */
+}
+
+/* (Seção de Depoimentos com fundo destacado) */
+.section.destaque {
+    background-color: var(--cor-fundo-destaque);
+    
+    /* A moldura dourada para o "altar" */
+    border-top: 1px solid var(--cor-destaque-ori);
+    border-bottom: 1px solid var(--cor-destaque-ori);
+    
+    transition: background-color 0.3s ease;
+}
+
+/* ======== 6. TIPOGRAFIA (Títulos e Textos) ======== */
+h1, h2, h3, h4 {
+    font-family: var(--font-titulo);
+    color: var(--cor-destaque-ori); /* Destaque Ori nos títulos */
+    font-weight: 600;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+h1 { font-size: 2.5rem; /* 40px */ }
+h2 { font-size: 2rem; /* 32px */ }
+h3 { font-size: 1.5rem; /* 24px */ }
+h4 { font-size: 1.25rem; /* 20px */ }
+
+p {
+    font-size: 1rem; /* 16px */
+    margin-bottom: 1rem;
+    color: var(--cor-texto-principal);
+}
+
+a {
+    color: var(--cor-destaque-ori);
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    opacity: 0.8;
+}
+
+/* ======== 7. COMPONENTES PRINCIPAIS ======== */
+
+/* (HEADER / NAVBAR) - SEMPRE VISÍVEL */
+.navbar {
+    padding: 1rem 0;
+    position: sticky; /* Menu fixo */
+    top: 0;
+    z-index: 1000;
+    
+    /* ESTADO PADRÃO (SEMPRE ATIVO) */
+    background-color: var(--cor-fundo-navbar);
+    
+    /* A linha de destaque dourada */
+    border-bottom: 1px solid var(--cor-destaque-ori);
+    
+    /* EFEITO VIDRO FOSCO (Glassmorphism) */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Suporte para Safari */
+    
+    /* SOMBRA SUAVE (Foco) */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between; /* (Desktop) */
+    align-items: center;
+    padding: 0; /* Resetar padding do container */
+    
+    /* Posição relativa para o menu hamburger */
+    position: relative;
+}
+.logo {
+    font-family: var(--font-titulo);
+    
+    /* (MUDANÇA AQUI) Logo maior */
+    font-size: 2.1rem; 
+    
+    font-weight: 600;
+    
+    /* (MUDANÇA AQUI) Centraliza perfeitamente na linha */
+    line-height: 1; 
+    
+    transition: all 0.3s ease;
+}
+.nav-menu a {
+    font-size: 1rem;
+    margin-left: 1.5rem;
+    font-weight: 500;
+}
+
+/* (ESTILOS DO HAMBURGER) */
+.hamburger-menu {
+    display: none; /* (Escondido no desktop) */
+    cursor: pointer;
+}
+.hamburger-menu .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: var(--cor-destaque-ori); /* (Cor dourada) */
+    transition: all 0.3s ease-in-out;
+}
+
+/* (HERO SECTION) */
+.hero {
+    min-height: 80vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 0; 
+}
+
+.hero .subtitulo {
+    font-size: 1.2rem;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 2rem;
+}
+.hero .frase-orgulho {
+    font-family: var(--font-titulo);
+    font-size: 1.2rem;
+    color: var(--cor-destaque-ori);
+    font-weight: 600;
+    margin-top: 2rem;
+}
+
+/* (BOTÃO CTA PRINCIPAL) */
+.cta-button {
+    font-family: var(--font-texto);
+    background-color: var(--cor-destaque-ori);
+    color: var(--cor-fundo); /* Contraste forte */
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    display: inline-block;
+    border: 2px solid var(--cor-destaque-ori);
+    transition: all 0.3s ease;
+    
+    /* Propriedades para o Efeito de Brilho */
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.cta-button:hover {
+    background-color: transparent;
+    color: var(--cor-destaque-ori);
+    opacity: 1;
+}
+
+/* (GALERIA) */
+.galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsividade mágica! */
+    gap: 1.5rem;
+}
+.card-servico {
+    background-color: var(--cor-fundo-destaque);
+    border-radius: 8px;
+    overflow: hidden; /* Para a imagem se ajustar */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.card-servico img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+.card-servico h4, .card-servico .disclaimer {
+    padding: 1rem;
+}
+.card-servico .disclaimer {
+    font-size: 0.85rem;
+    color: var(--cor-texto-secundario);
+    padding-top: 0;
+}
+
+/* (FRASES DE ORGULHO) */
+.frase-orgulho {
+    font-family: var(--font-titulo);
+    font-size: 1.5rem;
+    color: var(--cor-destaque-ori);
+    text-align: center;
+    padding: 2rem 0;
+    font-weight: 600;
+}
+
+/* (DEPOIMENTOS) */
+.depoimentos-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* 1 coluna no mobile */
+    gap: 1.5rem;
+}
+.card-depoimento {
+    background-color: var(--cor-fundo); /* Cor de fundo principal */
+    border-radius: 8px;
+    padding: 1.5rem;
+    border-left: 5px solid var(--cor-destaque-ori);
+}
+.card-depoimento p {
+    font-style: italic;
+    font-size: 1.1rem;
+}
+.card-depoimento span {
+    font-weight: 500;
+    color: var(--cor-texto-secundario);
+    margin-top: 1rem;
+    display: block;
+}
+
+/* (CONTATO) */
+.texto-localizacao {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--cor-texto-secundario);
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+}
+.botoes-contato {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap; /* Para quebrar no mobile */
+}
+
+/* (FOOTER) - ATUALIZADO COM BORDA DOURADA */
+.footer {
+    /* A linha de destaque dourada */
+    border-top: 1px solid var(--cor-destaque-ori);
+    
+    padding: 2rem 0;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+}
+.footer p {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+    margin: 0.25rem 0;
+}
+
+/* ======== 8. EFEITO BRILHO (O TOQUE MESTRE) ======== */
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%; /* Começa fora da tela, à esquerda */
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Fica atrás do texto do botão */
+
+    /* Este é o "brilho": um degradê diagonal */
+    background: linear-gradient(
+        60deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.4), /* Um brilho branco/dourado suave */
+        transparent
+    );
+
+    /* A mágica da animação */
+    transition: left 0.7s ease-in-out;
+}
+
+/* Quando o mouse passar por cima... */
+.cta-button:hover::before {
+    left: 100%; /* ...o brilho se move da esquerda para a direita */
+}
+
+
+/* ======== 9. MEDIA QUERIES (RESPONSIVIDADE - O MENU SANTUÁRIO) ======== */
+
+/* (Ajustes para tablets e celulares - max-width: 768px) */
+@media (max-width: 768px) {
+    
+    /* (1. Centraliza a Logo) */
+    .navbar .container {
+        justify-content: center;
+    }
+    
+    /* (2. Posiciona o Hamburger no canto) */
+    .hamburger-menu {
+        display: block; /* (Mostra o hamburger) */
+        position: absolute;
+        right: 0; /* (Na direita, na "zona do polegar") */
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1002; /* (Acima de tudo) */
+    }
+
+    /* (3. Esconde o menu desktop) */
+    .nav-menu {
+        /* (A "EXTENSÃO" / PORTA DO SANTUÁRIO) */
+        position: fixed;
+        left: -100%; /* (Começa escondido fora da tela) */
+        top: 0;
+        width: 100%;
+        height: 100vh; /* (Tela cheia) */
+        background-color: var(--cor-fundo); /* (Cor de fundo sólida) */
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        transition: left 0.4s ease-in-out;
+        z-index: 1001; /* (Abaixo do hamburger, acima do site) */
+    }
+    
+    /* (4. Mostra a "extensão" quando 'active') */
+    .nav-menu.active {
+        left: 0;
+    }
+
+    /* (5. Estiliza os links no menu mobile) */
+    .nav-menu a {
+        font-family: var(--font-titulo); /* (Fonte elegante) */
+        font-size: 2rem; /* (Links grandes, fáceis de tocar) */
+        margin: 1.5rem 0;
+        font-weight: 600;
+        
+        /* (MUDANÇA AQUI) Transição para o efeito de toque */
+        transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    /* (MUDANÇA AQUI) Efeito de toque (reflexo) para mobile */
+    .nav-menu a:active {
+        transform: scale(1.1); /* (Efeito "pulso") */
+        opacity: 0.8; /* (Feedback visual) */
+    }
+
+    /* (6. Anima o Hamburger para "X") */
+    .hamburger-menu.active .bar:nth-child(2) {
+        opacity: 0; /* (Some a barra do meio) */
+    }
+    .hamburger-menu.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger-menu.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* (Outros ajustes de tamanho) */
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.8rem; }
+    
+    .depoimentos-grid {
+        grid-template-columns: 1fr; /* 1 coluna (já era padrão, mas bom garantir) */
+    }
+}
