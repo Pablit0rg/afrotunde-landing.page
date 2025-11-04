@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Afrotunde | Trancista e Loctician em Curitiba (Nagô, Locs)</title>
+    <meta name="description" content="Procurando trancista negra em Curitiba? A Afrotunde é especialista em tranças nagô e locs. A arte ancestral que cuida do seu Ori.">
+    <meta name="keywords" content="trancista curitiba, loctician curitiba, trancista negra curitiba, tranças nago curitiba, locs curitiba, salão afro curitiba, cic">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="navbar"> 
+        <div class="container">
+            <a href="#inicio" class="logo">afrotunde</a>
+            
+            <nav class="nav-menu">
+                <a href="#inicio">Início</a>
+                <a href="#catalogo">Galeria</a>
+                <a href="#depoimentos">Depoimentos</a>
+                <a href="#contato">Contato</a>
+            </nav>
+            
+            <div class="hamburger-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <section id="inicio" class="hero">
+            <div class="container">
+                <h1>Afrotunde: Tranças Nagô e Locs em Curitiba</h1>
+                <p class="subtitulo">Por Karla, Loctician. A arte ancestral que revela o seu Ori.</p>
+                <a href="[SEU_LINK_WHATSAPP_AQUI]" class="cta-button">Agendar Minha Arte no Ori</a>
+                <p class="frase-orgulho">"Seu Ori é sua coroa ancestral."</p>
+            </div>
+        </section>
+
+        <section id="catalogo" class="section">
+            <div class="container">
+                <h2>Minhas Artes: Locs, Tranças e Penteados</h2>
+                
+                <div class="galeria-grid">
+                    <div class="card-servico">
+                        <img src="https://via.placeholder.com/300x300.png?text=Arte+Exemplo+1" alt="Exemplo de locs por loctician em Curitiba">
+                        <h4>A partir de R$ 200,00</h4>
+                        <p class="disclaimer">Valor médio. O preço final é negociado via WhatsApp e depende do seu cabelo.</p>
+                    </div>
+                    <div class="card-servico">
+                        <img src="https://via.placeholder.com/300x300.png?text=Arte+Exemplo+2" alt="Exemplo de trança nagô por trancista em Curitiba">
+                        <h4>A partir de R$ 150,00</h4>
+                        <p class="disclaimer">Valor médio. O preço final é negociado via WhatsApp e depende do seu cabelo.</p>
+                    </div>
+                </div>
+                
+                <p class="frase-orgulho">"Cultive sua raiz, floresça sua identidade."</p>
+            </div>
+        </section>
+
+        <section id="depoimentos" class="section destaque">
+            <div class="container">
+                <h2>Vozes de quem cuidou do Ori</h2>
+                <div class="depoimentos-grid">
+                    <div class="card-depoimento">
+                        <p>"Simplesmente incrível! A Karla tem mãos de fada e uma energia que renova a gente. Minha autoestima é outra!"</p>
+                        <span>- Cliente Satisfeita (via WhatsApp)</span>
+                    </div>
+                     <div class="card-depoimento">
+                        <p>"Profissional excelente, super atenciosa e o trabalho ficou perfeito. Recomendo de olhos felchados."</p>
+                        <span>- Cliente Satisfeita (via Instagram)</span>
+                    </div>
+                </div>
+                <p class="frase-orgulho">"Beleza e espiritualidade trançadas no mesmo fio."</p>
+            </div>
+        </section>
+
+        <section id="contato" class="section">
+            <div class="container">
+                <h2>Vamos cuidar da sua coroa?</h2>
+                <p class="texto-localizacao">Atendimento profissional em Curitiba, com fácil acesso para toda a região. Fale comigo e agende seu horário.</p>
+                <div class="botoes-contato">
+                    <a href="[SEU_LINK_WHATSAPP_AQUI]" class="cta-button">Chamar no WhatsApp</a>
+                    <a href="[LINK_DO_INSTA_DELA]" class="cta-button">Ver mais no Instagram</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 afrotunde | Todos os direitos reservados.</p>
+            <p>Desenvolvido por: <a href="[SEU_LINK_PORTFOLIO]" target="_blank">[Seu Nome / Sua Marca]</a></p>
+        </div>
+    </footer>
+
+    <script>
+        const hamburger = document.querySelector('.hamburger-menu');
+        const navMenu = document.querySelector('.nav-menu');
+
+        // "Escuta" o clique no hamburger
+        hamburger.addEventListener('click', () => {
+            // Adiciona a classe 'active' no hamburger (para virar "X")
+            hamburger.classList.toggle('active');
+            // Adiciona a classe 'active' no menu (para fazê-lo aparecer)
+            navMenu.classList.toggle('active');
+        });
+
+        // (Opcional: Fecha o menu quando um link é clicado)
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
