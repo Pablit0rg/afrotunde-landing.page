@@ -49,9 +49,9 @@
 
         <section id="catalogo" class="section">
             <div class="container">
-                <h2>Minhas Artes: Locs, Tranças e Penteados</h2>
+                <h2 class="fade-in">Minhas Artes: Locs, Tranças e Penteados</h2>
                 
-                <div class="galeria-grid">
+                <div class="galeria-grid fade-in">
                     <div class="card-servico" data-full-src="placeholder-video">
                         <div class="video-placeholder"></div>
                         <h4>A partir de R$ 200,00</h4>
@@ -94,14 +94,15 @@
                     </div>
                 </div>
                 
-                <p class="frase-orgulho">"Cultive sua raiz, floresça sua identidade."</p>
+                <p class="frase-orgulho fade-in">"Cultive sua raiz, floresça sua identidade."</p>
             </div>
         </section>
 
         <section id="depoimentos" class="section destaque">
             <div class="container">
-                <h2>Vozes de quem cuidou do Ori</h2>
-                <div class="depoimentos-grid">
+                <h2 class="fade-in">Vozes de quem cuidou do Ori</h2>
+                
+                <div class="depoimentos-grid fade-in">
                     <div class="card-depoimento">
                         <p>"Simplesmente incrível! A Karla tem mãos de fada e uma energia que renova a gente. Minha autoestima é outra!"</p>
                         <span>- Cliente Satisfeita (via WhatsApp)</span>
@@ -111,15 +112,18 @@
                         <span>- Cliente Satisfeita (via Instagram)</span>
                     </div>
                 </div>
-                <p class="frase-orgulho">"Beleza e espiritualidade trançadas no mesmo fio."</p>
+                
+                <p class="frase-orgulho fade-in">"Beleza e espiritualidade trançadas no mesmo fio."</p>
             </div>
         </section>
 
         <section id="contato" class="section">
             <div class="container">
-                <h2>Vamos cuidar da sua coroa?</h2>
-                <p class="texto-localizacao">Atendimento profissional em Curitiba, com fácil acesso para toda a região. Fale comigo e agende seu horário.</p>
-                <div class="botoes-contato">
+                <h2 class="fade-in">Vamos cuidar da sua coroa?</h2>
+                
+                <p class="texto-localizacao fade-in">Atendimento profissional em Curitiba, com fácil acesso para toda a região. Fale comigo e agende seu horário.</p>
+                
+                <div class="botoes-contato fade-in">
                     <a href="[SEU_LINK_WHATSAPP_AQUI]" class="cta-button">Chamar no WhatsApp</a>
                     <a href="https://www.instagram.com/afrotunde/" target="_blank" rel="noopener noreferrer" class="cta-button">Ver mais no Instagram</a>
                 </div>
@@ -156,16 +160,16 @@
     </div>
     
 <script>
+        // --- SCRIPT ANTIGO (TUDO OK) ---
         const hamburger = document.querySelector('.hamburger-menu');
         const navMenu = document.querySelector('.nav-menu');
         const lightboxOverlay = document.querySelector('.lightbox-overlay');
         const lightboxImage = document.querySelector('.lightbox-image');
-        const lightboxVideoPlaceholder = document.querySelector('.lightbox-video-placeholder'); // Seleciona o placeholder do lightbox
+        const lightboxVideoPlaceholder = document.querySelector('.lightbox-video-placeholder'); 
         const lightboxClose = document.querySelector('.lightbox-close');
         const cardServicos = document.querySelectorAll('.card-servico'); 
         const body = document.body;
 
-        // Lógica do Menu Hamburger
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
@@ -180,22 +184,21 @@
             });
         });
 
-        // Lógica do Lightbox (CORRIGIDA E ADAPTADA PARA PLACEHOLDER)
         cardServicos.forEach(card => {
             card.addEventListener('click', () => {
                 const fullSrc = card.getAttribute('data-full-src');
                 
                 if (fullSrc === "placeholder-video") {
-                    lightboxImage.style.display = 'none'; // Esconde a imagem real
-                    lightboxVideoPlaceholder.style.display = 'flex'; // Mostra o placeholder de vídeo
-                } else if (fullSrc) { // Se for uma URL real (foto)
+                    lightboxImage.style.display = 'none'; 
+                    lightboxVideoPlaceholder.style.display = 'flex'; 
+                } else if (fullSrc) { 
                     lightboxImage.src = fullSrc;
-                    lightboxImage.style.display = 'block'; // Mostra a imagem real
-                    lightboxVideoPlaceholder.style.display = 'none'; // Esconde o placeholder
+                    lightboxImage.style.display = 'block'; 
+                    lightboxVideoPlaceholder.style.display = 'none'; 
                 }
 
                 lightboxOverlay.classList.add('active');
-                body.classList.add('no-scroll'); // Bloqueia a rolagem
+                body.classList.add('no-scroll'); 
             });
         });
 
@@ -207,12 +210,36 @@
         };
 
         lightboxClose.addEventListener('click', closeLightbox);
-
         lightboxOverlay.addEventListener('click', (e) => {
             if (e.target === lightboxOverlay) {
                 closeLightbox();
             }
         });
+
+        // --- (NOVO) SCRIPT DE ANIMAÇÃO DE SCROLL (IntersectionObserver) ---
+        // É leve e moderno
+        const faders = document.querySelectorAll('.fade-in');
+
+        const appearOptions = {
+            threshold: 0.1, // Começa a animação quando 10% do elemento está visível
+            rootMargin: "0px 0px -50px 0px" // Começa um pouco antes (50px) do fim da tela
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('is-visible'); // Adiciona a classe que o CSS vai animar
+                    appearOnScroll.unobserve(entry.target); // Para de "assistir" o elemento (performance)
+                }
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+
     </script>
 
 </body>
