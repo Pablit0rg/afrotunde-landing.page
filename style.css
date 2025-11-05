@@ -10,99 +10,108 @@
     list-style: none;
 }
 
-/* ======== 3. VARIÁVEIS DE COR E FONTES (O MENU) ======== */
+/* ======== 3. VARIÁVEIS DE COR E FONTES (O MENU) - PALETA TERROSA ======== */
 :root {
-    /* TEMA DARK (GRAFITE) - PADRÃO */
-    --cor-fundo: #1a1820; /* Grafite/Berinjela escuro */
-    --cor-fundo-destaque: #2a2730; /* Um tom mais claro para os cards */
-    --cor-texto-principal: #f0f0f0; /* Branco suave */
-    --cor-texto-secundario: #a0a0a0; /* Cinza claro */
-    --cor-destaque-ori: #D4AF37; /* Dourado */
+    /* (NOVAS CORES) TEMA TERROSO (KARLA) */
+    --cor-fundo-base: #fcfaf5; /* Bege/Areia (Off-white) */
+    --cor-fundo-destaque: #e8f0e8; /* Verde Claro (Para a seção de depoimentos) */
+    --cor-texto-principal: #3f3a34; /* Marrom-Escuro (Para legibilidade) */
+    --cor-texto-secundario: #7a736a; /* Marrom-Médio (Para o disclaimer) */
+    --cor-destaque-ori: #b78972; /* Terracota (O novo "ouro") */
+    --cor-acento-secundario: #f0b8aa; /* Rosa Salmão (Para o hover/ação) */
 
     /* Cor da Navbar semi-transparente */
-    --cor-fundo-navbar: rgba(26, 24, 32, 0.85); /* 85% opacidade do grafite */
+    --cor-fundo-navbar: rgba(252, 250, 245, 0.85); /* Bege com 85% de opacidade */
 
     /* FONTES */
     --font-titulo: 'Cormorant Garamond', serif;
     --font-texto: 'Inter', sans-serif;
 }
 
-[data-theme="light"] {
-    /* TEMA LIGHT (BRANCO) - OPCIONAL */
-    --cor-fundo: #FCFCFC; /* Branco puro */
-    --cor-fundo-destaque: #f0f0f0; /* Cinza bem claro para os cards */
-    --cor-texto-principal: #1f1f1f; /* Grafite */
-    --cor-texto-secundario: #555555; /* Cinza médio */
-    --cor-destaque-ori: #C0A062; /* Bronze (funciona melhor no branco) */
-
-    /* Cor da Navbar semi-transparente */
-    --cor-fundo-navbar: rgba(252, 252, 252, 0.85); /* 85% opacidade do branco */
+/* (O TEMA LIGHT AGORA É O NOSSO TEMA DARK ORIGINAL - CASO ELA MUDE DE IDEIA) */
+[data-theme="dark"] {
+    --cor-fundo-base: #1a1820; 
+    --cor-fundo-destaque: #2a2730; 
+    --cor-texto-principal: #f0f0f0; 
+    --cor-texto-secundario: #a0a0a0; 
+    --cor-destaque-ori: #D4AF37; 
+    --cor-acento-secundario: #f0b8aa; 
+    --cor-fundo-navbar: rgba(26, 24, 32, 0.85); /* Grafite com 85% de opacidade */
 }
 
 /* ======== 4. CONFIGURAÇÕES GLOBAIS ======== */
 html {
-    scroll-behavior: smooth; /* A rolagem suave! */
-    font-size: 16px; /* Base para o 'rem' responsivo */
+    scroll-behavior: smooth; 
+    font-size: 16px; 
 }
 
 body {
     font-family: var(--font-texto);
-    background-color: var(--cor-fundo);
-    color: var(--cor-texto-principal);
+    background-color: var(--cor-fundo-base); 
+    color: var(--cor-texto-principal); 
     line-height: 1.6;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease; 
+}
+
+body.no-scroll {
+    overflow: hidden;
 }
 
 /* ======== 5. ESTRUTURA E UTILITÁRIOS ======== */
 .container {
-    width: 90%; /* Perfeito para mobile-first */
-    max-width: 1100px; /* Limite no desktop */
+    width: 90%; 
+    max-width: 1100px; 
     margin: 0 auto;
     padding: 20px 0;
 }
 
 .section {
-    padding: 60px 0; /* Espaçamento padrão entre seções */
+    padding: 60px 0; 
+    background-color: var(--cor-fundo-base); 
+    transition: background-color 0.3s ease;
 }
 
 /* (Seção de Depoimentos com fundo destacado) */
 .section.destaque {
-    background-color: var(--cor-fundo-destaque);
-    
-    /* A moldura dourada para o "altar" */
-    border-top: 1px solid var(--cor-destaque-ori);
-    border-bottom: 1px solid var(--cor-destaque-ori);
-    
+    background-color: var(--cor-fundo-destaque); 
+    border-top: 1px solid var(--cor-destaque-ori); 
+    border-bottom: 1px solid var(--cor-destaque-ori); 
     transition: background-color 0.3s ease;
 }
 
 /* ======== 6. TIPOGRAFIA (Títulos e Textos) ======== */
 h1, h2, h3, h4 {
     font-family: var(--font-titulo);
-    color: var(--cor-destaque-ori); /* Destaque Ori nos títulos */
+    color: var(--cor-destaque-ori); 
     font-weight: 600;
     margin-bottom: 1rem;
     line-height: 1.2;
 }
 
-h1 { font-size: 2.5rem; /* 40px */ }
-h2 { font-size: 2rem; /* 32px */ }
-h3 { font-size: 1.5rem; /* 24px */ }
-h4 { font-size: 1.25rem; /* 20px */ }
+/* Centraliza os títulos principais das seções */
+.section h2 {
+    text-align: center;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
 
 p {
-    font-size: 1rem; /* 16px */
+    font-size: 1rem;
     margin-bottom: 1rem;
-    color: var(--cor-texto-principal);
+    color: var(--cor-texto-principal); 
 }
 
 a {
-    color: var(--cor-destaque-ori);
+    color: var(--cor-destaque-ori); 
     transition: all 0.3s ease;
 }
 
 a:hover {
-    opacity: 0.8;
+    color: var(--cor-acento-secundario); 
+    opacity: 1; 
 }
 
 /* ======== 7. COMPONENTES PRINCIPAIS ======== */
@@ -110,55 +119,45 @@ a:hover {
 /* (HEADER / NAVBAR) - SEMPRE VISÍVEL */
 .navbar {
     padding: 1rem 0;
-    position: sticky; /* Menu fixo */
+    position: sticky;
     top: 0;
     z-index: 1000;
-    
-    /* ESTADO PADRÃO (SEMPRE ATIVO) */
-    background-color: var(--cor-fundo-navbar);
-    
-    /* A linha de destaque dourada */
-    border-bottom: 1px solid var(--cor-destaque-ori);
-    
-    /* EFEITO VIDRO FOSCO (Glassmorphism) */
+    background-color: var(--cor-fundo-navbar); 
+    border-bottom: 1px solid var(--cor-destaque-ori); 
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px); /* Suporte para Safari */
-    
-    /* SOMBRA SUAVE (Foco) */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    -webkit-backdrop-filter: blur(10px); 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
 }
 
 .navbar .container {
     display: flex;
-    justify-content: space-between; /* (Desktop) */
+    justify-content: space-between; 
     align-items: center;
-    padding: 0; /* Resetar padding do container */
-    
-    /* Posição relativa para o menu hamburger */
+    padding: 0; 
     position: relative;
 }
 .logo {
     font-family: var(--font-titulo);
-    
-    /* (MUDANÇA AQUI) Logo maior */
-    font-size: 2.1rem; 
-    
+    font-size: 2.5rem; 
     font-weight: 600;
-    
-    /* (MUDANÇA AQUI) Centraliza perfeitamente na linha */
     line-height: 1; 
-    
     transition: all 0.3s ease;
+    color: var(--cor-destaque-ori); 
 }
 .nav-menu a {
     font-size: 1rem;
     margin-left: 1.5rem;
     font-weight: 500;
+    /* (MUDANÇA AQUI) Corrigido de "preto" para o marrom-médio */
+    color: var(--cor-texto-secundario); 
+}
+.nav-menu a:hover {
+    color: var(--cor-destaque-ori); /* Hover para Terracota */
 }
 
 /* (ESTILOS DO HAMBURGER) */
 .hamburger-menu {
-    display: none; /* (Escondido no desktop) */
+    display: none; 
     cursor: pointer;
 }
 .hamburger-menu .bar {
@@ -166,7 +165,7 @@ a:hover {
     width: 25px;
     height: 3px;
     margin: 5px auto;
-    background-color: var(--cor-destaque-ori); /* (Cor dourada) */
+    background-color: var(--cor-destaque-ori); 
     transition: all 0.3s ease-in-out;
 }
 
@@ -178,17 +177,22 @@ a:hover {
     justify-content: center;
     text-align: center;
     padding: 60px 0; 
+    position: relative;
+    z-index: 1; 
+}
+.hero.section {
+    background-color: var(--cor-fundo-base); 
 }
 
 .hero .subtitulo {
     font-size: 1.2rem;
-    color: var(--cor-texto-secundario);
+    color: var(--cor-texto-secundario); 
     margin-bottom: 2rem;
 }
 .hero .frase-orgulho {
     font-family: var(--font-titulo);
     font-size: 1.2rem;
-    color: var(--cor-destaque-ori);
+    color: var(--cor-destaque-ori); 
     font-weight: 600;
     margin-top: 2rem;
 }
@@ -196,51 +200,67 @@ a:hover {
 /* (BOTÃO CTA PRINCIPAL) */
 .cta-button {
     font-family: var(--font-texto);
-    background-color: var(--cor-destaque-ori);
-    color: var(--cor-fundo); /* Contraste forte */
+    background-color: var(--cor-destaque-ori); 
+    color: var(--cor-fundo-base); 
     padding: 12px 24px;
     border-radius: 5px;
     font-size: 1rem;
     font-weight: 500;
     display: inline-block;
-    border: 2px solid var(--cor-destaque-ori);
+    border: 2px solid var(--cor-destaque-ori); 
     transition: all 0.3s ease;
-    
-    /* Propriedades para o Efeito de Brilho */
     position: relative;
     overflow: hidden;
     z-index: 1;
 }
 
 .cta-button:hover {
-    background-color: transparent;
-    color: var(--cor-destaque-ori);
+    background-color: var(--cor-acento-secundario); 
+    border-color: var(--cor-acento-secundario); 
+    color: var(--cor-fundo-base); 
     opacity: 1;
 }
 
 /* (GALERIA) */
 .galeria-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsividade mágica! */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
     gap: 1.5rem;
 }
 .card-servico {
-    background-color: var(--cor-fundo-destaque);
+    background-color: var(--cor-fundo-destaque); 
     border-radius: 8px;
-    overflow: hidden; /* Para a imagem se ajustar */
+    overflow: hidden;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    cursor: pointer; 
+    transition: transform 0.2s ease, background-color 0.3s ease;
 }
-.card-servico img {
+.card-servico:hover {
+    transform: translateY(-5px); 
+}
+
+/* ESTILO DO PLACEHOLDER DE VÍDEO */
+.video-placeholder {
     width: 100%;
     height: 250px;
-    object-fit: cover;
+    background-color: #dbe6db; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Ícone SVG embutido (cor Terracota) */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="%23b78972" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.6 11.6L22 7v10l-6.4-4.6v.2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h9.6a2 2 0 0 1 2 2v3.6z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 64px 64px; 
 }
+
 .card-servico h4, .card-servico .disclaimer {
     padding: 1rem;
 }
 .card-servico .disclaimer {
     font-size: 0.85rem;
-    color: var(--cor-texto-secundario);
+    color: var(--cor-texto-secundario); 
     padding-top: 0;
 }
 
@@ -248,7 +268,7 @@ a:hover {
 .frase-orgulho {
     font-family: var(--font-titulo);
     font-size: 1.5rem;
-    color: var(--cor-destaque-ori);
+    color: var(--cor-destaque-ori); 
     text-align: center;
     padding: 2rem 0;
     font-weight: 600;
@@ -257,22 +277,24 @@ a:hover {
 /* (DEPOIMENTOS) */
 .depoimentos-grid {
     display: grid;
-    grid-template-columns: 1fr; /* 1 coluna no mobile */
+    grid-template-columns: 1fr; 
     gap: 1.5rem;
 }
 .card-depoimento {
-    background-color: var(--cor-fundo); /* Cor de fundo principal */
+    background-color: var(--cor-fundo-base); 
     border-radius: 8px;
     padding: 1.5rem;
-    border-left: 5px solid var(--cor-destaque-ori);
+    border-left: 5px solid var(--cor-destaque-ori); 
+    transition: background-color 0.3s ease;
 }
 .card-depoimento p {
     font-style: italic;
     font-size: 1.1rem;
+    color: var(--cor-texto-principal); 
 }
 .card-depoimento span {
     font-weight: 500;
-    color: var(--cor-texto-secundario);
+    color: var(--cor-texto-secundario); 
     margin-top: 1rem;
     display: block;
 }
@@ -281,7 +303,7 @@ a:hover {
 .texto-localizacao {
     text-align: center;
     font-size: 1.1rem;
-    color: var(--cor-texto-secundario);
+    color: var(--cor-texto-secundario); 
     max-width: 600px;
     margin: 0 auto 2rem auto;
 }
@@ -289,22 +311,22 @@ a:hover {
     display: flex;
     justify-content: center;
     gap: 1rem;
-    flex-wrap: wrap; /* Para quebrar no mobile */
+    flex-wrap: wrap; 
 }
 
 /* (FOOTER) - ATUALIZADO COM BORDA DOURADA */
 .footer {
-    /* A linha de destaque dourada */
-    border-top: 1px solid var(--cor-destaque-ori);
-    
+    border-top: 1px solid var(--cor-destaque-ori); 
     padding: 2rem 0;
     text-align: center;
     font-size: 0.9rem;
-    color: var(--cor-texto-secundario);
+    color: var(--cor-texto-secundario); 
+    background-color: var(--cor-fundo-base); 
+    transition: background-color 0.3s ease;
 }
 .footer p {
     font-size: 0.9rem;
-    color: var(--cor-texto-secundario);
+    color: var(--cor-texto-secundario); 
     margin: 0.25rem 0;
 }
 
@@ -313,93 +335,67 @@ a:hover {
     content: '';
     position: absolute;
     top: 0;
-    left: -100%; /* Começa fora da tela, à esquerda */
+    left: -100%; 
     width: 100%;
     height: 100%;
-    z-index: -1; /* Fica atrás do texto do botão */
-
-    /* Este é o "brilho": um degradê diagonal */
+    z-index: -1; 
     background: linear-gradient(
         60deg, 
         transparent, 
-        rgba(255, 255, 255, 0.4), /* Um brilho branco/dourado suave */
+        rgba(255, 255, 255, 0.4), 
         transparent
     );
-
-    /* A mágica da animação */
     transition: left 0.7s ease-in-out;
 }
 
-/* Quando o mouse passar por cima... */
 .cta-button:hover::before {
-    left: 100%; /* ...o brilho se move da esquerda para a direita */
+    left: 100%; 
 }
 
 
 /* ======== 9. MEDIA QUERIES (RESPONSIVIDADE - O MENU SANTUÁRIO) ======== */
-
-/* (Ajustes para tablets e celulares - max-width: 768px) */
 @media (max-width: 768px) {
-    
-    /* (1. Centraliza a Logo) */
     .navbar .container {
         justify-content: center;
     }
-    
-    /* (2. Posiciona o Hamburger no canto) */
     .hamburger-menu {
-        display: block; /* (Mostra o hamburger) */
+        display: block; 
         position: absolute;
-        right: 0; /* (Na direita, na "zona do polegar") */
+        right: 0; 
         top: 50%;
         transform: translateY(-50%);
-        z-index: 1002; /* (Acima de tudo) */
+        z-index: 1002; 
     }
-
-    /* (3. Esconde o menu desktop) */
     .nav-menu {
-        /* (A "EXTENSÃO" / PORTA DO SANTUÁRIO) */
         position: fixed;
-        left: -100%; /* (Começa escondido fora da tela) */
+        left: -100%; 
         top: 0;
         width: 100%;
-        height: 100vh; /* (Tela cheia) */
-        background-color: var(--cor-fundo); /* (Cor de fundo sólida) */
-        
+        height: 100vh; 
+        background-color: var(--cor-fundo-base); 
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        
         transition: left 0.4s ease-in-out;
-        z-index: 1001; /* (Abaixo do hamburger, acima do site) */
+        z-index: 1001; 
     }
-    
-    /* (4. Mostra a "extensão" quando 'active') */
     .nav-menu.active {
         left: 0;
     }
-
-    /* (5. Estiliza os links no menu mobile) */
     .nav-menu a {
-        font-family: var(--font-titulo); /* (Fonte elegante) */
-        font-size: 2rem; /* (Links grandes, fáceis de tocar) */
+        font-family: var(--font-titulo); 
+        font-size: 2rem; 
         margin: 1.5rem 0;
         font-weight: 600;
-        
-        /* (MUDANÇA AQUI) Transição para o efeito de toque */
-        transition: transform 0.2s ease, opacity 0.2s ease;
+        transition: transform 0.2s ease, color 0.2s ease; 
     }
-
-    /* (MUDANÇA AQUI) Efeito de toque (reflexo) para mobile */
     .nav-menu a:active {
-        transform: scale(1.1); /* (Efeito "pulso") */
-        opacity: 0.8; /* (Feedback visual) */
+        transform: scale(1.1); 
+        color: var(--cor-acento-secundario); 
     }
-
-    /* (6. Anima o Hamburger para "X") */
     .hamburger-menu.active .bar:nth-child(2) {
-        opacity: 0; /* (Some a barra do meio) */
+        opacity: 0; 
     }
     .hamburger-menu.active .bar:nth-child(1) {
         transform: translateY(8px) rotate(45deg);
@@ -408,11 +404,88 @@ a:hover {
         transform: translateY(-8px) rotate(-45deg);
     }
 
-    /* (Outros ajustes de tamanho) */
     h1 { font-size: 2.2rem; }
     h2 { font-size: 1.8rem; }
-    
     .depoimentos-grid {
-        grid-template-columns: 1fr; /* 1 coluna (já era padrão, mas bom garantir) */
+        grid-template-columns: 1fr; 
     }
+}
+
+/* ======== 10. LIGHTBOX (AMPLIAÇÃO DE IMAGENS) ======== */
+
+.lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; 
+    opacity: 0; 
+    visibility: hidden; 
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.lightbox-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90%; 
+    max-height: 90vh; 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    
+    transform: scale(0.8); 
+    transition: transform 0.3s ease;
+}
+
+.lightbox-overlay.active .lightbox-content {
+    transform: scale(1); 
+}
+
+.lightbox-image {
+    max-width: 100%;
+    max-height: 100%;
+    display: block; 
+    border-radius: 8px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+/* Placeholder de vídeo DENTRO do lightbox */
+.lightbox-video-placeholder {
+    display: none; /* Escondido por padrão */
+    width: 90vw; 
+    height: 50vh; 
+    background-color: var(--cor-fundo-destaque);
+    border-radius: 8px;
+    
+    /* Ícone SVG (Terracota) */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24" fill="none" stroke="%23b78972" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.6 11.6L22 7v10l-6.4-4.6v.2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h9.6a2 2 0 0 1 2 2v3.6z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 128px 128px; 
+}
+
+
+.lightbox-close {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    color: var(--cor-destaque-ori); 
+    font-size: 40px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-shadow: 0 0 5px rgba(0,0,0,0.7); 
+}
+
+.lightbox-close:hover {
+    color: var(--cor-acento-secundario); 
+    transform: scale(1.1);
 }
