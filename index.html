@@ -138,8 +138,10 @@
     
 <div class="lightbox-overlay">
         <div class="lightbox-content">
-            <img src="" alt="Imagem Ampliada" class="lightbox-image">
-            <div class="lightbox-video-placeholder"></div> <span class="lightbox-close">&times;</span>
+            
+<img src="" alt="Imagem Ampliada" class="lightbox-image">
+            <div class="lightbox-video-placeholder"></div> 
+<span class="lightbox-close">&times;</span>
         </div>
     </div>
     
@@ -148,7 +150,7 @@
         const navMenu = document.querySelector('.nav-menu');
         const lightboxOverlay = document.querySelector('.lightbox-overlay');
         const lightboxImage = document.querySelector('.lightbox-image');
-        const lightboxVideoPlaceholder = document.querySelector('.lightbox-video-placeholder'); // NOVO: Seleciona o placeholder do lightbox
+        const lightboxVideoPlaceholder = document.querySelector('.lightbox-video-placeholder'); // Seleciona o placeholder do lightbox
         const lightboxClose = document.querySelector('.lightbox-close');
         const cardServicos = document.querySelectorAll('.card-servico'); 
         const body = document.body;
@@ -176,9 +178,7 @@
                 if (fullSrc === "placeholder-video") {
                     lightboxImage.style.display = 'none'; // Esconde a imagem real
                     lightboxVideoPlaceholder.style.display = 'flex'; // Mostra o placeholder de vídeo
-                    // Poderíamos adicionar um vídeo real aqui se tivéssemos a URL do vídeo
-                    // ex: lightboxVideoPlaceholder.innerHTML = '<iframe src="URL_DO_VIDEO" frameborder="0" allowfullscreen></iframe>';
-                } else if (fullSrc) { // Se for uma URL real (foto ou vídeo)
+                } else if (fullSrc) { // Se for uma URL real (foto)
                     lightboxImage.src = fullSrc;
                     lightboxImage.style.display = 'block'; // Mostra a imagem real
                     lightboxVideoPlaceholder.style.display = 'none'; // Esconde o placeholder
@@ -194,8 +194,6 @@
             if (!navMenu.classList.contains('active')) {
                 body.classList.remove('no-scroll');
             }
-            // (OPCIONAL): Se houver um iframe de vídeo, pausar/remover ele aqui
-            // lightboxVideoPlaceholder.innerHTML = ''; 
         };
 
         lightboxClose.addEventListener('click', closeLightbox);
