@@ -19,6 +19,7 @@
     --cor-texto-secundario: #7a736a; /* Marrom-Médio (Para o disclaimer) */
     --cor-destaque-ori: #b78972; /* Terracota (O novo "ouro") */
     --cor-acento-secundario: #f0b8aa; /* Rosa Salmão (Para o hover/ação) */
+    --cor-instagram-icon: #E1306C; /* (NOVO) Cor do ícone do Instagram */
 
     /* Cor da Navbar semi-transparente */
     --cor-fundo-navbar: rgba(252, 250, 245, 0.85); /* Bege com 85% de opacidade */
@@ -28,7 +29,6 @@
     --font-texto: 'Inter', sans-serif;
 }
 
-/* (O TEMA LIGHT AGORA É O NOSSO TEMA DARK ORIGINAL - CASO ELA MUDE DE IDEIA) */
 [data-theme="dark"] {
     --cor-fundo-base: #1a1820; 
     --cor-fundo-destaque: #2a2730; 
@@ -36,7 +36,8 @@
     --cor-texto-secundario: #a0a0a0; 
     --cor-destaque-ori: #D4AF37; 
     --cor-acento-secundario: #f0b8aa; 
-    --cor-fundo-navbar: rgba(26, 24, 32, 0.85); /* Grafite com 85% de opacidade */
+    --cor-fundo-navbar: rgba(26, 24, 32, 0.85);
+    --cor-instagram-icon: #E1306C; 
 }
 
 /* ======== 4. CONFIGURAÇÕES GLOBAIS ======== */
@@ -71,7 +72,6 @@ body.no-scroll {
     transition: background-color 0.3s ease;
 }
 
-/* (Seção de Depoimentos com fundo destacado) */
 .section.destaque {
     background-color: var(--cor-fundo-destaque); 
     border-top: 1px solid var(--cor-destaque-ori); 
@@ -88,7 +88,6 @@ h1, h2, h3, h4 {
     line-height: 1.2;
 }
 
-/* Centraliza os títulos principais das seções */
 .section h2 {
     text-align: center;
 }
@@ -109,7 +108,6 @@ a {
     transition: all 0.3s ease;
 }
 
-/* (MUDANÇA AQUI) Hover padrão agora é o Rosa Salmão */
 a:hover {
     color: var(--cor-acento-secundario); 
     opacity: 1; 
@@ -117,7 +115,7 @@ a:hover {
 
 /* ======== 7. COMPONENTES PRINCIPAIS ======== */
 
-/* (HEADER / NAVBAR) - SEMPRE VISÍVEL */
+/* (HEADER / NAVBAR) */
 .navbar {
     padding: 1rem 0;
     position: sticky;
@@ -149,12 +147,10 @@ a:hover {
     font-size: 1rem;
     margin-left: 1.5rem;
     font-weight: 500;
-    /* (MUDANÇA AQUI) Cor dos links igual à logo (Terracota) */
-    color: var(--cor-destaque-ori); 
+    color: var(--cor-destaque-ori); /* (CORRIGIDO) Cor Terracota */
 }
 .nav-menu a:hover {
-    /* (MUDANÇA AQUI) Hover dos links para Rosa Salmão */
-    color: var(--cor-acento-secundario); 
+    color: var(--cor-acento-secundario); /* (CORRIGIDO) Hover Rosa Salmão */
 }
 
 /* (ESTILOS DO HAMBURGER) */
@@ -316,7 +312,7 @@ a:hover {
     flex-wrap: wrap; 
 }
 
-/* (FOOTER) - ATUALIZADO COM BORDA DOURADA */
+/* (FOOTER) - ATUALIZADO COM ÍCONE */
 .footer {
     border-top: 1px solid var(--cor-destaque-ori); 
     padding: 2rem 0;
@@ -331,6 +327,39 @@ a:hover {
     color: var(--cor-texto-secundario); 
     margin: 0.25rem 0;
 }
+
+/* (NOVO) Estiliza o link "Desenvolvido por" */
+.footer .desenvolvido-por a {
+    color: var(--cor-destaque-ori); /* Terracota para o texto @pablit0rg */
+    font-weight: 600;
+    display: inline-flex; /* Alinha ícone e texto */
+    align-items: center;
+    gap: 0.3rem; /* Espaço entre ícone e texto */
+}
+
+/* (NOVO) Hover do link do rodapé */
+.footer .desenvolvido-por a:hover {
+    color: var(--cor-acento-secundario); /* Rosa Salmão */
+}
+
+/* (NOVO) Alinha o ícone SVG com o texto */
+.icon-instagram {
+    position: relative;
+    top: -1px; /* Ajuste fino vertical */
+    vertical-align: middle;
+}
+
+/* (MUDANÇA AQUI) Cor SOMENTE do ícone do Instagram */
+.footer .desenvolvido-por .icon-instagram {
+    stroke: var(--cor-instagram-icon); /* Cor Rosa/Pink do Instagram */
+    transition: stroke 0.3s ease;
+}
+
+/* (MUDANÇA AQUI) Ao passar o mouse, o *texto* muda, mas o *ícone* continua rosa */
+.footer .desenvolvido-por a:hover .icon-instagram {
+    stroke: var(--cor-instagram-icon); /* Mantém a cor rosa */
+}
+
 
 /* ======== 8. EFEITO BRILHO (O TOQUE MESTRE) ======== */
 .cta-button::before {
