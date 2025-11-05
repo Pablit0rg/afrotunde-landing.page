@@ -109,6 +109,7 @@ a {
     transition: all 0.3s ease;
 }
 
+/* (MUDANÇA AQUI) Hover padrão agora é o Rosa Salmão */
 a:hover {
     color: var(--cor-acento-secundario); 
     opacity: 1; 
@@ -148,11 +149,12 @@ a:hover {
     font-size: 1rem;
     margin-left: 1.5rem;
     font-weight: 500;
-    /* (MUDANÇA AQUI) Corrigido de "preto" para o marrom-médio */
-    color: var(--cor-texto-secundario); 
+    /* (MUDANÇA AQUI) Cor dos links igual à logo (Terracota) */
+    color: var(--cor-destaque-ori); 
 }
 .nav-menu a:hover {
-    color: var(--cor-destaque-ori); /* Hover para Terracota */
+    /* (MUDANÇA AQUI) Hover dos links para Rosa Salmão */
+    color: var(--cor-acento-secundario); 
 }
 
 /* (ESTILOS DO HAMBURGER) */
