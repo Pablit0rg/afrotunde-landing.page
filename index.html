@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Afrotunde | Trancista e Loctician em Curitiba (Nagô, Locs)</title>
+    <title>Afrotunde | Afrotunde: Trancista e Loctician em Curitiba (Nagô, Locs)</title>
     <meta name="description" content="Procurando trancista negra em Curitiba? A Afrotunde é especialista em tranças nagô e locs. A arte ancestral que cuida do seu Ori.">
     <meta name="keywords" content="trancista curitiba, loctician curitiba, trancista negra curitiba, tranças nago curitiba, locs curitiba, salão afro curitiba, cic">
 
@@ -52,14 +52,44 @@
                 <h2>Minhas Artes: Locs, Tranças e Penteados</h2>
                 
                 <div class="galeria-grid">
-                    <div class="card-servico">
-                        <img src="https://via.placeholder.com/300x300.png?text=Arte+Exemplo+1" alt="Exemplo de locs por loctician em Curitiba">
+                    <div class="card-servico" data-full-src="placeholder-video">
+                        <div class="video-placeholder"></div>
                         <h4>A partir de R$ 200,00</h4>
                         <p class="disclaimer">Valor médio. O preço final é negociado via WhatsApp e depende do seu cabelo.</p>
                     </div>
-                    <div class="card-servico">
-                        <img src="https://via.placeholder.com/300x300.png?text=Arte+Exemplo+2" alt="Exemplo de trança nagô por trancista em Curitiba">
+                    <div class="card-servico" data-full-src="placeholder-video">
+                        <div class="video-placeholder"></div>
                         <h4>A partir de R$ 150,00</h4>
+                        <p class="disclaimer">Valor médio. O preço final é negociado via WhatsApp e depende do seu cabelo.</p>
+                    </div>
+                    <div class="card-servico" data-full-src="placeholder-video">
+                        <div class="video-placeholder"></div>
+                        <h4>A partir de R$ 100,00</h4>
+                        <p class="disclaimer">Valor médio. O preço final é negociado via WhatsApp e depende do seu cabelo.</p>
+                    </div>
+                    <div class="card-servico" data-full-src="placeholder-video">
+                        <div class="video-placeholder"></div>
+                        <h4>A partir de R$ 120,00</h4>
+                        <p class="disclaimer">Valor médio. O preço final é negociado via WhatsApp e depende do seu cabelo.</p>
+                    </div>
+                    <div class="card-servico" data-full-src="placeholder-video">
+                        <div class="video-placeholder"></div>
+                        <h4>A partir de R$ 250,00</h4>
+                        <p class="disclaimer">Valor médio. O preço final é negociado via WhatsApp e depende do seu cabelo.</p>
+                    </div>
+                    <div class="card-servico" data-full-src="placeholder-video">
+                        <div class="video-placeholder"></div>
+                        <h4>A partir de R$ 200,00</h4>
+                        <p class="disclaimer">Valor médio. O preço final é negociado via WhatsApp e depende do seu cabelo.</p>
+                    </div>
+                    <div class="card-servico" data-full-src="placeholder-video">
+                        <div class="video-placeholder"></div>
+                        <h4>A partir de R$ 100,00</h4>
+                        <p class="disclaimer">Valor médio. O preço final é negociado via WhatsApp e depende do seu cabelo.</p>
+                    </div>
+                    <div class="card-servico" data-full-src="placeholder-video">
+                        <div class="video-placeholder"></div>
+                        <h4>A partir de R$ 80,00</h4>
                         <p class="disclaimer">Valor médio. O preço final é negociado via WhatsApp e depende do seu cabelo.</p>
                     </div>
                 </div>
@@ -105,24 +135,75 @@
         </div>
     </footer>
 
-    <script>
+    
+<div class="lightbox-overlay">
+        <div class="lightbox-content">
+            <img src="" alt="Imagem Ampliada" class="lightbox-image">
+            <div class="lightbox-video-placeholder"></div> <span class="lightbox-close">&times;</span>
+        </div>
+    </div>
+    
+<script>
         const hamburger = document.querySelector('.hamburger-menu');
         const navMenu = document.querySelector('.nav-menu');
+        const lightboxOverlay = document.querySelector('.lightbox-overlay');
+        const lightboxImage = document.querySelector('.lightbox-image');
+        const lightboxVideoPlaceholder = document.querySelector('.lightbox-video-placeholder'); // NOVO: Seleciona o placeholder do lightbox
+        const lightboxClose = document.querySelector('.lightbox-close');
+        const cardServicos = document.querySelectorAll('.card-servico'); 
+        const body = document.body;
 
-        // "Escuta" o clique no hamburger
+        // Lógica do Menu Hamburger
         hamburger.addEventListener('click', () => {
-            // Adiciona a classe 'active' no hamburger (para virar "X")
             hamburger.classList.toggle('active');
-            // Adiciona a classe 'active' no menu (para fazê-lo aparecer)
             navMenu.classList.toggle('active');
+            body.classList.toggle('no-scroll', navMenu.classList.contains('active'));
         });
 
-        // (Opcional: Fecha o menu quando um link é clicado)
         document.querySelectorAll('.nav-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
+                body.classList.remove('no-scroll');
             });
+        });
+
+        // Lógica do Lightbox (CORRIGIDA E ADAPTADA PARA PLACEHOLDER)
+        cardServicos.forEach(card => {
+            card.addEventListener('click', () => {
+                const fullSrc = card.getAttribute('data-full-src');
+                
+                if (fullSrc === "placeholder-video") {
+                    lightboxImage.style.display = 'none'; // Esconde a imagem real
+                    lightboxVideoPlaceholder.style.display = 'flex'; // Mostra o placeholder de vídeo
+                    // Poderíamos adicionar um vídeo real aqui se tivéssemos a URL do vídeo
+                    // ex: lightboxVideoPlaceholder.innerHTML = '<iframe src="URL_DO_VIDEO" frameborder="0" allowfullscreen></iframe>';
+                } else if (fullSrc) { // Se for uma URL real (foto ou vídeo)
+                    lightboxImage.src = fullSrc;
+                    lightboxImage.style.display = 'block'; // Mostra a imagem real
+                    lightboxVideoPlaceholder.style.display = 'none'; // Esconde o placeholder
+                }
+
+                lightboxOverlay.classList.add('active');
+                body.classList.add('no-scroll'); // Bloqueia a rolagem
+            });
+        });
+
+        const closeLightbox = () => {
+            lightboxOverlay.classList.remove('active');
+            if (!navMenu.classList.contains('active')) {
+                body.classList.remove('no-scroll');
+            }
+            // (OPCIONAL): Se houver um iframe de vídeo, pausar/remover ele aqui
+            // lightboxVideoPlaceholder.innerHTML = ''; 
+        };
+
+        lightboxClose.addEventListener('click', closeLightbox);
+
+        lightboxOverlay.addEventListener('click', (e) => {
+            if (e.target === lightboxOverlay) {
+                closeLightbox();
+            }
         });
     </script>
 
