@@ -1,6 +1,4 @@
 /* ======== 1. LÓGICA DE TEMA (RODA IMEDIATAMENTE) ======== */
-// Esta função é auto-executável e roda ANTES do DOM carregar,
-// para evitar o "piscar" da tela (Flash of Unstyled Content).
 (() => {
     // Função que aplica o tema no <html>
     const applyTheme = (theme) => {
@@ -63,10 +61,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const statNumbers = document.querySelectorAll('.stat-number');
     
     const themeToggleButton = document.querySelector('#theme-toggle');
-    
-    // (NOVOS SELETORES) Para o Scroll Spy
+
+    const notificationBar = document.querySelector('#notification-bar');
+    const closeNotificationBtn = document.querySelector('#close-notification-btn');
+
     const sections = document.querySelectorAll('.section[id]');
     const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
+
+    // (NOVOS SELETORES) Para o Modal WhatsApp
+    const whatsappBtn = document.querySelector('#whatsapp-btn');
+    const whatsappBtnHero = document.querySelector('#whatsapp-btn-hero'); // Botão do Hero
+    const whatsappModal = document.querySelector('#whatsapp-modal');
+    const modalCloseBtn = document.querySelector('#modal-close-btn');
+    const modalConfirmBtn = document.querySelector('#modal-confirm-btn');
+    const modalCancelBtn = document.querySelector('#modal-cancel-btn');
 
 
     // --- LÓGICA DO CLIQUE NO BOTÃO DE TEMA ---
@@ -89,7 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-            if (!localStorage.getItem('theme-preference')) {
+            const savedTheme = localStorage.getItem('theme-preference');
+            if (!savedTheme) {
                 applyTheme(e.matches ? 'dark' : 'light');
             }
         });
@@ -104,14 +113,11 @@ document.addEventListener('DOMContentLoaded', () => {
             body.classList.toggle('no-scroll', navMenu.classList.contains('active'));
         });
 
-        // (MUDANÇA AQUI) O Scroll Spy agora controla o 'active-link',
-        // então o clique apenas *fecha* o menu.
         document.querySelectorAll('.nav-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
                 body.classList.remove('no-scroll');
-                // (Removemos o 'active-link' daqui, o Observer cuida disso)
             });
         });
     }
@@ -174,7 +180,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const closeLightbox = () => {
             lightboxOverlay.classList.remove('active');
-            if (!navMenu.classList.contains('active')) {
+            // Só destrava o scroll se o menu mobile e o modal wpp estiverem fechados
+            if (!navMenu.classList.contains('active') && !whatsappModal.classList.contains('active')) {
                 body.classList.remove('no-scroll');
             }
             lightboxVideoPlaceholder.innerHTML = '';
@@ -309,34 +316,83 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
-    // --- (NOVO) LÓGICA DO SCROLL SPY (Navegação Inteligente) ---
+    
+    // --- LÓGICA DO SCROLL SPY (Navegação Inteligente) ---
     if (navLinks.length > 0 && sections.length > 0) {
         
-        // (Reutilizando a ideia do IntersectionObserver de forma leve)
-        const spyObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                // Se a seção está [threshold: 0.7] (70%) visível na tela
-                if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id');
-                    
-                    // 1. Remove o 'active-link' de TODOS os links
-                    navLinks.forEach(link => link.classList.remove('active-link'));
-                    
-                    // 2. Encontra o link específico que corresponde à seção e adiciona
-                    const activeLink = document.querySelector(`.nav-menu a[href="#${id}"]`);
-                    if (activeLink) {
-                        activeLink.classList.add('active-link');
-                    }
-                }
-            });
-        }, { 
-            threshold: 0.7 // O link "acende" quando 70% da seção está visível
-        });
+        const spyOptions = {
+            rootMargin: "-100px 0px -30% 0px",
+            threshold: 0 
+        };
 
-        // "Assiste" a todas as seções
+        const spyObserver = new IntersectionObserver((entries) => {
+            navLinks.forEach(link => link.classList.remove('active-link'));
+            
+            const visibleSections = entries.filter(entry => entry.isIntersecting);
+
+            if (visibleSections.length > 0) {
+                const id = visibleSections[0].target.getAttribute('id');
+                const activeLink = document.querySelector(`.nav-menu a[href="#${id}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active-link');
+                }
+            } else if (window.scrollY < 200) {
+                 const homeLink = document.querySelector(`.nav-menu a[href="#inicio"]`);
+                 if (homeLink) {
+                    homeLink.classList.add('active-link');
+                 }
+            }
+
+        }, spyOptions); 
+
         sections.forEach(section => {
             spyObserver.observe(section);
+        });
+    }
+
+    // --- (NOVO) LÓGICA DO MODAL WHATSAPP ---
+    if (whatsappModal && modalCloseBtn && modalConfirmBtn && modalCancelBtn) {
+        
+        // Função para fechar o modal
+        const closeModal = () => {
+            whatsappModal.classList.remove('active');
+            // Só destrava o scroll se o lightbox e o menu mobile estiverem fechados
+            if (!lightboxOverlay.classList.contains('active') && !navMenu.classList.contains('active')) {
+                body.classList.remove('no-scroll');
+            }
+        };
+
+        // Função para abrir o modal
+        const openModal = (e) => {
+            e.preventDefault(); // Impede que o link abra imediatamente
+            whatsappModal.classList.add('active'); // Mostra o modal
+            body.classList.add('no-scroll'); // Trava o scroll
+        };
+
+        // 1. "Sequestra" o clique nos botões do WhatsApp
+        if (whatsappBtn) {
+            whatsappBtn.addEventListener('click', openModal);
+        }
+        if (whatsappBtnHero) { // (CORRIGIDO) Adiciona o ouvinte ao botão do Hero também
+            whatsappBtnHero.addEventListener('click', openModal);
+        }
+
+        // 2. Ações dos botões do modal
+        modalCancelBtn.addEventListener('click', closeModal); // "Cancelar" fecha o modal
+        modalCloseBtn.addEventListener('click', closeModal); // "X" fecha o modal
+
+        modalConfirmBtn.addEventListener('click', () => {
+            // "Continuar" abre o link do WhatsApp (do botão do Hero, que é o primeiro)
+            const whatsappLink = whatsappBtnHero.getAttribute('href');
+            window.open(whatsappLink, '_blank'); // Abre em nova aba
+            closeModal(); // Fecha o modal
+        });
+
+        // 3. Fecha ao clicar fora (no overlay)
+        whatsappModal.addEventListener('click', (e) => {
+            if (e.target === whatsappModal) {
+                closeModal();
+            }
         });
     }
 
