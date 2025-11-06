@@ -66,10 +66,14 @@ body.no-scroll {
     padding: 20px 0;
 }
 
+/* (MUDANÇA AQUI) Adiciona a margem de scroll para as âncoras */
 .section {
     padding: 60px 0; 
     background-color: var(--cor-fundo-base); 
     transition: background-color 0.3s ease;
+    
+    /* (NOVO) Garante que a âncora pare abaixo da navbar fixa */
+    scroll-margin-top: 100px; /* (Altura aproximada da navbar) */
 }
 
 .section.destaque {
@@ -147,10 +151,10 @@ a:hover {
     font-size: 1rem;
     margin-left: 1.5rem;
     font-weight: 500;
-    color: var(--cor-destaque-ori); /* (CORRIGIDO) Cor Terracota */
+    color: var(--cor-destaque-ori); 
 }
 .nav-menu a:hover {
-    color: var(--cor-acento-secundario); /* (CORRIGIDO) Hover Rosa Salmão */
+    color: var(--cor-acento-secundario); 
 }
 
 /* (ESTILOS DO HAMBURGER) */
@@ -312,7 +316,7 @@ a:hover {
     flex-wrap: wrap; 
 }
 
-/* (FOOTER) - ATUALIZADO COM ÍCONE */
+/* (FOOTER) */
 .footer {
     border-top: 1px solid var(--cor-destaque-ori); 
     padding: 2rem 0;
@@ -328,40 +332,37 @@ a:hover {
     margin: 0.25rem 0;
 }
 
-/* (NOVO) Estiliza o link "Desenvolvido por" */
 .footer .desenvolvido-por a {
-    color: var(--cor-destaque-ori); /* Terracota para o texto @pablit0rg */
+    color: var(--cor-destaque-ori); 
     font-weight: 600;
-    display: inline-flex; /* Alinha ícone e texto */
+    display: inline-flex; 
     align-items: center;
-    gap: 0.3rem; /* Espaço entre ícone e texto */
+    gap: 0.3rem; 
 }
 
-/* (NOVO) Hover do link do rodapé */
 .footer .desenvolvido-por a:hover {
-    color: var(--cor-acento-secundario); /* Rosa Salmão */
+    color: var(--cor-acento-secundario); 
 }
 
-/* (NOVO) Alinha o ícone SVG com o texto */
 .icon-instagram {
     position: relative;
-    top: -1px; /* Ajuste fino vertical */
+    top: -1px; 
     vertical-align: middle;
 }
 
-/* (MUDANÇA AQUI) Cor SOMENTE do ícone do Instagram */
 .footer .desenvolvido-por .icon-instagram {
-    stroke: var(--cor-instagram-icon); /* Cor Rosa/Pink do Instagram */
+    stroke: var(--cor-instagram-icon); 
     transition: stroke 0.3s ease;
 }
 
-/* (MUDANÇA AQUI) Ao passar o mouse, o *texto* muda, mas o *ícone* continua rosa */
 .footer .desenvolvido-por a:hover .icon-instagram {
-    stroke: var(--cor-instagram-icon); /* Mantém a cor rosa */
+    stroke: var(--cor-instagram-icon); 
 }
 
 
-/* ======== 8. EFEITO BRILHO (O TOQUE MESTRE) ======== */
+/* ======== 8. EFEITOS (O TOQUE MESTRE) ======== */
+
+/* (EFEITO BRILHO BOTÃO) */
 .cta-button::before {
     content: '';
     position: absolute;
@@ -378,9 +379,20 @@ a:hover {
     );
     transition: left 0.7s ease-in-out;
 }
-
 .cta-button:hover::before {
     left: 100%; 
+}
+
+/* (NOVO) ANIMAÇÃO DE FADE-IN NO SCROLL */
+.fade-in {
+    opacity: 0; /* Começa invisível */
+    transform: translateY(20px); /* Começa 20px abaixo */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.is-visible {
+    opacity: 1; /* Fica visível */
+    transform: translateY(0); /* Sobe para a posição original */
 }
 
 
@@ -519,4 +531,43 @@ a:hover {
 .lightbox-close:hover {
     color: var(--cor-acento-secundario); 
     transform: scale(1.1);
+}
+
+/* ======== 11. (NOVO) BOTÃO VOLTAR AO TOPO ======== */
+.voltar-ao-topo {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999; /* (Abaixo da navbar e lightbox, mas acima do resto) */
+    
+    background-color: var(--cor-destaque-ori); /* (Fundo Terracota) */
+    color: var(--cor-fundo-base); /* (Ícone Bege) */
+    
+    width: 45px;
+    height: 45px;
+    border-radius: 50%; /* (Círculo) */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    
+    /* (Mágica do JS) Começa invisível e escalonado */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
+}
+
+.voltar-ao-topo.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.voltar-ao-topo:hover {
+    background-color: var(--cor-acento-secundario); /* (Hover Rosa Salmão) */
+    color: var(--cor-fundo-base); /* (Mantém ícone Bege) */
+    opacity: 1;
 }
