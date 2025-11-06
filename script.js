@@ -1,43 +1,34 @@
 /* ======== 1. LÓGICA DE TEMA (RODA IMEDIATAMENTE) ======== */
 (() => {
-    // Função que aplica o tema no <html>
     const applyTheme = (theme) => {
         if (theme === 'dark') {
             document.documentElement.setAttribute('data-theme', 'dark');
-            document.documentElement.lang = "pt-BR"; // Garante o lang
+            document.documentElement.lang = "pt-BR"; 
         } else {
             document.documentElement.removeAttribute('data-theme');
-            document.documentElement.lang = "pt-BR"; // Garante o lang
+            document.documentElement.lang = "pt-BR"; 
         }
     };
-
-    // Função principal que decide qual tema usar
     const initializeTheme = () => {
         let savedTheme = null;
         try {
-            // 1. Tenta pegar o tema salvo pelo usuário (a "memória")
             savedTheme = localStorage.getItem('theme-preference');
         } catch (e) {
             console.warn('localStorage não está disponível.');
         }
-
         if (savedTheme) {
-            // 2. Se achou um tema salvo, usa ele
             applyTheme(savedTheme);
         } else {
-            // 3. Se não tem tema salvo, detecta o sistema do usuário
             const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             applyTheme(systemPrefersDark ? 'dark' : 'light');
         }
     };
-
     initializeTheme();
 })();
-// --- FIM DA LÓGICA IMEDIATA ---
+/* ======== FIM DA LÓGICA DE TEMA ======== */
 
 
 /* ======== 2. LÓGICA PRINCIPAL (RODA APÓS O HTML CARREGAR) ======== */
-// 'DOMContentLoaded' espera o HTML estar pronto
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- SELETORES GERAIS ---
@@ -65,12 +56,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const notificationBar = document.querySelector('#notification-bar');
     const closeNotificationBtn = document.querySelector('#close-notification-btn');
 
-    const sections = document.querySelectorAll('.section[id]');
-    const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
+    // (REMOVIDO) Seletores do Scroll Spy
+    // const sections = document.querySelectorAll('.section[id]');
+    // const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
 
-    // (NOVOS SELETORES) Para o Modal WhatsApp
     const whatsappBtn = document.querySelector('#whatsapp-btn');
-    const whatsappBtnHero = document.querySelector('#whatsapp-btn-hero'); // Botão do Hero
+    const whatsappBtnHero = document.querySelector('#whatsapp-btn-hero'); 
     const whatsappModal = document.querySelector('#whatsapp-modal');
     const modalCloseBtn = document.querySelector('#modal-close-btn');
     const modalConfirmBtn = document.querySelector('#modal-confirm-btn');
@@ -82,13 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
         themeToggleButton.addEventListener('click', () => {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const newTheme = (currentTheme === 'dark') ? 'light' : 'dark';
-
             if (newTheme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
             } else {
                 document.documentElement.removeAttribute('data-theme');
             }
-            
             try {
                 localStorage.setItem('theme-preference', newTheme);
             } catch (e) {
@@ -105,7 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- LÓGICA DO MENU HAMBURGER ---
+    // --- (CORRIGIDO) LÓGICA DO MENU HAMBURGER ---
+    // (Este bloco estava faltando!)
     if (hamburger && navMenu) {
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
@@ -113,6 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
             body.classList.toggle('no-scroll', navMenu.classList.contains('active'));
         });
 
+        // Fecha o menu mobile quando um link é clicado
         document.querySelectorAll('.nav-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
@@ -180,7 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const closeLightbox = () => {
             lightboxOverlay.classList.remove('active');
-            // Só destrava o scroll se o menu mobile e o modal wpp estiverem fechados
             if (!navMenu.classList.contains('active') && !whatsappModal.classList.contains('active')) {
                 body.classList.remove('no-scroll');
             }
@@ -317,46 +307,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // --- LÓGICA DO SCROLL SPY (Navegação Inteligente) ---
-    if (navLinks.length > 0 && sections.length > 0) {
-        
-        const spyOptions = {
-            rootMargin: "-100px 0px -30% 0px",
-            threshold: 0 
-        };
+    // --- (REMOVIDO) LÓGICA DO SCROLL SPY ---
+    // (O código foi removido desta seção)
 
-        const spyObserver = new IntersectionObserver((entries) => {
-            navLinks.forEach(link => link.classList.remove('active-link'));
-            
-            const visibleSections = entries.filter(entry => entry.isIntersecting);
 
-            if (visibleSections.length > 0) {
-                const id = visibleSections[0].target.getAttribute('id');
-                const activeLink = document.querySelector(`.nav-menu a[href="#${id}"]`);
-                if (activeLink) {
-                    activeLink.classList.add('active-link');
-                }
-            } else if (window.scrollY < 200) {
-                 const homeLink = document.querySelector(`.nav-menu a[href="#inicio"]`);
-                 if (homeLink) {
-                    homeLink.classList.add('active-link');
-                 }
-            }
-
-        }, spyOptions); 
-
-        sections.forEach(section => {
-            spyObserver.observe(section);
-        });
-    }
-
-    // --- (NOVO) LÓGICA DO MODAL WHATSAPP ---
+    // --- LÓGICA DO MODAL WHATSAPP ---
     if (whatsappModal && modalCloseBtn && modalConfirmBtn && modalCancelBtn) {
         
         // Função para fechar o modal
         const closeModal = () => {
             whatsappModal.classList.remove('active');
-            // Só destrava o scroll se o lightbox e o menu mobile estiverem fechados
             if (!lightboxOverlay.classList.contains('active') && !navMenu.classList.contains('active')) {
                 body.classList.remove('no-scroll');
             }
@@ -373,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (whatsappBtn) {
             whatsappBtn.addEventListener('click', openModal);
         }
-        if (whatsappBtnHero) { // (CORRIGIDO) Adiciona o ouvinte ao botão do Hero também
+        if (whatsappBtnHero) { 
             whatsappBtnHero.addEventListener('click', openModal);
         }
 
