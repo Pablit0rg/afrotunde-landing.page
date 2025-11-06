@@ -19,7 +19,7 @@
     --cor-texto-secundario: #7a736a; /* Marrom-Médio (Para o disclaimer) */
     --cor-destaque-ori: #b78972; /* Terracota (O novo "ouro") */
     --cor-acento-secundario: #f0b8aa; /* Rosa Salmão (Para o hover/ação) */
-    --cor-instagram-icon: #E1306C; /* (NOVO) Cor do ícone do Instagram */
+    --cor-instagram-icon: #E1306C; /* Cor do ícone do Instagram */
 
     /* Cor da Navbar semi-transparente */
     --cor-fundo-navbar: rgba(252, 250, 245, 0.85); /* Bege com 85% de opacidade */
@@ -27,6 +27,10 @@
     /* FONTES */
     --font-titulo: 'Cormorant Garamond', serif;
     --font-texto: 'Inter', sans-serif;
+    
+    /* Ícones Sol/Lua (SVG embutido) */
+    --icon-moon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>');
+    --icon-sun: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>');
 }
 
 [data-theme="dark"] {
@@ -66,14 +70,13 @@ body.no-scroll {
     padding: 20px 0;
 }
 
-/* (MUDANÇA AQUI) Adiciona a margem de scroll para as âncoras */
 .section {
     padding: 60px 0; 
     background-color: var(--cor-fundo-base); 
     transition: background-color 0.3s ease;
     
-    /* (NOVO) Garante que a âncora pare abaixo da navbar fixa */
-    scroll-margin-top: 100px; /* (Altura aproximada da navbar) */
+    /* Garante que a âncora pare abaixo da navbar fixa */
+    scroll-margin-top: 100px; 
 }
 
 .section.destaque {
@@ -147,15 +150,53 @@ a:hover {
     transition: all 0.3s ease;
     color: var(--cor-destaque-ori); 
 }
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; 
+}
 .nav-menu a {
     font-size: 1rem;
-    margin-left: 1.5rem;
+    margin-left: 0; 
     font-weight: 500;
     color: var(--cor-destaque-ori); 
 }
 .nav-menu a:hover {
     color: var(--cor-acento-secundario); 
 }
+
+/* Estilo do link ATIVO (Scroll Spy) */
+.nav-menu a.active-link {
+    color: var(--cor-acento-secundario); /* Rosa Salmão */
+    font-weight: 600; 
+}
+
+
+/* BOTÃO DE MUDAR TEMA (SOL/LUA) - ESTILO DESKTOP */
+#theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 24px; 
+    height: 24px;
+    padding: 0;
+    
+    background-color: var(--cor-destaque-ori);
+    mask-image: var(--icon-moon); 
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+#theme-toggle:hover {
+    background-color: var(--cor-acento-secundario);
+    transform: scale(1.1);
+}
+[data-theme="dark"] #theme-toggle {
+    mask-image: var(--icon-sun);
+}
+
 
 /* (ESTILOS DO HAMBURGER) */
 .hamburger-menu {
@@ -214,6 +255,12 @@ a:hover {
     position: relative;
     overflow: hidden;
     z-index: 1;
+    
+    min-width: 150px; 
+    min-height: 45px; 
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .cta-button:hover {
@@ -222,6 +269,37 @@ a:hover {
     color: var(--cor-fundo-base); 
     opacity: 1;
 }
+
+/* SPINNER DE CARREGAMENTO (PURO CSS) */
+.spinner {
+    display: none; 
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3); 
+    border-top-color: var(--cor-fundo-base); 
+    border-radius: 50%;
+    animation: spin 1s ease-in-out infinite; 
+}
+[data-theme="dark"] .spinner {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #f0f0f0; 
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ESTADO DE CARREGAMENTO DO BOTÃO */
+.cta-button.is-loading {
+    opacity: 0.8; 
+    pointer-events: none; 
+}
+.cta-button.is-loading .btn-text {
+    display: none; 
+}
+.cta-button.is-loading .spinner {
+    display: block; 
+}
+
 
 /* (GALERIA) */
 .galeria-grid {
@@ -276,6 +354,37 @@ a:hover {
     font-weight: 600;
 }
 
+/* SEÇÃO DE CONTADORES (STATS) */
+.stats-section {
+    background-color: var(--cor-fundo-base);
+    padding-bottom: 40px; 
+}
+.stats-container {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-around; 
+    gap: 1.5rem;
+    text-align: center;
+    padding-top: 1rem; 
+}
+.stat-item {
+    flex-basis: 150px; 
+}
+.stat-number {
+    font-family: var(--font-titulo);
+    font-size: 3rem; 
+    color: var(--cor-destaque-ori); 
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 0.25rem;
+}
+.stat-label {
+    font-size: 1rem;
+    color: var(--cor-texto-secundario); 
+    margin: 0;
+}
+
+
 /* (DEPOIMENTOS) */
 .depoimentos-grid {
     display: grid;
@@ -315,6 +424,122 @@ a:hover {
     gap: 1rem;
     flex-wrap: wrap; 
 }
+
+/* ESTILOS DO "CLICK TO COPY" (PIX) */
+.pix-copy-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem; 
+    background-color: var(--cor-fundo-destaque); 
+    border: 1px dashed var(--cor-destaque-ori); 
+    padding: 1rem;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 0 auto 2rem auto; 
+    text-align: center;
+    position: relative; 
+}
+.pix-text {
+    font-size: 1rem;
+    color: var(--cor-texto-secundario);
+}
+#pix-key {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--cor-texto-principal);
+}
+#copy-pix-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+    position: relative; 
+}
+#copy-pix-btn .icon-copy {
+    stroke: var(--cor-destaque-ori); 
+    transition: stroke 0.2s ease;
+}
+#copy-pix-btn:hover {
+    background-color: rgba(0,0,0,0.05); 
+}
+#copy-pix-btn:hover .icon-copy {
+    stroke: var(--cor-acento-secundario); 
+}
+/* O balão "Copiado!" (Tooltip) */
+.tooltip-copy {
+    position: absolute;
+    bottom: -30px; 
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--cor-texto-principal); 
+    color: var(--cor-fundo-base); 
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+/* Classe que o JS vai adicionar */
+.tooltip-copy.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* (BARRA DE NOTIFICAÇÃO) */
+.notification-bar {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto 2rem auto;
+    padding: 1rem;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    
+    background-color: var(--cor-destaque-ori); 
+    color: var(--cor-fundo-base); 
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+    transition: all 0.5s ease; 
+}
+.notification-bar p {
+    color: var(--cor-fundo-base); 
+    margin: 0;
+    font-weight: 500;
+}
+.close-notification {
+    background: none;
+    border: none;
+    color: var(--cor-fundo-base); 
+    font-size: 1.5rem; 
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+.close-notification:hover {
+    opacity: 1;
+}
+/* Classe que o JS vai adicionar */
+.notification-bar.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    padding: 0 1rem;
+    margin: 0 auto;
+    border: none;
+}
+
 
 /* (FOOTER) */
 .footer {
@@ -383,16 +608,16 @@ a:hover {
     left: 100%; 
 }
 
-/* (NOVO) ANIMAÇÃO DE FADE-IN NO SCROLL */
+/* ANIMAÇÃO DE FADE-IN NO SCROLL */
 .fade-in {
-    opacity: 0; /* Começa invisível */
-    transform: translateY(20px); /* Começa 20px abaixo */
+    opacity: 0; 
+    transform: translateY(20px); 
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .fade-in.is-visible {
-    opacity: 1; /* Fica visível */
-    transform: translateY(0); /* Sobe para a posição original */
+    opacity: 1; 
+    transform: translateY(0); 
 }
 
 
@@ -422,6 +647,7 @@ a:hover {
         align-items: center;
         transition: left 0.4s ease-in-out;
         z-index: 1001; 
+        gap: 0; 
     }
     .nav-menu.active {
         left: 0;
@@ -429,14 +655,43 @@ a:hover {
     .nav-menu a {
         font-family: var(--font-titulo); 
         font-size: 2rem; 
-        margin: 1.5rem 0;
+        margin: 1.2rem 0; 
         font-weight: 600;
         transition: transform 0.2s ease, color 0.2s ease; 
     }
-    .nav-menu a:active {
-        transform: scale(1.1); 
+    .nav-menu a:active,
+    .nav-menu a.active-link { 
         color: var(--cor-acento-secundario); 
     }
+    .nav-menu a:active {
+        transform: scale(1.1); 
+    }
+    
+    /* (CORRIGIDO) Estilo do Botão de Tema no Mobile */
+    #theme-toggle {
+        font-size: 1rem; 
+        font-weight: normal;
+        color: inherit;
+        background-color: transparent; 
+        padding: 0;
+        border-radius: 0;
+        margin-top: 1.5rem; 
+        width: 32px; 
+        height: 32px;
+        mask-image: var(--icon-moon); 
+        background-color: var(--cor-destaque-ori); 
+    }
+    #theme-toggle:hover {
+        background-color: var(--cor-acento-secundario); 
+    }
+    #theme-toggle::before {
+        content: ''; 
+    }
+    [data-theme="dark"] #theme-toggle::before {
+        content: ''; 
+    }
+
+    
     .hamburger-menu.active .bar:nth-child(2) {
         opacity: 0; 
     }
@@ -451,6 +706,42 @@ a:hover {
     h2 { font-size: 1.8rem; }
     .depoimentos-grid {
         grid-template-columns: 1fr; 
+    }
+
+    /* (Ajuste para o Bloco PIX no mobile) */
+    .pix-copy-wrapper {
+        flex-direction: column; 
+        gap: 0.25rem;
+    }
+    .pix-text {
+        font-size: 0.9rem;
+    }
+    #pix-key {
+        font-size: 1rem;
+    }
+    
+    /* (Ajuste dos Contadores no mobile) */
+    .stats-container {
+        gap: 2rem; 
+    }
+    .stat-number {
+        font-size: 2.5rem; 
+    }
+    .stat-label {
+        font-size: 0.9rem;
+    }
+
+    /* (CORRIGIDO) Ajuste da Barra de Notificação no mobile */
+    .notification-bar {
+        /* (REMOVIDO) flex-direction: column; */
+        text-align: left; /* (REMOVIDO) text-align: center; */
+        gap: 0.5rem; /* (AJUSTADO) gap: 0.5rem; */
+    }
+    .notification-bar p {
+        font-size: 0.9rem;
+    }
+    .close-notification {
+        padding: 5px; 
     }
 }
 
@@ -479,7 +770,8 @@ a:hover {
 
 .lightbox-content {
     position: relative;
-    max-width: 90%; 
+    width: 90vw; 
+    max-width: 1000px; 
     max-height: 90vh; 
     display: flex; 
     justify-content: center;
@@ -503,9 +795,9 @@ a:hover {
 
 /* Placeholder de vídeo DENTRO do lightbox */
 .lightbox-video-placeholder {
-    display: none; /* Escondido por padrão */
-    width: 90vw; 
-    height: 50vh; 
+    display: none; 
+    width: 100%; 
+    aspect-ratio: 16 / 9; 
     background-color: var(--cor-fundo-destaque);
     border-radius: 8px;
     
@@ -514,6 +806,20 @@ a:hover {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 128px 128px; 
+    
+    position: relative;
+    overflow: hidden; 
+}
+
+/* Estilo para o iframe do vídeo quando ele for inserido */
+.lightbox-video-placeholder iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px; 
 }
 
 
@@ -524,7 +830,7 @@ a:hover {
     color: var(--cor-destaque-ori); 
     font-size: 40px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     text-shadow: 0 0 5px rgba(0,0,0,0.7); 
 }
 
@@ -533,19 +839,19 @@ a:hover {
     transform: scale(1.1);
 }
 
-/* ======== 11. (NOVO) BOTÃO VOLTAR AO TOPO ======== */
+/* ======== 11. BOTÃO VOLTAR AO TOPO ======== */
 .voltar-ao-topo {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    z-index: 999; /* (Abaixo da navbar e lightbox, mas acima do resto) */
+    z-index: 999; 
     
-    background-color: var(--cor-destaque-ori); /* (Fundo Terracota) */
-    color: var(--cor-fundo-base); /* (Ícone Bege) */
+    background-color: var(--cor-destaque-ori); 
+    color: var(--cor-fundo-base); 
     
     width: 45px;
     height: 45px;
-    border-radius: 50%; /* (Círculo) */
+    border-radius: 50%; 
     
     display: flex;
     justify-content: center;
@@ -553,7 +859,6 @@ a:hover {
     
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     
-    /* (Mágica do JS) Começa invisível e escalonado */
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px);
@@ -567,7 +872,7 @@ a:hover {
 }
 
 .voltar-ao-topo:hover {
-    background-color: var(--cor-acento-secundario); /* (Hover Rosa Salmão) */
-    color: var(--cor-fundo-base); /* (Mantém ícone Bege) */
+    background-color: var(--cor-acento-secundario); 
+    color: var(--cor-fundo-base); 
     opacity: 1;
 }
