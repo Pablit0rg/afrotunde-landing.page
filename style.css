@@ -19,7 +19,7 @@
     --cor-texto-secundario: #7a736a; /* Marrom-Médio (Para o disclaimer) */
     --cor-destaque-ori: #b78972; /* Terracota (O novo "ouro") */
     --cor-acento-secundario: #f0b8aa; /* Rosa Salmão (Para o hover/ação) */
-    --cor-instagram-icon: #E1306C; /* Cor do ícone do Instagram */
+    --cor-instagram-icon: #E1306C; /* Cor oficial do Instagram */
 
     /* Cor da Navbar semi-transparente */
     --cor-fundo-navbar: rgba(252, 250, 245, 0.85); /* Bege com 85% de opacidade */
@@ -38,10 +38,10 @@
     --cor-fundo-destaque: #2a2730; 
     --cor-texto-principal: #f0f0f0; 
     --cor-texto-secundario: #a0a0a0; 
-    --cor-destaque-ori: #D4AF37; 
+    --cor-destaque-ori: #D4AF37; /* Dourado */
     --cor-acento-secundario: #f0b8aa; 
     --cor-fundo-navbar: rgba(26, 24, 32, 0.85);
-    --cor-instagram-icon: #E1306C; 
+    --cor-instagram-icon: #E1306C; /* Mantém a cor oficial no tema dark */
 }
 
 /* ======== 4. CONFIGURAÇÕES GLOBAIS ======== */
@@ -165,12 +165,7 @@ a:hover {
     color: var(--cor-acento-secundario); 
 }
 
-/* Estilo do link ATIVO (Scroll Spy) */
-.nav-menu a.active-link {
-    color: var(--cor-acento-secundario); /* Rosa Salmão */
-    font-weight: 600; 
-}
-
+/* Estilo do link ATIVO (Scroll Spy) - REMOVIDO */
 
 /* BOTÃO DE MUDAR TEMA (SOL/LUA) - ESTILO DESKTOP */
 #theme-toggle {
@@ -180,21 +175,49 @@ a:hover {
     width: 24px; 
     height: 24px;
     padding: 0;
-    
-    background-color: var(--cor-destaque-ori);
-    mask-image: var(--icon-moon); 
-    mask-size: contain;
-    mask-repeat: no-repeat;
-    mask-position: center;
-    
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+    transition: transform 0.3s ease;
 }
-#theme-toggle:hover {
-    background-color: var(--cor-acento-secundario);
-    transform: scale(1.1);
+
+/* Estilos dos SVGs internos do botão de tema */
+#theme-toggle svg {
+    width: 100%;
+    height: 100%;
+    transition: stroke 0.3s ease, fill 0.3s ease;
 }
-[data-theme="dark"] #theme-toggle {
-    mask-image: var(--icon-sun);
+/* Ícone da LUA (Tema Claro) */
+#theme-toggle .icon-moon {
+    stroke: var(--cor-destaque-ori); /* Terracota */
+    fill: none;
+}
+/* Ícone do SOL (Tema Escuro) */
+#theme-toggle .icon-sun {
+    display: none; 
+    stroke: var(--cor-destaque-ori); /* Dourado */
+    fill: var(--cor-destaque-ori); /* Preenchido Dourado */
+}
+
+#theme-toggle:hover svg {
+    stroke: var(--cor-acento-secundario);
+    fill: var(--cor-acento-secundario); /* Hover Rosa Salmão */
+}
+#theme-toggle:hover .icon-moon {
+    fill: none; /* Lua nunca é preenchida */
+}
+
+/* Quando o tema for DARK, mostra o SOL */
+[data-theme="dark"] #theme-toggle .icon-moon { display: none; }
+[data-theme="dark"] #theme-toggle .icon-sun { 
+    display: block; 
+    stroke: var(--cor-destaque-ori); /* Dourado */
+    fill: var(--cor-destaque-ori); /* Dourado */
+}
+[data-theme="dark"] #theme-toggle:hover .icon-sun {
+    stroke: var(--cor-acento-secundario); /* Rosa */
+    fill: var(--cor-acento-secundario); /* Rosa */
 }
 
 
@@ -275,17 +298,14 @@ a:hover {
     display: none; 
     width: 18px;
     height: 18px;
-    border: 2px solid rgba(255, 255, 255, 0.3); 
-    border-top-color: var(--cor-fundo-base); 
-    border-radius: 50%;
-    animation: spin 1s ease-in-out infinite; 
+    color: var(--cor-fundo-base); 
+    animation: spin 1s linear infinite; 
 }
-[data-theme="dark"] .spinner {
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-top-color: #f0f0f0; 
-}
-@keyframes spin {
-    to { transform: rotate(360deg); }
+.spinner svg {
+    width: 100%;
+    height: 100%;
+    stroke: currentColor; 
+    fill: none;
 }
 
 /* ESTADO DE CARREGAMENTO DO BOTÃO */
@@ -298,6 +318,9 @@ a:hover {
 }
 .cta-button.is-loading .spinner {
     display: block; 
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
 
 
@@ -327,13 +350,17 @@ a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    /* Ícone SVG embutido (cor Terracota) */
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="%23b78972" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.6 11.6L22 7v10l-6.4-4.6v.2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h9.6a2 2 0 0 1 2 2v3.6z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 64px 64px; 
 }
+.video-placeholder svg {
+    width: 64px; 
+    height: 64px;
+    stroke: var(--cor-destaque-ori); 
+    fill: none;
+}
+[data-theme="dark"] .video-placeholder {
+    background-color: #3e4a3e; 
+}
+
 
 .card-servico h4, .card-servico .disclaimer {
     padding: 1rem;
@@ -456,16 +483,21 @@ a:hover {
     padding: 5px;
     border-radius: 5px;
     transition: background-color 0.2s ease;
+    
+    /* (CORRIGIDO) Esta é a âncora para o tooltip */
     position: relative; 
 }
-#copy-pix-btn .icon-copy {
+#copy-pix-btn svg {
+    width: 20px; 
+    height: 20px;
     stroke: var(--cor-destaque-ori); 
+    fill: none; 
     transition: stroke 0.2s ease;
 }
 #copy-pix-btn:hover {
     background-color: rgba(0,0,0,0.05); 
 }
-#copy-pix-btn:hover .icon-copy {
+#copy-pix-btn:hover svg {
     stroke: var(--cor-acento-secundario); 
 }
 /* O balão "Copiado!" (Tooltip) */
@@ -484,6 +516,7 @@ a:hover {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
+    white-space: nowrap; 
 }
 /* Classe que o JS vai adicionar */
 .tooltip-copy.is-visible {
@@ -519,13 +552,22 @@ a:hover {
 .close-notification {
     background: none;
     border: none;
-    color: var(--cor-fundo-base); 
     font-size: 1.5rem; 
     font-weight: bold;
     line-height: 1;
     cursor: pointer;
     opacity: 0.8;
     transition: opacity 0.2s ease;
+    padding: 0; 
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+}
+.close-notification svg {
+    width: 24px; 
+    height: 24px;
+    stroke: var(--cor-fundo-base); 
+    fill: none;
 }
 .close-notification:hover {
     opacity: 1;
@@ -569,19 +611,20 @@ a:hover {
     color: var(--cor-acento-secundario); 
 }
 
-.icon-instagram {
+/* (CORRIGIDO AQUI) Cor oficial do Instagram no SVG */
+.footer .desenvolvido-por svg { 
+    width: 18px; 
+    height: 18px;
+    stroke: var(--cor-instagram-icon); /* Usa a variável com a cor oficial */
+    fill: none;
     position: relative;
     top: -1px; 
     vertical-align: middle;
-}
-
-.footer .desenvolvido-por .icon-instagram {
-    stroke: var(--cor-instagram-icon); 
     transition: stroke 0.3s ease;
 }
 
-.footer .desenvolvido-por a:hover .icon-instagram {
-    stroke: var(--cor-instagram-icon); 
+.footer .desenvolvido-por a:hover svg {
+    stroke: var(--cor-instagram-icon); /* (CORRIGIDO) Mantém a cor do Instagram no hover */
 }
 
 
@@ -659,12 +702,9 @@ a:hover {
         font-weight: 600;
         transition: transform 0.2s ease, color 0.2s ease; 
     }
-    .nav-menu a:active,
-    .nav-menu a.active-link { 
-        color: var(--cor-acento-secundario); 
-    }
     .nav-menu a:active {
         transform: scale(1.1); 
+        color: var(--cor-acento-secundario); 
     }
     
     /* (CORRIGIDO) Estilo do Botão de Tema no Mobile */
@@ -678,17 +718,26 @@ a:hover {
         margin-top: 1.5rem; 
         width: 32px; 
         height: 32px;
-        mask-image: var(--icon-moon); 
-        background-color: var(--cor-destaque-ori); 
+    }
+    #theme-toggle svg {
+        width: 100%;
+        height: 100%;
+        stroke: var(--cor-destaque-ori); 
     }
     #theme-toggle:hover {
-        background-color: var(--cor-acento-secundario); 
+        background-color: transparent; 
     }
-    #theme-toggle::before {
-        content: ''; 
+    #theme-toggle:hover svg {
+         stroke: var(--cor-acento-secundario);
     }
-    [data-theme="dark"] #theme-toggle::before {
-        content: ''; 
+    /* (CORRIGIDO) Cor do ícone do SOL no mobile */
+    [data-theme="dark"] #theme-toggle .icon-sun {
+        stroke: var(--cor-destaque-ori); 
+        fill: var(--cor-destaque-ori); 
+    }
+    [data-theme="dark"] #theme-toggle:hover .icon-sun {
+        stroke: var(--cor-acento-secundario); 
+        fill: var(--cor-acento-secundario); 
     }
 
     
@@ -731,11 +780,10 @@ a:hover {
         font-size: 0.9rem;
     }
 
-    /* (CORRIGIDO) Ajuste da Barra de Notificação no mobile */
+    /* (Ajuste da Barra de Notificação no mobile) */
     .notification-bar {
-        /* (REMOVIDO) flex-direction: column; */
-        text-align: left; /* (REMOVIDO) text-align: center; */
-        gap: 0.5rem; /* (AJUSTADO) gap: 0.5rem; */
+        text-align: left; 
+        gap: 0.5rem; 
     }
     .notification-bar p {
         font-size: 0.9rem;
@@ -801,15 +849,20 @@ a:hover {
     background-color: var(--cor-fundo-destaque);
     border-radius: 8px;
     
-    /* Ícone SVG (Terracota) */
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24" fill="none" stroke="%23b78972" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.6 11.6L22 7v10l-6.4-4.6v.2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h9.6a2 2 0 0 1 2 2v3.6z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 128px 128px; 
-    
     position: relative;
     overflow: hidden; 
+
+    display: flex; 
+    justify-content: center;
+    align-items: center;
 }
+.lightbox-video-placeholder svg { 
+    width: 128px; 
+    height: 128px;
+    stroke: var(--cor-destaque-ori); 
+    fill: none;
+}
+
 
 /* Estilo para o iframe do vídeo quando ele for inserido */
 .lightbox-video-placeholder iframe {
@@ -828,18 +881,129 @@ a:hover {
     top: 15px;
     right: 25px;
     color: var(--cor-destaque-ori); 
-    font-size: 40px;
+    font-size: 40px; 
     cursor: pointer;
     transition: all 0.3s ease;
     text-shadow: 0 0 5px rgba(0,0,0,0.7); 
+    background: none; 
+    border: none; 
+    padding: 0; 
+    line-height: 1;
+    width: 40px; 
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.lightbox-close svg {
+    width: 30px; 
+    height: 30px;
+    stroke: var(--cor-destaque-ori); 
+    fill: none;
+    transition: stroke 0.3s ease, transform 0.3s ease;
 }
 
-.lightbox-close:hover {
-    color: var(--cor-acento-secundario); 
+
+.lightbox-close:hover svg {
+    stroke: var(--cor-acento-secundario); 
     transform: scale(1.1);
 }
 
-/* ======== 11. BOTÃO VOLTAR AO TOPO ======== */
+/* ======== 11. MODAL DE CONFIRMAÇÃO (WHATSAPP) ======== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; 
+    opacity: 0; 
+    visibility: hidden; 
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: var(--cor-fundo-base);
+    color: var(--cor-texto-principal);
+    padding: 2.5rem 2rem 2rem 2rem; 
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    max-width: 450px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    
+    transform: scale(0.9); 
+    transition: transform 0.3s ease;
+}
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-content h3 {
+    font-family: var(--font-titulo);
+    color: var(--cor-destaque-ori);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+.modal-content p {
+    color: var(--cor-texto-secundario);
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+}
+.modal-close svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--cor-texto-secundario); 
+    transition: all 0.2s ease;
+}
+.modal-close:hover svg {
+    stroke: var(--cor-destaque-ori);
+    transform: scale(1.1);
+}
+
+.modal-botoes {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap; 
+}
+
+/* Botão "Cancelar" */
+.cta-button.secondary {
+    background-color: transparent;
+    color: var(--cor-destaque-ori);
+    border: 2px solid var(--cor-fundo-destaque); 
+}
+.cta-button.secondary:hover {
+    background-color: var(--cor-fundo-destaque); 
+    color: var(--cor-texto-principal);
+    border-color: var(--cor-fundo-destaque);
+}
+
+/* ======== 12. BOTÃO VOLTAR AO TOPO ======== */
 .voltar-ao-topo {
     position: fixed;
     bottom: 20px;
@@ -869,6 +1033,13 @@ a:hover {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+}
+
+.voltar-ao-topo svg {
+    width: 24px; 
+    height: 24px;
+    stroke: var(--cor-fundo-base); 
+    fill: none;
 }
 
 .voltar-ao-topo:hover {
