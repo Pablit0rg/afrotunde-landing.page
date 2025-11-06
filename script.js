@@ -1,0 +1,573 @@
+/* ======== 1. IMPORTAÇÃO DAS FONTES ======== */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500&display=swap');
+
+/* ======== 2. RESET BÁSICO ======== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+/* ======== 3. VARIÁVEIS DE COR E FONTES (O MENU) - PALETA TERROSA ======== */
+:root {
+    /* (NOVAS CORES) TEMA TERROSO (KARLA) */
+    --cor-fundo-base: #fcfaf5; /* Bege/Areia (Off-white) */
+    --cor-fundo-destaque: #e8f0e8; /* Verde Claro (Para a seção de depoimentos) */
+    --cor-texto-principal: #3f3a34; /* Marrom-Escuro (Para legibilidade) */
+    --cor-texto-secundario: #7a736a; /* Marrom-Médio (Para o disclaimer) */
+    --cor-destaque-ori: #b78972; /* Terracota (O novo "ouro") */
+    --cor-acento-secundario: #f0b8aa; /* Rosa Salmão (Para o hover/ação) */
+    --cor-instagram-icon: #E1306C; /* (NOVO) Cor do ícone do Instagram */
+
+    /* Cor da Navbar semi-transparente */
+    --cor-fundo-navbar: rgba(252, 250, 245, 0.85); /* Bege com 85% de opacidade */
+
+    /* FONTES */
+    --font-titulo: 'Cormorant Garamond', serif;
+    --font-texto: 'Inter', sans-serif;
+}
+
+[data-theme="dark"] {
+    --cor-fundo-base: #1a1820; 
+    --cor-fundo-destaque: #2a2730; 
+    --cor-texto-principal: #f0f0f0; 
+    --cor-texto-secundario: #a0a0a0; 
+    --cor-destaque-ori: #D4AF37; 
+    --cor-acento-secundario: #f0b8aa; 
+    --cor-fundo-navbar: rgba(26, 24, 32, 0.85);
+    --cor-instagram-icon: #E1306C; 
+}
+
+/* ======== 4. CONFIGURAÇÕES GLOBAIS ======== */
+html {
+    scroll-behavior: smooth; 
+    font-size: 16px; 
+}
+
+body {
+    font-family: var(--font-texto);
+    background-color: var(--cor-fundo-base); 
+    color: var(--cor-texto-principal); 
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease; 
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* ======== 5. ESTRUTURA E UTILITÁRIOS ======== */
+.container {
+    width: 90%; 
+    max-width: 1100px; 
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* (MUDANÇA AQUI) Adiciona a margem de scroll para as âncoras */
+.section {
+    padding: 60px 0; 
+    background-color: var(--cor-fundo-base); 
+    transition: background-color 0.3s ease;
+    
+    /* (NOVO) Garante que a âncora pare abaixo da navbar fixa */
+    scroll-margin-top: 100px; /* (Altura aproximada da navbar) */
+}
+
+.section.destaque {
+    background-color: var(--cor-fundo-destaque); 
+    border-top: 1px solid var(--cor-destaque-ori); 
+    border-bottom: 1px solid var(--cor-destaque-ori); 
+    transition: background-color 0.3s ease;
+}
+
+/* ======== 6. TIPOGRAFIA (Títulos e Textos) ======== */
+h1, h2, h3, h4 {
+    font-family: var(--font-titulo);
+    color: var(--cor-destaque-ori); 
+    font-weight: 600;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.section h2 {
+    text-align: center;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+
+p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: var(--cor-texto-principal); 
+}
+
+a {
+    color: var(--cor-destaque-ori); 
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: var(--cor-acento-secundario); 
+    opacity: 1; 
+}
+
+/* ======== 7. COMPONENTES PRINCIPAIS ======== */
+
+/* (HEADER / NAVBAR) */
+.navbar {
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--cor-fundo-navbar); 
+    border-bottom: 1px solid var(--cor-destaque-ori); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 0; 
+    position: relative;
+}
+.logo {
+    font-family: var(--font-titulo);
+    font-size: 2.5rem; 
+    font-weight: 600;
+    line-height: 1; 
+    transition: all 0.3s ease;
+    color: var(--cor-destaque-ori); 
+}
+.nav-menu a {
+    font-size: 1rem;
+    margin-left: 1.5rem;
+    font-weight: 500;
+    color: var(--cor-destaque-ori); 
+}
+.nav-menu a:hover {
+    color: var(--cor-acento-secundario); 
+}
+
+/* (ESTILOS DO HAMBURGER) */
+.hamburger-menu {
+    display: none; 
+    cursor: pointer;
+}
+.hamburger-menu .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: var(--cor-destaque-ori); 
+    transition: all 0.3s ease-in-out;
+}
+
+/* (HERO SECTION) */
+.hero {
+    min-height: 80vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 0; 
+    position: relative;
+    z-index: 1; 
+}
+.hero.section {
+    background-color: var(--cor-fundo-base); 
+}
+
+.hero .subtitulo {
+    font-size: 1.2rem;
+    color: var(--cor-texto-secundario); 
+    margin-bottom: 2rem;
+}
+.hero .frase-orgulho {
+    font-family: var(--font-titulo);
+    font-size: 1.2rem;
+    color: var(--cor-destaque-ori); 
+    font-weight: 600;
+    margin-top: 2rem;
+}
+
+/* (BOTÃO CTA PRINCIPAL) */
+.cta-button {
+    font-family: var(--font-texto);
+    background-color: var(--cor-destaque-ori); 
+    color: var(--cor-fundo-base); 
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    display: inline-block;
+    border: 2px solid var(--cor-destaque-ori); 
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.cta-button:hover {
+    background-color: var(--cor-acento-secundario); 
+    border-color: var(--cor-acento-secundario); 
+    color: var(--cor-fundo-base); 
+    opacity: 1;
+}
+
+/* (GALERIA) */
+.galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 1.5rem;
+}
+.card-servico {
+    background-color: var(--cor-fundo-destaque); 
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    cursor: pointer; 
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+.card-servico:hover {
+    transform: translateY(-5px); 
+}
+
+/* ESTILO DO PLACEHOLDER DE VÍDEO */
+.video-placeholder {
+    width: 100%;
+    height: 250px;
+    background-color: #dbe6db; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Ícone SVG embutido (cor Terracota) */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="%23b78972" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.6 11.6L22 7v10l-6.4-4.6v.2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h9.6a2 2 0 0 1 2 2v3.6z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 64px 64px; 
+}
+
+.card-servico h4, .card-servico .disclaimer {
+    padding: 1rem;
+}
+.card-servico .disclaimer {
+    font-size: 0.85rem;
+    color: var(--cor-texto-secundario); 
+    padding-top: 0;
+}
+
+/* (FRASES DE ORGULHO) */
+.frase-orgulho {
+    font-family: var(--font-titulo);
+    font-size: 1.5rem;
+    color: var(--cor-destaque-ori); 
+    text-align: center;
+    padding: 2rem 0;
+    font-weight: 600;
+}
+
+/* (DEPOIMENTOS) */
+.depoimentos-grid {
+    display: grid;
+    grid-template-columns: 1fr; 
+    gap: 1.5rem;
+}
+.card-depoimento {
+    background-color: var(--cor-fundo-base); 
+    border-radius: 8px;
+    padding: 1.5rem;
+    border-left: 5px solid var(--cor-destaque-ori); 
+    transition: background-color 0.3s ease;
+}
+.card-depoimento p {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--cor-texto-principal); 
+}
+.card-depoimento span {
+    font-weight: 500;
+    color: var(--cor-texto-secundario); 
+    margin-top: 1rem;
+    display: block;
+}
+
+/* (CONTATO) */
+.texto-localizacao {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--cor-texto-secundario); 
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+}
+.botoes-contato {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap; 
+}
+
+/* (FOOTER) */
+.footer {
+    border-top: 1px solid var(--cor-destaque-ori); 
+    padding: 2rem 0;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario); 
+    background-color: var(--cor-fundo-base); 
+    transition: background-color 0.3s ease;
+}
+.footer p {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario); 
+    margin: 0.25rem 0;
+}
+
+.footer .desenvolvido-por a {
+    color: var(--cor-destaque-ori); 
+    font-weight: 600;
+    display: inline-flex; 
+    align-items: center;
+    gap: 0.3rem; 
+}
+
+.footer .desenvolvido-por a:hover {
+    color: var(--cor-acento-secundario); 
+}
+
+.icon-instagram {
+    position: relative;
+    top: -1px; 
+    vertical-align: middle;
+}
+
+.footer .desenvolvido-por .icon-instagram {
+    stroke: var(--cor-instagram-icon); 
+    transition: stroke 0.3s ease;
+}
+
+.footer .desenvolvido-por a:hover .icon-instagram {
+    stroke: var(--cor-instagram-icon); 
+}
+
+
+/* ======== 8. EFEITOS (O TOQUE MESTRE) ======== */
+
+/* (EFEITO BRILHO BOTÃO) */
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%; 
+    width: 100%;
+    height: 100%;
+    z-index: -1; 
+    background: linear-gradient(
+        60deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.4), 
+        transparent
+    );
+    transition: left 0.7s ease-in-out;
+}
+.cta-button:hover::before {
+    left: 100%; 
+}
+
+/* (NOVO) ANIMAÇÃO DE FADE-IN NO SCROLL */
+.fade-in {
+    opacity: 0; /* Começa invisível */
+    transform: translateY(20px); /* Começa 20px abaixo */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.is-visible {
+    opacity: 1; /* Fica visível */
+    transform: translateY(0); /* Sobe para a posição original */
+}
+
+
+/* ======== 9. MEDIA QUERIES (RESPONSIVIDADE - O MENU SANTUÁRIO) ======== */
+@media (max-width: 768px) {
+    .navbar .container {
+        justify-content: center;
+    }
+    .hamburger-menu {
+        display: block; 
+        position: absolute;
+        right: 0; 
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1002; 
+    }
+    .nav-menu {
+        position: fixed;
+        left: -100%; 
+        top: 0;
+        width: 100%;
+        height: 100vh; 
+        background-color: var(--cor-fundo-base); 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: left 0.4s ease-in-out;
+        z-index: 1001; 
+    }
+    .nav-menu.active {
+        left: 0;
+    }
+    .nav-menu a {
+        font-family: var(--font-titulo); 
+        font-size: 2rem; 
+        margin: 1.5rem 0;
+        font-weight: 600;
+        transition: transform 0.2s ease, color 0.2s ease; 
+    }
+    .nav-menu a:active {
+        transform: scale(1.1); 
+        color: var(--cor-acento-secundario); 
+    }
+    .hamburger-menu.active .bar:nth-child(2) {
+        opacity: 0; 
+    }
+    .hamburger-menu.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger-menu.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.8rem; }
+    .depoimentos-grid {
+        grid-template-columns: 1fr; 
+    }
+}
+
+/* ======== 10. LIGHTBOX (AMPLIAÇÃO DE IMAGENS) ======== */
+
+.lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; 
+    opacity: 0; 
+    visibility: hidden; 
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.lightbox-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90%; 
+    max-height: 90vh; 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    
+    transform: scale(0.8); 
+    transition: transform 0.3s ease;
+}
+
+.lightbox-overlay.active .lightbox-content {
+    transform: scale(1); 
+}
+
+.lightbox-image {
+    max-width: 100%;
+    max-height: 100%;
+    display: block; 
+    border-radius: 8px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+/* Placeholder de vídeo DENTRO do lightbox */
+.lightbox-video-placeholder {
+    display: none; /* Escondido por padrão */
+    width: 90vw; 
+    height: 50vh; 
+    background-color: var(--cor-fundo-destaque);
+    border-radius: 8px;
+    
+    /* Ícone SVG (Terracota) */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24" fill="none" stroke="%23b78972" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15.6 11.6L22 7v10l-6.4-4.6v.2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h9.6a2 2 0 0 1 2 2v3.6z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 128px 128px; 
+}
+
+
+.lightbox-close {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    color: var(--cor-destaque-ori); 
+    font-size: 40px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-shadow: 0 0 5px rgba(0,0,0,0.7); 
+}
+
+.lightbox-close:hover {
+    color: var(--cor-acento-secundario); 
+    transform: scale(1.1);
+}
+
+/* ======== 11. (NOVO) BOTÃO VOLTAR AO TOPO ======== */
+.voltar-ao-topo {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999; /* (Abaixo da navbar e lightbox, mas acima do resto) */
+    
+    background-color: var(--cor-destaque-ori); /* (Fundo Terracota) */
+    color: var(--cor-fundo-base); /* (Ícone Bege) */
+    
+    width: 45px;
+    height: 45px;
+    border-radius: 50%; /* (Círculo) */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    
+    /* (Mágica do JS) Começa invisível e escalonado */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
+}
+
+.voltar-ao-topo.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.voltar-ao-topo:hover {
+    background-color: var(--cor-acento-secundario); /* (Hover Rosa Salmão) */
+    color: var(--cor-fundo-base); /* (Mantém ícone Bege) */
+    opacity: 1;
+}
