@@ -158,89 +158,14 @@
 <span class="lightbox-close">&times;</span>
         </div>
     </div>
+
+<a href="#inicio" class="voltar-ao-topo" title="Voltar ao topo">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+</a>
     
-<script>
-        // --- SCRIPT ANTIGO (TUDO OK) ---
-        const hamburger = document.querySelector('.hamburger-menu');
-        const navMenu = document.querySelector('.nav-menu');
-        const lightboxOverlay = document.querySelector('.lightbox-overlay');
-        const lightboxImage = document.querySelector('.lightbox-image');
-        const lightboxVideoPlaceholder = document.querySelector('.lightbox-video-placeholder'); 
-        const lightboxClose = document.querySelector('.lightbox-close');
-        const cardServicos = document.querySelectorAll('.card-servico'); 
-        const body = document.body;
-
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            body.classList.toggle('no-scroll', navMenu.classList.contains('active'));
-        });
-
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-                body.classList.remove('no-scroll');
-            });
-        });
-
-        cardServicos.forEach(card => {
-            card.addEventListener('click', () => {
-                const fullSrc = card.getAttribute('data-full-src');
-                
-                if (fullSrc === "placeholder-video") {
-                    lightboxImage.style.display = 'none'; 
-                    lightboxVideoPlaceholder.style.display = 'flex'; 
-                } else if (fullSrc) { 
-                    lightboxImage.src = fullSrc;
-                    lightboxImage.style.display = 'block'; 
-                    lightboxVideoPlaceholder.style.display = 'none'; 
-                }
-
-                lightboxOverlay.classList.add('active');
-                body.classList.add('no-scroll'); 
-            });
-        });
-
-        const closeLightbox = () => {
-            lightboxOverlay.classList.remove('active');
-            if (!navMenu.classList.contains('active')) {
-                body.classList.remove('no-scroll');
-            }
-        };
-
-        lightboxClose.addEventListener('click', closeLightbox);
-        lightboxOverlay.addEventListener('click', (e) => {
-            if (e.target === lightboxOverlay) {
-                closeLightbox();
-            }
-        });
-
-        // --- (NOVO) SCRIPT DE ANIMAÇÃO DE SCROLL (IntersectionObserver) ---
-        // É leve e moderno
-        const faders = document.querySelectorAll('.fade-in');
-
-        const appearOptions = {
-            threshold: 0.1, // Começa a animação quando 10% do elemento está visível
-            rootMargin: "0px 0px -50px 0px" // Começa um pouco antes (50px) do fim da tela
-        };
-
-        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) {
-                    return;
-                } else {
-                    entry.target.classList.add('is-visible'); // Adiciona a classe que o CSS vai animar
-                    appearOnScroll.unobserve(entry.target); // Para de "assistir" o elemento (performance)
-                }
-            });
-        }, appearOptions);
-
-        faders.forEach(fader => {
-            appearOnScroll.observe(fader);
-        });
-
-    </script>
+<script src="script.js" defer></script>
 
 </body>
 </html>
