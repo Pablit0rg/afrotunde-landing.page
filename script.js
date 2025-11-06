@@ -1,8 +1,48 @@
-// Espera o DOM (estrutura HTML) estar pronto antes de executar o script
+/* ======== 1. LÓGICA DE TEMA (RODA IMEDIATAMENTE) ======== */
+// Esta função é auto-executável e roda ANTES do DOM carregar,
+// para evitar o "piscar" da tela (Flash of Unstyled Content).
+(() => {
+    // Função que aplica o tema no <html>
+    const applyTheme = (theme) => {
+        if (theme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.documentElement.lang = "pt-BR"; // Garante o lang
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+            document.documentElement.lang = "pt-BR"; // Garante o lang
+        }
+    };
+
+    // Função principal que decide qual tema usar
+    const initializeTheme = () => {
+        let savedTheme = null;
+        try {
+            // 1. Tenta pegar o tema salvo pelo usuário (a "memória")
+            savedTheme = localStorage.getItem('theme-preference');
+        } catch (e) {
+            console.warn('localStorage não está disponível.');
+        }
+
+        if (savedTheme) {
+            // 2. Se achou um tema salvo, usa ele
+            applyTheme(savedTheme);
+        } else {
+            // 3. Se não tem tema salvo, detecta o sistema do usuário
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            applyTheme(systemPrefersDark ? 'dark' : 'light');
+        }
+    };
+
+    initializeTheme();
+})();
+// --- FIM DA LÓGICA IMEDIATA ---
+
+
+/* ======== 2. LÓGICA PRINCIPAL (RODA APÓS O HTML CARREGAR) ======== */
+// 'DOMContentLoaded' espera o HTML estar pronto
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. SELETORES GERAIS ---
-    // Selecionamos todos os elementos que vamos usar no JS de uma vez
+    // --- SELETORES GERAIS ---
     const body = document.body;
     const hamburger = document.querySelector('.hamburger-menu');
     const navMenu = document.querySelector('.nav-menu');
@@ -13,81 +53,156 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightboxClose = document.querySelector('.lightbox-close');
     const cardServicos = document.querySelectorAll('.card-servico');
     
-    const faders = document.querySelectorAll('.fade-in'); // Elementos para o fade-in
-    const voltarAoTopoBtn = document.querySelector('.voltar-ao-topo'); // Botão de voltar ao topo
+    const faders = document.querySelectorAll('.fade-in'); 
+    const voltarAoTopoBtn = document.querySelector('.voltar-ao-topo'); 
 
-    // --- 2. LÓGICA DO MENU HAMBURGER ---
+    const copyPixBtn = document.querySelector('#copy-pix-btn');
+    const pixKeyText = document.querySelector('#pix-key');
+    const tooltip = document.querySelector('.tooltip-copy');
+    
+    const statNumbers = document.querySelectorAll('.stat-number');
+    
+    const themeToggleButton = document.querySelector('#theme-toggle');
+    
+    // (NOVOS SELETORES) Para o Scroll Spy
+    const sections = document.querySelectorAll('.section[id]');
+    const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
+
+
+    // --- LÓGICA DO CLIQUE NO BOTÃO DE TEMA ---
+    if (themeToggleButton) {
+        themeToggleButton.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = (currentTheme === 'dark') ? 'light' : 'dark';
+
+            if (newTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+            }
+            
+            try {
+                localStorage.setItem('theme-preference', newTheme);
+            } catch (e) {
+                console.warn('localStorage não está disponível.');
+            }
+        });
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme-preference')) {
+                applyTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+    }
+
+
+    // --- LÓGICA DO MENU HAMBURGER ---
     if (hamburger && navMenu) {
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
-            // Bloqueia/desbloqueia a rolagem do body
             body.classList.toggle('no-scroll', navMenu.classList.contains('active'));
         });
 
-        // Fecha o menu mobile quando um link é clicado
+        // (MUDANÇA AQUI) O Scroll Spy agora controla o 'active-link',
+        // então o clique apenas *fecha* o menu.
         document.querySelectorAll('.nav-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
                 body.classList.remove('no-scroll');
+                // (Removemos o 'active-link' daqui, o Observer cuida disso)
             });
         });
     }
 
-    // --- 3. LÓGICA DO LIGHTBOX (MODAL DE VÍDEO/IMAGEM) ---
+    // --- FUNÇÕES "HELPER" PARA O LIGHTBOX (VÍDEO) ---
+    function getYouTubeID(url) {
+        let ID = '';
+        url = url.replace(/(>|<)/gi,'').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+        if (url[2] !== undefined) {
+            ID = url[2].split(/[^0-9a-z_\-]/i);
+            ID = ID[0];
+        } else {
+            ID = url;
+        }
+        return ID;
+    }
+
+    function createYouTubePlayer(url) {
+        const videoID = getYouTubeID(url);
+        const iframeHTML = `
+            <iframe 
+                src="https://www.youtube.com/embed/${videoID}?autoplay=1&rel=0&modestbranding=1" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        `;
+        lightboxVideoPlaceholder.innerHTML = iframeHTML;
+    }
+
+    // --- LÓGICA DO LIGHTBOX (MODAL DE VÍDEO/IMAGEM) ---
     if (lightboxOverlay && lightboxImage && lightboxVideoPlaceholder && lightboxClose && cardServicos.length > 0) {
         
         cardServicos.forEach(card => {
             card.addEventListener('click', () => {
                 const fullSrc = card.getAttribute('data-full-src');
                 
+                lightboxVideoPlaceholder.innerHTML = '';
+                lightboxImage.src = '';
+                
                 if (fullSrc === "placeholder-video") {
-                    lightboxImage.style.display = 'none'; // Esconde a imagem real
-                    lightboxVideoPlaceholder.style.display = 'flex'; // Mostra o placeholder de vídeo
-                } else if (fullSrc) { // Se for uma URL real (foto)
+                    lightboxImage.style.display = 'none'; 
+                    lightboxVideoPlaceholder.style.display = 'flex'; 
+                
+                } else if (fullSrc && (fullSrc.includes('youtube.com') || fullSrc.includes('youtu.be'))) {
+                    lightboxImage.style.display = 'none'; 
+                    lightboxVideoPlaceholder.style.display = 'block'; 
+                    createYouTubePlayer(fullSrc); 
+                
+                } else if (fullSrc) { 
                     lightboxImage.src = fullSrc;
-                    lightboxImage.style.display = 'block'; // Mostra a imagem real
-                    lightboxVideoPlaceholder.style.display = 'none'; // Esconde o placeholder
+                    lightboxImage.style.display = 'block'; 
+                    lightboxVideoPlaceholder.style.display = 'none'; 
                 }
 
                 lightboxOverlay.classList.add('active');
-                body.classList.add('no-scroll'); // Bloqueia a rolagem
+                body.classList.add('no-scroll'); 
             });
         });
 
         const closeLightbox = () => {
             lightboxOverlay.classList.remove('active');
-            // Só desbloqueia a rolagem se o menu mobile também estiver fechado
             if (!navMenu.classList.contains('active')) {
                 body.classList.remove('no-scroll');
             }
+            lightboxVideoPlaceholder.innerHTML = '';
         };
 
         lightboxClose.addEventListener('click', closeLightbox);
 
         lightboxOverlay.addEventListener('click', (e) => {
-            // Fecha o lightbox se clicar no overlay (fundo preto), mas não na imagem
             if (e.target === lightboxOverlay) {
                 closeLightbox();
             }
         });
     }
 
-    // --- 4. LÓGICA DO FADE-IN AO ROLAR (IntersectionObserver) ---
+    // --- LÓGICA DO FADE-IN AO ROLAR (IntersectionObserver) ---
     if (faders.length > 0) {
         const appearOptions = {
-            threshold: 0.1, // Começa a animação quando 10% do elemento está visível
-            rootMargin: "0px 0px -50px 0px" // Começa a animar 50px antes de aparecer na tela
+            threshold: 0.1, 
+            rootMargin: "0px 0px -50px 0px" 
         };
 
         const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
             entries.forEach(entry => {
                 if (!entry.isIntersecting) {
-                    return; // Sai se não estiver visível
+                    return; 
                 } else {
-                    entry.target.classList.add('is-visible'); // Adiciona a classe que o CSS vai animar
-                    appearOnScroll.unobserve(entry.target); // Para de "assistir" o elemento (melhora a performance)
+                    entry.target.classList.add('is-visible'); 
+                    appearOnScroll.unobserve(entry.target); 
                 }
             });
         }, appearOptions);
@@ -97,21 +212,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 5. LÓGICA DO BOTÃO "VOLTAR AO TOPO" ---
-    // (Esta lógica é combinada com um 'debounce' para performance máxima)
+    // --- LÓGICA DO BOTÃO "VOLTAR AO TOPO" ---
     if (voltarAoTopoBtn) {
         
-        // Função 'debounce' (Otimização #5)
-        // Isso impede que a função de scroll seja disparada 1000x por segundo, melhorando a performance
         let debounceTimer;
         const debounce = (callback, time) => {
             window.clearTimeout(debounceTimer);
             debounceTimer = window.setTimeout(callback, time);
         };
 
-        // A função que verifica o scroll (otimizada)
         const handleScroll = () => {
-            // Se o usuário rolou mais que 400px para baixo
             if (window.scrollY > 400) {
                 voltarAoTopoBtn.classList.add('is-visible');
             } else {
@@ -119,9 +229,114 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        // "Escuta" o evento de scroll, mas usa o 'debounce' para otimizar
         window.addEventListener('scroll', () => {
-            debounce(handleScroll, 100); // Só executa a função 100ms *depois* que o usuário parar de rolar
+            debounce(handleScroll, 100); 
+        });
+    }
+
+    // --- LÓGICA DO CLICK TO COPY (PIX) ---
+    if (copyPixBtn && pixKeyText && tooltip) {
+        copyPixBtn.addEventListener('click', () => {
+            const keyToCopy = pixKeyText.innerText;
+
+            navigator.clipboard.writeText(keyToCopy).then(() => {
+                tooltip.classList.add('is-visible'); 
+                setTimeout(() => {
+                    tooltip.classList.remove('is-visible');
+                }, 2000);
+
+            }).catch(err => {
+                console.error('Falha ao copiar PIX: ', err);
+                tooltip.innerText = 'Erro!';
+                tooltip.classList.add('is-visible');
+                setTimeout(() => {
+                    tooltip.classList.remove('is-visible');
+                    tooltip.innerText = 'Copiado!'; 
+                }, 2000);
+            });
+        });
+    }
+
+    // --- LÓGICA DO CONTADOR ANIMADO ---
+    if (statNumbers.length > 0) {
+        const animateCounter = (el) => {
+            const goal = parseInt(el.getAttribute('data-goal'), 10);
+            let current = 0;
+            const duration = 2000; 
+            const stepTime = Math.max(10, Math.floor(duration / goal)); 
+
+            const timer = setInterval(() => {
+                current += 1;
+                el.innerText = `${current}+`;
+                
+                if (current >= goal) {
+                    clearInterval(timer);
+                    el.innerText = `${goal}+`; 
+                }
+            }, stepTime);
+        };
+
+        const counterObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, { threshold: 0.5 }); 
+
+        statNumbers.forEach(number => {
+            counterObserver.observe(number);
+        });
+    }
+
+    // --- LÓGICA DA BARRA DE NOTIFICAÇÃO ---
+    if (notificationBar && closeNotificationBtn) {
+        try {
+            if (localStorage.getItem('notificationClosed') === 'true') {
+                notificationBar.classList.add('is-hidden');
+            }
+        } catch (e) {
+            console.warn('localStorage não está disponível.');
+        }
+
+        closeNotificationBtn.addEventListener('click', () => {
+            notificationBar.classList.add('is-hidden'); 
+            try {
+                localStorage.setItem('notificationClosed', 'true');
+            } catch (e) {
+                console.warn('localStorage não está disponível.');
+            }
+        });
+    }
+
+    // --- (NOVO) LÓGICA DO SCROLL SPY (Navegação Inteligente) ---
+    if (navLinks.length > 0 && sections.length > 0) {
+        
+        // (Reutilizando a ideia do IntersectionObserver de forma leve)
+        const spyObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // Se a seção está [threshold: 0.7] (70%) visível na tela
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    
+                    // 1. Remove o 'active-link' de TODOS os links
+                    navLinks.forEach(link => link.classList.remove('active-link'));
+                    
+                    // 2. Encontra o link específico que corresponde à seção e adiciona
+                    const activeLink = document.querySelector(`.nav-menu a[href="#${id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active-link');
+                    }
+                }
+            });
+        }, { 
+            threshold: 0.7 // O link "acende" quando 70% da seção está visível
+        });
+
+        // "Assiste" a todas as seções
+        sections.forEach(section => {
+            spyObserver.observe(section);
         });
     }
 
