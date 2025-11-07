@@ -1,3 +1,12 @@
+/*
+  LANDING PAGE AFROTUNDE (v3 - Paleta Terrosa)
+  Cliente: Karla (Afrotunde)
+  Desenvolvedor: Pablo Rosa Gomes (Seu Senhor)
+  IA Assistente: Gemini
+  Foco: Santuário Ori (Elegância, Afro, Espiritual)
+  Objetivo: Captação de Clientes (Conversão)
+*/
+
 /* ======== 1. IMPORTAÇÃO DAS FONTES ======== */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500&display=swap');
 
@@ -21,6 +30,9 @@
     --cor-acento-secundario: #f0b8aa; /* Rosa Salmão (Para o hover/ação) */
     --cor-instagram-icon: #E1306C; /* Cor oficial do Instagram */
 
+    /* Cor da Borda (Notificação) */
+    --cor-borda-notificacao: #4a5c4a; /* Verde Oliva Sutil */
+
     /* Cor da Navbar semi-transparente */
     --cor-fundo-navbar: rgba(252, 250, 245, 0.85); /* Bege com 85% de opacidade */
 
@@ -42,6 +54,9 @@
     --cor-acento-secundario: #f0b8aa; 
     --cor-fundo-navbar: rgba(26, 24, 32, 0.85);
     --cor-instagram-icon: #E1306C; /* Mantém a cor oficial no tema dark */
+
+    /* Cor da Borda (Notificação) - Tema Escuro */
+    --cor-borda-notificacao: #8FBC8F; /* Verde Sutil (Dark Sea Green) */
 }
 
 /* ======== 4. CONFIGURAÇÕES GLOBAIS ======== */
@@ -122,6 +137,24 @@ a:hover {
 
 /* ======== 7. COMPONENTES PRINCIPAIS ======== */
 
+/* LINK DE ACESSIBILIDADE "PULAR CONTEÚDO" */
+.skip-link {
+    position: absolute;
+    top: -40px; /* Esconde fora da tela */
+    left: 0;
+    background-color: var(--cor-destaque-ori);
+    color: var(--cor-fundo-base);
+    padding: 10px 15px;
+    z-index: 9999; /* Fica acima de tudo */
+    transition: top 0.3s ease;
+    font-weight: 600;
+    border-bottom-right-radius: 8px;
+}
+.skip-link:focus {
+    top: 0; 
+}
+
+
 /* (HEADER / NAVBAR) */
 .navbar {
     padding: 1rem 0;
@@ -160,15 +193,49 @@ a:hover {
     margin-left: 0; 
     font-weight: 500;
     color: var(--cor-destaque-ori); 
+    
+    position: relative;
+    padding-bottom: 4px; 
 }
+
 .nav-menu a:hover {
     color: var(--cor-acento-secundario); 
 }
 
-/* Estilo do link ATIVO (Scroll Spy) - REMOVIDO */
+/* Estilo do Sublinhado (Hover e Ativo) */
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--cor-acento-secundario);
+    
+    opacity: 0;
+    transform: scaleX(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
 
-/* BOTÃO DE MUDAR TEMA (SOL/LUA) - ESTILO DESKTOP */
-#theme-toggle {
+/* Animação no Hover */
+.nav-menu a:hover::after {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+/* Estilo do link ATIVO (Scroll Spy) */
+.nav-menu a.active {
+    color: var(--cor-acento-secundario); 
+}
+.nav-menu a.active::after {
+    background-color: var(--cor-acento-secundario);
+    opacity: 1;
+    transform: scaleX(1); 
+}
+
+
+/* (BOTÃO DE TEMA - DESKTOP) */
+#theme-toggle-desktop {
     background: none;
     border: none;
     cursor: pointer;
@@ -180,44 +247,50 @@ a:hover {
     align-items: center;
     overflow: hidden; 
     transition: transform 0.3s ease;
+    margin-left: 1.5rem; 
 }
 
 /* Estilos dos SVGs internos do botão de tema */
-#theme-toggle svg {
+#theme-toggle-desktop svg {
     width: 100%;
     height: 100%;
     transition: stroke 0.3s ease, fill 0.3s ease;
 }
 /* Ícone da LUA (Tema Claro) */
-#theme-toggle .icon-moon {
-    stroke: var(--cor-destaque-ori); /* Terracota */
+#theme-toggle-desktop .icon-moon {
+    stroke: var(--cor-destaque-ori); 
     fill: none;
 }
 /* Ícone do SOL (Tema Escuro) */
-#theme-toggle .icon-sun {
+#theme-toggle-desktop .icon-sun {
     display: none; 
-    stroke: var(--cor-destaque-ori); /* Dourado */
-    fill: var(--cor-destaque-ori); /* Preenchido Dourado */
+    stroke: var(--cor-destaque-ori); 
+    fill: var(--cor-destaque-ori); 
 }
 
-#theme-toggle:hover svg {
+#theme-toggle-desktop:hover svg {
     stroke: var(--cor-acento-secundario);
-    fill: var(--cor-acento-secundario); /* Hover Rosa Salmão */
+    fill: var(--cor-acento-secundario); 
 }
-#theme-toggle:hover .icon-moon {
-    fill: none; /* Lua nunca é preenchida */
+#theme-toggle-desktop:hover .icon-moon {
+    fill: none; 
 }
 
 /* Quando o tema for DARK, mostra o SOL */
-[data-theme="dark"] #theme-toggle .icon-moon { display: none; }
-[data-theme="dark"] #theme-toggle .icon-sun { 
+[data-theme="dark"] #theme-toggle-desktop .icon-moon { display: none; }
+[data-theme="dark"] #theme-toggle-desktop .icon-sun { 
     display: block; 
-    stroke: var(--cor-destaque-ori); /* Dourado */
-    fill: var(--cor-destaque-ori); /* Dourado */
+    stroke: var(--cor-destaque-ori); 
+    fill: var(--cor-destaque-ori); 
 }
-[data-theme="dark"] #theme-toggle:hover .icon-sun {
-    stroke: var(--cor-acento-secundario); /* Rosa */
-    fill: var(--cor-acento-secundario); /* Rosa */
+[data-theme="dark"] #theme-toggle-desktop:hover .icon-sun {
+    stroke: var(--cor-acento-secundario); 
+    fill: var(--cor-acento-secundario); 
+}
+
+/* (BOTÃO DE TEMA - MOBILE) */
+#theme-toggle-mobile {
+    display: none; 
 }
 
 
@@ -245,10 +318,61 @@ a:hover {
     padding: 60px 0; 
     position: relative;
     z-index: 1; 
+    overflow: hidden; /* Garante que a imagem não vaze */
 }
 .hero.section {
     background-color: var(--cor-fundo-base); 
 }
+
+/* (PLANO B: ESTILIZANDO SVG ADINKRA) */
+.hero-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0; /* Fica atrás do .container */
+    pointer-events: none; /* Não pode ser clicado */
+    max-width: 90%;
+}
+
+.hero-watermark img {
+    width: 400px; /* Tamanho do Selo */
+    height: 400px;
+    object-fit: contain; 
+    
+    /* Para SVG, que é vetorizado, podemos usar FILL (cor base da imagem)
+       e STROKE (cor da linha). Vamos usar FILL para a cor. 
+       Isso é melhor que o filter usado no PNG. */
+       
+    /* Usamos filter/opacity aqui para o SVG também, pois a imagem
+       baixada pelo senhor pode não ter o atributo 'fill' no código-fonte
+       que permite mudar a cor diretamente. Filter garante a cor. */
+       
+    filter: none; /* Resetando filtros anteriores, pois o SVG é colorido */
+    
+    /* Como o SVG já tem a cor marrom/terracota original, vamos
+       apenas controlar a opacidade para deixá-lo sutil */
+    opacity: 0.1;
+    
+    /* Animação sutil de pulso */
+    animation: pulse 8s infinite ease-in-out;
+}
+
+
+/* (ATUALIZADO) Animação de pulso para a watermark */
+@keyframes pulse {
+    0% { opacity: 0.1; transform: scale(1); }
+    50% { opacity: 0.15; transform: scale(1.03); }
+    100% { opacity: 0.1; transform: scale(1); }
+}
+
+/* Para o tema escuro, escurecemos o SVG */
+[data-theme="dark"] .hero-watermark img {
+    /* Diminui o brilho para ficar mais discreto no fundo escuro */
+    filter: brightness(0.6); 
+    opacity: 0.15; 
+}
+
 
 .hero .subtitulo {
     font-size: 1.2rem;
@@ -323,6 +447,68 @@ a:hover {
     to { transform: rotate(360deg); }
 }
 
+/* ESTILOS DA SEÇÃO SOBRE */
+.sobre-container {
+    display: flex;
+    align-items: center;
+    gap: 3rem; 
+    flex-wrap: wrap; 
+}
+.sobre-imagem {
+    flex: 1; 
+    min-width: 280px; 
+}
+.sobre-imagem img {
+    width: 100%;
+    height: auto;
+    max-height: 500px; 
+    object-fit: cover; 
+    object-position: center; 
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    
+    border: 4px solid var(--cor-fundo-destaque);
+    
+    /* --- EFEITO MOLDURA FLUTUANTE (NOVO) --- */
+    outline: 2px solid var(--cor-destaque-ori);
+    outline-offset: 8px; /* O "respiro" */
+    transition: all 0.3s ease;
+    /* --- FIM DO EFEITO --- */
+}
+
+/* (NOVO) Efeito hover para a moldura */
+.sobre-imagem img:hover {
+    outline-color: var(--cor-acento-secundario);
+    transform: scale(1.02);
+}
+
+.sobre-texto {
+    flex: 1.5; 
+    min-width: 300px;
+}
+.sobre-texto h2 {
+    text-align: left; 
+    margin-bottom: 0.5rem;
+}
+.sobre-texto h3 {
+    font-family: var(--font-texto); 
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 1.5rem;
+}
+.sobre-texto p {
+    font-size: 1.05rem; 
+    text-align: justify;
+}
+.frase-orgulho-sobre {
+    font-family: var(--font-titulo);
+    font-size: 1.3rem;
+    color: var(--cor-destaque-ori); 
+    font-weight: 600;
+    margin-top: 1.5rem;
+}
+
 
 /* (GALERIA) */
 .galeria-grid {
@@ -342,23 +528,45 @@ a:hover {
     transform: translateY(-5px); 
 }
 
-/* ESTILO DO PLACEHOLDER DE VÍDEO */
-.video-placeholder {
+/* (THUMBNAIL DA GALERIA) */
+.card-video-thumb {
     width: 100%;
-    height: 250px;
-    background-color: #dbe6db; 
+    height: 250px; 
+    position: relative; 
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden; 
 }
-.video-placeholder svg {
-    width: 64px; 
-    height: 64px;
-    stroke: var(--cor-destaque-ori); 
-    fill: none;
+.galeria-imagem {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover; 
+    display: block;
+    background-color: #dbe6db; 
+    transition: transform 0.3s ease;
 }
-[data-theme="dark"] .video-placeholder {
+.card-servico:hover .galeria-imagem {
+    transform: scale(1.05);
+}
+
+[data-theme="dark"] .galeria-imagem {
     background-color: #3e4a3e; 
+}
+
+/* Ícone de "Play" sobreposto */
+.icon-play-overlay {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    stroke: rgba(255, 255, 255, 0.9);
+    fill: none;
+    filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
+    transition: transform 0.3s ease;
+    pointer-events: none; 
+}
+.card-servico:hover .icon-play-overlay {
+    transform: scale(1.1);
 }
 
 
@@ -397,6 +605,7 @@ a:hover {
 .stat-item {
     flex-basis: 150px; 
 }
+/* (Semântica Otimizada) Alterado de H3 para DIV */
 .stat-number {
     font-family: var(--font-titulo);
     font-size: 3rem; 
@@ -484,7 +693,6 @@ a:hover {
     border-radius: 5px;
     transition: background-color 0.2s ease;
     
-    /* (CORRIGIDO) Esta é a âncora para o tooltip */
     position: relative; 
 }
 #copy-pix-btn svg {
@@ -518,7 +726,6 @@ a:hover {
     transition: opacity 0.3s ease, visibility 0.3s ease;
     white-space: nowrap; 
 }
-/* Classe que o JS vai adicionar */
 .tooltip-copy.is-visible {
     opacity: 1;
     visibility: visible;
@@ -543,6 +750,8 @@ a:hover {
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 
     transition: all 0.5s ease; 
+
+    border: 2px solid var(--cor-borda-notificacao);
 }
 .notification-bar p {
     color: var(--cor-fundo-base); 
@@ -593,9 +802,35 @@ a:hover {
     background-color: var(--cor-fundo-base); 
     transition: background-color 0.3s ease;
 }
+
+/* ======== (NOVO) NAVEGAÇÃO DO RODAPÉ ======== */
+.footer-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Quebra a linha em telas pequenas */
+    gap: 1rem 1.5rem; /* 1rem vertical, 1.5rem horizontal */
+    margin-bottom: 1.5rem;
+}
+.footer-nav a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--cor-texto-secundario); /* Cor mais sutil */
+}
+.footer-nav a:hover {
+    color: var(--cor-acento-secundario); /* Destaque no hover */
+    opacity: 1;
+}
+
+
 .footer p {
     font-size: 0.9rem;
     color: var(--cor-texto-secundario); 
+    margin: 0.25rem 0;
+}
+
+/* (Semântica Otimizada) Estilizando a tag <address> */
+.footer .desenvolvido-por {
+    font-style: normal; 
     margin: 0.25rem 0;
 }
 
@@ -611,11 +846,10 @@ a:hover {
     color: var(--cor-acento-secundario); 
 }
 
-/* (CORRIGIDO AQUI) Cor oficial do Instagram no SVG */
 .footer .desenvolvido-por svg { 
     width: 18px; 
     height: 18px;
-    stroke: var(--cor-instagram-icon); /* Usa a variável com a cor oficial */
+    stroke: var(--cor-instagram-icon); 
     fill: none;
     position: relative;
     top: -1px; 
@@ -624,7 +858,7 @@ a:hover {
 }
 
 .footer .desenvolvido-por a:hover svg {
-    stroke: var(--cor-instagram-icon); /* (CORRIGIDO) Mantém a cor do Instagram no hover */
+    stroke: var(--cor-instagram-icon); 
 }
 
 
@@ -663,18 +897,44 @@ a:hover {
     transform: translateY(0); 
 }
 
+/* ======== 8.5. OTIMIZAÇÃO DE PERFORMANCE (NOVO) ======== */
+/*
+  content-visibility: auto;
+  Instrui o navegador a pular a renderização (layout, pintura)
+  destas seções até que elas estejam perto de rolar para a tela.
+  Melhora drasticamente a velocidade de carregamento inicial.
+*/
+#sobre,
+#catalogo,
+#stats,
+#depoimentos,
+#contato {
+  content-visibility: auto;
+  /*
+    'contain-intrinsic-size' fornece um tamanho placeholder
+    para evitar "pulos" de layout (CLS) enquanto o
+    navegador não renderiza o conteúdo.
+  */
+  contain-intrinsic-size: 500px; /* Um valor genérico */
+}
+
 
 /* ======== 9. MEDIA QUERIES (RESPONSIVIDADE - O MENU SANTUÁRIO) ======== */
 @media (max-width: 768px) {
     .navbar .container {
-        justify-content: center;
+        justify-content: space-between; 
     }
+    
+    #theme-toggle-desktop {
+        display: none;
+    }
+
     .hamburger-menu {
         display: block; 
-        position: absolute;
-        right: 0; 
-        top: 50%;
-        transform: translateY(-50%);
+        position: relative; 
+        right: auto; 
+        top: auto;
+        transform: none;
         z-index: 1002; 
     }
     .nav-menu {
@@ -701,44 +961,66 @@ a:hover {
         margin: 1.2rem 0; 
         font-weight: 600;
         transition: transform 0.2s ease, color 0.2s ease; 
+        
+        padding-bottom: 0.5rem; 
     }
+
+    .nav-menu a::after {
+        display: none;
+    }
+    
+    .nav-menu a.active {
+        color: var(--cor-acento-secundario);
+    }
+    .nav-menu a:hover::after {
+        display: none;
+    }
+    
     .nav-menu a:active {
         transform: scale(1.1); 
         color: var(--cor-acento-secundario); 
     }
     
-    /* (CORRIGIDO) Estilo do Botão de Tema no Mobile */
-    #theme-toggle {
+    #theme-toggle-mobile {
+        display: flex; 
+        justify-content: center;
+        align-items: center;
         font-size: 1rem; 
         font-weight: normal;
         color: inherit;
         background-color: transparent; 
         padding: 0;
+        border: none;
         border-radius: 0;
         margin-top: 1.5rem; 
         width: 32px; 
         height: 32px;
+        cursor: pointer;
     }
-    #theme-toggle svg {
+    #theme-toggle-mobile svg {
         width: 100%;
         height: 100%;
         stroke: var(--cor-destaque-ori); 
     }
-    #theme-toggle:hover {
+    #theme-toggle-mobile:hover {
         background-color: transparent; 
     }
-    #theme-toggle:hover svg {
+    #theme-toggle-mobile:hover svg {
          stroke: var(--cor-acento-secundario);
     }
-    /* (CORRIGIDO) Cor do ícone do SOL no mobile */
-    [data-theme="dark"] #theme-toggle .icon-sun {
+    [data-theme="dark"] #theme-toggle-mobile .icon-sun {
         stroke: var(--cor-destaque-ori); 
         fill: var(--cor-destaque-ori); 
     }
-    [data-theme="dark"] #theme-toggle:hover .icon-sun {
+    [data-theme="dark"] #theme-toggle-mobile:hover .icon-sun {
         stroke: var(--cor-acento-secundario); 
         fill: var(--cor-acento-secundario); 
     }
+
+    #theme-toggle-mobile .icon-sun { display: none; }
+    [data-theme="dark"] #theme-toggle-mobile .icon-moon { display: none; }
+    [data-theme="dark"] #theme-toggle-mobile .icon-sun { display: block; }
+    
 
     
     .hamburger-menu.active .bar:nth-child(2) {
@@ -757,7 +1039,6 @@ a:hover {
         grid-template-columns: 1fr; 
     }
 
-    /* (Ajuste para o Bloco PIX no mobile) */
     .pix-copy-wrapper {
         flex-direction: column; 
         gap: 0.25rem;
@@ -769,7 +1050,6 @@ a:hover {
         font-size: 1rem;
     }
     
-    /* (Ajuste dos Contadores no mobile) */
     .stats-container {
         gap: 2rem; 
     }
@@ -780,7 +1060,6 @@ a:hover {
         font-size: 0.9rem;
     }
 
-    /* (Ajuste da Barra de Notificação no mobile) */
     .notification-bar {
         text-align: left; 
         gap: 0.5rem; 
@@ -791,7 +1070,71 @@ a:hover {
     .close-notification {
         padding: 5px; 
     }
+
+    .sobre-container {
+        gap: 2rem; 
+        display: flex;
+        flex-direction: column-reverse; 
+    }
+    .sobre-texto h2 {
+        text-align: center; 
+    }
+    .sobre-texto h3 {
+        text-align: center; 
+    }
+
+    /* (PLANO B: ESTILIZANDO SVG ADINKRA) */
+    .hero-watermark img {
+        width: 300px;
+        height: 300px;
+    }
 }
+
+/* (A11Y) MEDIA QUERY DE MOVIMENTO REDUZIDO */
+@media (prefers-reduced-motion: reduce) {
+    /* Desliga a rolagem suave */
+    html {
+        scroll-behavior: auto;
+    }
+    
+    /* Desliga TODAS as transições e animações */
+    *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+
+    /* Garante que o fade-in não esconda o conteúdo */
+    .fade-in {
+        opacity: 1;
+        transform: none;
+    }
+    
+    /* Desliga o brilho do botão */
+    .cta-button:hover::before {
+        display: none;
+    }
+    
+    /* Desliga o zoom da galeria */
+    .card-servico:hover .galeria-imagem,
+    .card-servico:hover .icon-play-overlay {
+        transform: none;
+    }
+
+    /* (NOVO) Desliga o hover da imagem "Sobre" */
+    .sobre-imagem img:hover {
+        outline-color: var(--cor-destaque-ori);
+        transform: none;
+    }
+
+    /* (PLANO B: DESLIGA ANIMAÇÃO SVG) */
+    .hero-watermark img {
+        animation: none;
+        opacity: 0.1; /* Garante a opacidade base */
+    }
+}
+
 
 /* ======== 10. LIGHTBOX (AMPLIAÇÃO DE IMAGENS) ======== */
 
@@ -822,6 +1165,7 @@ a:hover {
     max-width: 1000px; 
     max-height: 90vh; 
     display: flex; 
+    flex-direction: column; 
     justify-content: center;
     align-items: center;
     
@@ -839,6 +1183,9 @@ a:hover {
     display: block; 
     border-radius: 8px; 
     box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    
+    flex-shrink: 1;
+    min-height: 0; 
 }
 
 /* Placeholder de vídeo DENTRO do lightbox */
@@ -855,6 +1202,9 @@ a:hover {
     display: flex; 
     justify-content: center;
     align-items: center;
+
+    flex-shrink: 1;
+    min-height: 0;
 }
 .lightbox-video-placeholder svg { 
     width: 128px; 
@@ -873,6 +1223,21 @@ a:hover {
     height: 100%;
     border: none;
     border-radius: 8px; 
+}
+
+/* (ESTILO DA LEGENDA DO LIGHTBOX) */
+.lightbox-caption {
+    font-family: var(--font-titulo);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--cor-destaque-ori);
+    text-align: center;
+    padding: 1rem 0 0 0;
+    margin: 0;
+    line-height: 1.3;
+}
+[data-theme="dark"] .lightbox-caption {
+     color: var(--cor-destaque-ori);
 }
 
 
