@@ -30,12 +30,17 @@
     --cor-acento-secundario: #f0b8aa; /* Rosa Salmão (Para o hover/ação) */
     --cor-instagram-icon: #E1306C; /* Cor oficial do Instagram */
 
+    /* Cores em RGBA para Transparência */
+    --cor-fundo-base-transparente: rgba(252, 250, 245, 0.9); /* Bege/Areia 90% opaco */
+    --cor-fundo-destaque-transparente: rgba(232, 240, 232, 0.9); /* Verde Claro 90% opaco */
+    --cor-navbar-fundo-transparente: rgba(252, 250, 245, 0.95); /* Navbar mais opaca para manter a visibilidade */
+
     /* Cor da Borda (Notificação) */
     --cor-borda-notificacao: #4a5c4a; /* Verde Oliva Sutil */
 
     /* Cor da Navbar semi-transparente */
-    --cor-fundo-navbar: rgba(252, 250, 245, 0.85); /* Bege com 85% de opacidade */
-    
+    --cor-fundo-navbar: var(--cor-navbar-fundo-transparente);
+
     /* FONTES */
     --font-titulo: 'Cormorant Garamond', serif;
     --font-texto: 'Inter', sans-serif;
@@ -52,7 +57,12 @@
     --cor-texto-secundario: #a0a0a0; 
     --cor-destaque-ori: #D4AF37; /* Dourado */
     --cor-acento-secundario: #f0b8aa; 
-    --cor-fundo-navbar: rgba(26, 24, 32, 0.85);
+    
+    --cor-fundo-base-transparente: rgba(26, 24, 32, 0.9); /* Escuro 90% opaco */
+    --cor-fundo-destaque-transparente: rgba(42, 39, 48, 0.9); /* Escuro Destaque 90% opaco */
+    --cor-navbar-fundo-transparente: rgba(26, 24, 32, 0.95);
+
+    --cor-fundo-navbar: var(--cor-navbar-fundo-transparente);
     --cor-instagram-icon: #E1306C; /* Mantém a cor oficial no tema dark */
 
     /* Cor da Borda (Notificação) - Tema Escuro */
@@ -67,12 +77,18 @@ html {
 
 body {
     font-family: var(--font-texto);
-    background-color: var(--cor-fundo-base); /* RESTAURADO: Cor sólida */
     color: var(--cor-texto-principal); 
     line-height: 1.6;
     transition: background-color 0.3s ease, color 0.3s ease; 
     
-    /* REMOVIDO: background-image, background-size, background-attachment. */
+    /* (ATUALIZADO) Fundo do Body com a imagem de textura SVG */
+    background-image: url('assets/img/363622795_b948d16b-9bea-44f8-adf7-7b775cf0a221.svg');
+    background-color: var(--cor-fundo-base); /* Cor de fallback/base por baixo do SVG */
+    background-size: cover; 
+    background-attachment: fixed; /* Fixa o fundo, dando efeito 3D ao rolar */
+    background-position: center;
+    background-repeat: no-repeat;
+    /* FIM (ATUALIZADO) */
 }
 
 body.no-scroll {
@@ -89,7 +105,8 @@ body.no-scroll {
 
 .section {
     padding: 60px 0; 
-    background-color: var(--cor-fundo-base); /* RESTAURADO: Cor sólida */
+    /* (AJUSTADO) Usa cor semi-transparente para ver o fundo */
+    background-color: var(--cor-fundo-base-transparente); 
     transition: background-color 0.3s ease;
     
     /* Garante que a âncora pare abaixo da navbar fixa */
@@ -97,7 +114,8 @@ body.no-scroll {
 }
 
 .section.destaque {
-    background-color: var(--cor-fundo-destaque); /* RESTAURADO: Cor sólida */
+    /* (AJUSTADO) Usa cor semi-transparente para ver o fundo */
+    background-color: var(--cor-fundo-destaque-transparente); 
     border-top: 1px solid var(--cor-destaque-ori); 
     border-bottom: 1px solid var(--cor-destaque-ori); 
     transition: background-color 0.3s ease;
@@ -323,46 +341,13 @@ a:hover {
     overflow: hidden; 
 }
 .hero.section {
-    background-color: var(--cor-fundo-base); 
+    background-color: var(--cor-fundo-base-transparente); /* Usando Transparência */
 }
 
-/* (RESTAURADO) ESTILO DO SELO ORI (WATERMARK) */
+/* (REMOVIDO Estilos do .hero-watermark) */
 .hero-watermark {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 0; /* Fica atrás do .container */
-    pointer-events: none; /* Não pode ser clicado */
-    max-width: 90%;
+    display: none; 
 }
-
-.hero-watermark img {
-    width: 400px; /* Tamanho do Selo */
-    height: 400px;
-    object-fit: contain; 
-    
-    filter: none;
-    opacity: 0.1;
-    
-    /* Animação sutil de pulso */
-    animation: pulse 8s infinite ease-in-out;
-}
-
-
-/* (RESTAURADO) Animação de pulso para a watermark */
-@keyframes pulse {
-    0% { opacity: 0.1; transform: scale(1); }
-    50% { opacity: 0.15; transform: scale(1.03); }
-    100% { opacity: 0.1; transform: scale(1); }
-}
-
-/* (RESTAURADO) Para o tema escuro, escurecemos o SVG */
-[data-theme="dark"] .hero-watermark img {
-    filter: brightness(0.6); 
-    opacity: 0.15; 
-}
-
 
 .hero .subtitulo {
     font-size: 1.2rem;
@@ -581,7 +566,7 @@ a:hover {
 
 /* SEÇÃO DE CONTADORES (STATS) */
 .stats-section {
-    background-color: var(--cor-fundo-base);
+    background-color: var(--cor-fundo-base-transparente); /* Usando Transparência */
     padding-bottom: 40px; 
 }
 .stats-container {
@@ -618,7 +603,7 @@ a:hover {
     gap: 1.5rem;
 }
 .card-depoimento {
-    background-color: var(--cor-fundo-base); 
+    background-color: var(--cor-fundo-base-transparente); /* Usando Transparência */
     border-radius: 8px;
     padding: 1.5rem;
     border-left: 5px solid var(--cor-destaque-ori); 
@@ -657,7 +642,7 @@ a:hover {
     justify-content: center;
     align-items: center;
     gap: 0.5rem; 
-    background-color: var(--cor-fundo-destaque); 
+    background-color: var(--cor-fundo-destaque-transparente); /* Usando Transparência */
     border: 1px dashed var(--cor-destaque-ori); 
     padding: 1rem;
     border-radius: 8px;
@@ -789,7 +774,7 @@ a:hover {
     text-align: center;
     font-size: 0.9rem;
     color: var(--cor-texto-secundario); 
-    background-color: var(--cor-fundo-base); 
+    background-color: var(--cor-fundo-base-transparente); /* Usando Transparência */
     transition: background-color 0.3s ease;
 }
 
@@ -933,7 +918,7 @@ a:hover {
         top: 0;
         width: 100%;
         height: 100vh; 
-        background-color: var(--cor-fundo-base); 
+        background-color: var(--cor-fundo-base); /* RESTAURADO: Cor sólida no menu */
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -1072,12 +1057,6 @@ a:hover {
     .sobre-texto h3 {
         text-align: center; 
     }
-
-    /* (RESTAURADO) Ajuste do Selo Ori para mobile */
-    .hero-watermark img {
-        width: 300px;
-        height: 300px;
-    }
 }
 
 /* (A11Y) MEDIA QUERY DE MOVIMENTO REDUZIDO */
@@ -1116,12 +1095,6 @@ a:hover {
     .sobre-imagem img:hover {
         outline-color: var(--cor-destaque-ori);
         transform: none;
-    }
-
-    /* (RESTAURADO) Desliga a animação de pulso */
-    .hero-watermark img {
-        animation: none;
-        opacity: 0.1; /* Garante a opacidade base */
     }
 }
 
