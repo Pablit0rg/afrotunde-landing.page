@@ -63,35 +63,18 @@ html {
 
 body {
     font-family: var(--font-texto);
-    /* Mantém a cor de fundo (Foco no tema claro ou escuro) */
+    /* RESTAURADO: Fundo Sólido */
     background-color: var(--cor-fundo-base); 
     color: var(--cor-texto-principal); 
     line-height: 1.6;
     transition: background-color 0.3s ease, color 0.3s ease; 
     
-    /* (NOVO) IMPLEMENTANDO O PADRÃO DE REPETIÇÃO SVG */
-    background-image: url('assets/img/45185206_9128818.svg');
-    background-repeat: repeat; /* Força a repetição em toda a área */
-    background-attachment: fixed; /* Opcional: fixa o padrão para dar profundidade ao rolar */
-    background-position: center;
-    
-    /* CONTROLANDO O TAMANHO E OPACIDADE DO PADRÃO (Chave para a sutileza) */
-    background-size: 80px; /* Reduz drasticamente a imagem para criar um padrão menor */
-    
-    /* Aplicando filtros para escurecer o padrão e deixá-lo sutil */
-    filter: brightness(0.9) opacity(0.2); 
-    /* FIM (NOVO) */
+    /* REMOVIDO: background-image, background-repeat, background-size, filter, etc. */
 }
 
 body.no-scroll {
     overflow: hidden;
 }
-
-/* (AJUSTE) Removemos o filtro do body quando o tema é escuro e ajustamos o brilho. */
-[data-theme="dark"] body {
-    filter: brightness(0.5) opacity(0.2); 
-}
-
 
 /* ======== 5. ESTRUTURA E UTILITÁRIOS ======== */
 .container {
@@ -103,8 +86,7 @@ body.no-scroll {
 
 .section {
     padding: 60px 0; 
-    /* Cor de fundo é a mesma, mas o filtro do body garante a textura por baixo */
-    background-color: var(--cor-fundo-base); 
+    background-color: var(--cor-fundo-base); /* RESTAURADO: Fundo Sólido */
     transition: background-color 0.3s ease;
     
     /* Garante que a âncora pare abaixo da navbar fixa */
@@ -112,28 +94,16 @@ body.no-scroll {
 }
 
 .section.destaque {
-    background-color: var(--cor-fundo-destaque); 
+    background-color: var(--cor-fundo-destaque); /* RESTAURADO: Fundo Sólido */
     border-top: 1px solid var(--cor-destaque-ori); 
     border-bottom: 1px solid var(--cor-destaque-ori); 
     transition: background-color 0.3s ease;
 }
 
-/* (ESTILO DE ÁREA ÚNICA - Hero) */
-/* O Hero é a única seção que não é full width, então precisamos garantir
-   que a cor de fundo dele seja forte o suficiente para sobrepor o padrão.
-   Como o body já tem o filtro, vamos deixar o Hero com a cor base. */
-.hero.section {
-    background-color: var(--cor-fundo-base);
-}
-
-/* (RESTAURADO) ESTILO DO SELO ORI (WATERMARK) - AGORA ESCONDIDO */
-/* Já que o SVG está no body, escondemos o elemento do Hero que gerou a deformação */
+/* (REMOVIDO Estilos do .hero-watermark, pois não são mais usados) */
 .hero-watermark {
     display: none; 
 }
-
-/* ... (O restante do código é o mesmo da versão anterior e está completo) ... */
-/* A PARTIR DAQUI O CÓDIGO É O MESMO DO BLOCO ANTERIORMENTE ENVIADO */
 
 /* ======== 6. TIPOGRAFIA (Títulos e Textos) ======== */
 h1, h2, h3, h4 {
@@ -567,9 +537,6 @@ a:hover {
     display: block;
     background-color: #dbe6db; 
     transition: transform 0.3s ease;
-}
-.card-servico:hover .galeria-imagem {
-    transform: scale(1.05);
 }
 
 [data-theme="dark"] .galeria-imagem {
