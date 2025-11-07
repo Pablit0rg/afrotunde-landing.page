@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-width=1.0">
 
     <title>Afrotunde | Afrotunde: Trancista e Loctician em Curitiba (Nagô, Locs)</title>
     <meta name="description" content="Procurando trancista negra em Curitiba? A Afrotunde é especialista em tranças nagô e locs. A arte ancestral que cuida do seu Ori.">
@@ -14,14 +14,20 @@
       "@type": "HairSalon",
       "name": "Afrotunde",
       "description": "Trancista e Loctician em Curitiba, especialista na arte ancestral que revela o seu Ori.",
+      "image": "https://afrotunde-landing-page.vercel.app/assets/img/logo-afrotunde.png", 
       "telephone": "+5541999999999", 
       "priceRange": "R$$-$$$", 
       "url": "https://afrotunde-landing-page.vercel.app/", 
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "Rua (Endereço Completo no CIC)", 
         "addressLocality": "Curitiba",
         "addressRegion": "PR",
         "addressCountry": "BR"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "CIC, Curitiba"
       },
       "openingHours": "Mo,Tu,We,Th,Fr,Sa 09:00-18:00" 
     }
@@ -39,6 +45,9 @@
 </head>
 
 <body>
+
+    <a href="#inicio" class="skip-link">Pular para o conteúdo principal</a>
+
 
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="icon-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -71,22 +80,29 @@
              <path d="M12 2.1C6.6 2.1 2.2 6.5 2.2 11.9" stroke="currentColor" />
         </symbol>
     </svg>
+
     <header class="navbar"> 
         <div class="container">
             <a href="#inicio" class="logo">afrotunde</a>
             
             <nav class="nav-menu">
                 <a href="#inicio">Início</a>
+                <a href="#sobre">Sobre</a>
                 <a href="#catalogo">Galeria</a>
                 <a href="#stats">Jornada</a> 
                 <a href="#depoimentos">Depoimentos</a>
                 <a href="#contato">Contato</a>
                 
-                <button id="theme-toggle" title="Mudar tema">
+                <button id="theme-toggle-mobile" title="Mudar tema">
                     <svg class="icon-moon"><use href="#icon-moon"></use></svg>
                     <svg class="icon-sun"><use href="#icon-sun"></use></svg>
                 </button>
             </nav>
+            
+            <button id="theme-toggle-desktop" title="Mudar tema">
+                <svg class="icon-moon"><use href="#icon-moon"></use></svg>
+                <svg class="icon-sun"><use href="#icon-sun"></use></svg>
+            </button>
             
             <div class="hamburger-menu">
                 <span class="bar"></span>
@@ -99,6 +115,11 @@
     <main>
 
         <section id="inicio" class="hero section">
+            
+            <div class="hero-watermark" aria-hidden="true">
+                <img src="assets/img/45185206_9128818.svg" alt="Selo Adinkra (9-em-1)">
+            </div>
+            
             <div class="container">
                 <h1>Tranças Nagô e Locs em Curitiba</h1>
                 <p class="subtitulo">Por Karla, Trancista e Loctician. A arte ancestral que revela o seu Ori.</p>
@@ -111,89 +132,141 @@
             </div>
         </section>
 
+        <section id="sobre" class="section">
+            <div class="container sobre-container fade-in">
+                <div class="sobre-imagem">
+                    <img src="https://images.pexels.com/photos/32749464/pexels-photo-32749464.jpeg" 
+                         alt="Foto de perfil de uma mulher negra com tranças (placeholder para Karla Afrotunde)" 
+                         loading="lazy">
+                </div>
+                <div class="sobre-texto">
+                    <h2>Conheça a Artista</h2>
+                    <h3>Karla, Guardiã do seu Ori</h3>
+                    <p>Mais do que uma trancista, sou uma guardiã da arte ancestral. Meu trabalho com a Afrotunde é um resgate da espiritualidade e da força que cada trança e cada dreadlock carregam.</p>
+                    <p>Com mais de 8 anos de jornada, meu foco é cuidar do seu Ori, revelando a beleza que já existe em você. Cada atendimento é um ritual de conexão e autoestima, feito com técnica, afeto e respeito à sua identidade.</p>
+                    <p class="frase-orgulho-sobre">"Sua coroa é sagrada."</p>
+                </div>
+            </div>
+        </section>
+
         <section id="catalogo" class="section">
             <div class="container">
                 <h2 class="fade-in">Minhas Artes: Locs, Tranças e Penteados</h2>
                 
                 <div class="galeria-grid fade-in">
                     <div class="card-servico" data-full-src="placeholder-video">
-                        <div class="video-placeholder">
-                            <svg><use href="#icon-video"></use></svg>
+                        <div class="card-video-thumb">
+                            <img src="assets/img/thumb-01.jpg" 
+                                 alt="Thumbnail do vídeo de Tranças Nagô em Curitiba" 
+                                 class="galeria-imagem" 
+                                 loading="lazy">
+                            <svg class="icon-play-overlay"><use href="#icon-video"></use></svg>
                         </div>
-                        <h4>A partir de R$ 200,00</h4>
+                        <h4>Tranças Nagô</h4>
                         <p class="disclaimer">Valor médio. O preço final é negociado via WhatsApp e depende do seu cabelo.</p>
                     </div>
                     <div class="card-servico" data-full-src="placeholder-video">
-                        <div class="video-placeholder">
-                            <svg><use href="#icon-video"></use></svg>
+                         <div class="card-video-thumb">
+                            <img src="assets/img/thumb-02.jpg" 
+                                 alt="Thumbnail do vídeo de Manutenção de Locs em Curitiba" 
+                                 class="galeria-imagem" 
+                                 loading="lazy">
+                            <svg class="icon-play-overlay"><use href="#icon-video"></use></svg>
                         </div>
-                        <h4>A partir de R$ 150,00</h4>
+                        <h4>Manutenção de Locs</h4>
                         <p class="disclaimer">Valor médio. O preço final é negociado via WhatsApp e depende do seu cabelo.</p>
                     </div>
                     <div class="card-servico" data-full-src="placeholder-video">
-                        <div class="video-placeholder">
-                            <svg><use href="#icon-video"></use></svg>
+                         <div class="card-video-thumb">
+                            <img src="assets/img/thumb-03.jpg" 
+                                 alt="Thumbnail do vídeo de Penteado Afro Puff em Curitiba" 
+                                 class="galeria-imagem" 
+                                 loading="lazy">
+                            <svg class="icon-play-overlay"><use href="#icon-video"></use></svg>
                         </div>
-                        <h4>A partir de R$ 100,00</h4>
+                        <h4>Penteado Afro Puff</h4>
                         <p class="disclaimer">Valor médio. O preço final é negociado via WhatsApp e depende do seu cabelo.</p>
                     </div>
                     <div class="card-servico" data-full-src="placeholder-video">
-                        <div class="video-placeholder">
-                            <svg><use href="#icon-video"></use></svg>
+                         <div class="card-video-thumb">
+                            <img src="assets/img/thumb-04.jpg" 
+                                 alt="Thumbnail do vídeo de Box Braids (Jumbo) em Curitiba" 
+                                 class="galeria-imagem" 
+                                 loading="lazy">
+                            <svg class="icon-play-overlay"><use href="#icon-video"></use></svg>
                         </div>
-                        <h4>A partir de R$ 120,00</h4>
+                        <h4>Box Braids (Jumbo)</h4>
                         <p class="disclaimer">Valor médio. O preço final é negociado via WhatsApp e depende do seu cabelo.</p>
                     </div>
                     <div class="card-servico" data-full-src="placeholder-video">
-                        <div class="video-placeholder">
-                            <svg><use href="#icon-video"></use></svg>
+                         <div class="card-video-thumb">
+                            <img src="assets/img/thumb-05.jpg" 
+                                 alt="Thumbnail do vídeo de Fulani Braids em Curitiba" 
+                                 class="galeria-imagem" 
+                                 loading="lazy">
+                            <svg class="icon-play-overlay"><use href="#icon-video"></use></svg>
                         </div>
-                        <h4>A partir de R$ 250,00</h4>
+                        <h4>Fulani Braids</h4>
+                        <p class="disclaimer">Valor médio. O preço final é negociado via WhatsApp e depende do seu cabelo.</a<p>
+                    </div>
+                    <div class="card-servico" data-full-src="placeholder-video">
+                         <div class="card-video-thumb">
+                            <img src="assets/img/thumb-06.jpg" 
+                                 alt="Thumbnail do vídeo de Trança Boxeadora em Curitiba" 
+                                 class="galeria-imagem" 
+                                 loading="lazy">
+                            <svg class="icon-play-overlay"><use href="#icon-video"></use></svg>
+                        </div>
+                        <h4>Trança Boxeadora</h4>
                         <p class="disclaimer">Valor médio. O preço final é negociado via WhatsApp e depende do seu cabelo.</p>
                     </div>
                     <div class="card-servico" data-full-src="placeholder-video">
-                        <div class="video-placeholder">
-                            <svg><use href="#icon-video"></use></svg>
+                         <div class="card-video-thumb">
+                            <img src="assets/img/thumb-07.jpg" 
+                                 alt="Thumbnail do vídeo de Crochet Braids em Curitiba" 
+                                 class="galeria-imagem" 
+                                 loading="lazy">
+                            <svg class="icon-play-overlay"><use href="#icon-video"></use></svg>
                         </div>
-                        <h4>A partir de R$ 200,00</h4>
+                        <h4>Crochet Braids</h4>
                         <p class="disclaimer">Valor médio. O preço final é negociado via WhatsApp e depende do seu cabelo.</p>
                     </div>
                     <div class="card-servico" data-full-src="placeholder-video">
-                        <div class="video-placeholder">
-                            <svg><use href="#icon-video"></use></svg>
+                         <div class="card-video-thumb">
+                            <img src="assets/img/thumb-08.jpg" 
+                                 alt="Thumbnail do vídeo de Twists (Trança de 2) em Curitiba" 
+                                 classeria-imagem" 
+                                 loading="lazy">
+                            <svg class="icon-play-overlay"><use href="#icon-video"></use></svg>
                         </div>
-                        <h4>A partir de R$ 100,00</h4>
+                        <h4>Twists</h4>
                         <p class="disclaimer">Valor médio. O preço final é negociado via WhatsApp e depende do seu cabelo.</p>
                     </div>
-                    <div class="card-servico" data-full-src="placeholder-video">
-                        <div class="video-placeholder">
-                            <svg><use href="#icon-video"></use></svg>
-                        </div>
-                        <h4>A partir de R$ 80,00</h4>
-                        <p class="disclaimer">Valor médio. O preço final é negociado via WhatsApp e depende do seu cabelo.</p>
-                    </div>
+
                 </div>
                 
                 <p class="frase-orgulho fade-in">"Cultive sua raiz, floresça sua identidade."</p>
             </div>
         </section>
-        
+
         <section id="stats" class="section stats-section">
             <div class="container">
                 <h2 class="fade-in">Minha Jornada em Números</h2>
                 <div class="stats-container fade-in">
+                    
                     <div class="stat-item">
-                        <h3 class="stat-number" data-goal="100">0+</h3>
+                        <div class="stat-number" data-goal="100">0+</div>
                         <p class="stat-label">Clientes Felizes</p>
                     </div>
                     <div class="stat-item">
-                        <h3 class="stat-number" data-goal="8">0+</h3>
+                        <div class="stat-number" data-goal="8">0+</div>
                         <p class="stat-label">Anos de Experiência</p>
                     </div>
                     <div class="stat-item">
-                        <h3 class="stat-number" data-goal="500">0+</h3>
+                        <div class="stat-number" data-goal="500">0+</div>
                         <p class="stat-label">Artes Criadas</p>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -248,7 +321,8 @@
 
     <div class="notification-bar fade-in" id="notification-bar">
         <p>A agenda para Dezembro está aberta! Garanta seu horário.</p>
-        <button class="close-notification" id="close-notification-btn" title="Fechar">
+        
+        <button class="close-notification" id="close-notification-btn" title="Fechar" aria-label="Fechar barra de notificação">
             <svg class="icon-close"><use href="#icon-close"></use></svg>
         </button>
     </div>
@@ -256,14 +330,24 @@
 
     <footer class="footer">
         <div class="container">
+            
+            <nav class="footer-nav">
+                <a href="#inicio">Início</a>
+                <a href="#sobre">Sobre</a>
+                <a href="#catalogo">Galeria</a>
+                <a href="#depoimentos">Depoimentos</a>
+                <a href="#contato">Contato</a>
+            </nav>
             <p>&copy; 2025 afrotunde | Todos os direitos reservados.</p>
-            <p class="desenvolvido-por">
+            
+            <address class="desenvolvido-por">
                 Desenvolvido por: 
                 <a href="https://www.instagram.com/pablit0rg/" target="_blank" rel="noopener noreferrer">
                     <svg class="icon-instagram"><use href="#icon-instagram"></use></svg>
                     @pablit0rg
                 </a>
-            </p>
+            </address>
+
         </div>
     </footer>
 
@@ -271,10 +355,13 @@
 <div class="lightbox-overlay">
         <div class="lightbox-content">
             
-<img src="" alt="Imagem Ampliada" class="lightbox-image">
+            <img src="" alt="Imagem Ampliada" class="lightbox-image">
             <div class="lightbox-video-placeholder">
                 <svg class="icon-video-lightbox"><use href="#icon-video"></use></svg>
             </div> 
+            
+            <p class="lightbox-caption"></p>
+
             <button class="lightbox-close" title="Fechar">
                 <svg><use href="#icon-close"></use></svg>
             </button>
@@ -283,9 +370,11 @@
 
 <div class="modal-overlay" id="whatsapp-modal">
     <div class="modal-content fade-in">
-        <button class="modal-close" id="modal-close-btn" title="Fechar">
+        
+        <button class="modal-close" id="modal-close-btn" title="Fechar" aria-label="Fechar modal de redirecionamento">
             <svg><use href="#icon-close"></use></svg>
         </button>
+        
         <h3>Redirecionando...</h3>
         <p>Você está sendo redirecionado para o WhatsApp para finalizar seu agendamento.</p>
         <div class="modal-botoes">
@@ -295,8 +384,7 @@
     </div>
 </div>
 
-
-<a href="#inicio" class="voltar-ao-topo" title="Voltar ao topo">
+<a href="#inicio" class="voltar-ao-topo" title="Voltar ao topo" aria-label="Voltar ao topo da página">
     <svg><use href="#icon-arrow-up"></use></svg>
 </a>
     
