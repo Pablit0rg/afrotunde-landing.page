@@ -8,6 +8,19 @@
     <meta name="description" content="Procurando trancista negra em Curitiba? A Afrotunde é especialista em tranças nagô e locs. A arte ancestral que cuida do seu Ori.">
     <meta name="keywords" content="trancista curitiba, loctician curitiba, trancista negra curitiba, tranças nago curitiba, locs curitiba, salão afro curitiba, cic">
 
+    <meta property="og:title" content="Afrotunde | Afrotunde: Trancista e Loctician em Curitiba (Nagô, Locs)">
+    <meta property="og:description" content="Procurando trancista negra em Curitiba? A Afrotunde é especialista em tranças nagô e locs. A arte ancestral que cuida do seu Ori.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://afrotunde-landing-page.vercel.app/">
+    <meta property="og:image" content="https://images.pexels.com/photos/32749464/pexels-photo-32749464.jpeg">
+    <meta property="og:image:alt" content="Foto de uma mulher negra com tranças (Karla Afrotunde)">
+    <meta property="og:locale" content="pt_BR">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://afrotunde-landing-page.vercel.app/">
+    <meta name="twitter:title" content="Afrotunde | Afrotunde: Trancista e Loctician em Curitiba (Nagô, Locs)">
+    <meta name="twitter:description" content="Procurando trancista negra em Curitiba? A Afrotunde é especialista em tranças nagô e locs. A arte ancestral que cuida do seu Ori.">
+    <meta name="twitter:image" content="https://images.pexels.com/photos/32749464/pexels-photo-32749464.jpeg">
+    <meta name="twitter:image:alt" content="Foto de uma mulher negra com tranças (Karla Afrotunde)">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -29,12 +42,46 @@
         "@type": "Place",
         "name": "CIC, Curitiba"
       },
-      "openingHours": "Mo,Tu,We,Th,Fr,Sa 09:00-18:00" 
+      "openingHours": "Mo,Tu,We,Th,Fr,Sa 09:00-18:00",
+      
+      "review": [
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Cliente Satisfeita"
+          },
+          "datePublished": "2025-10-20", 
+          "reviewBody": "Simplesmente incrível! A Karla tem mãos de fada e uma energia que renova a gente. Minha autoestima é outra!",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          }
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Cliente Satisfeita"
+          },
+          "datePublished": "2025-10-25",
+          "reviewBody": "Profissional excelente, super atenciosa e o trabalho ficou perfeito. Recomendo de olhos felchados.",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5",
+            "bestRating": "5"
+          }
+        }
+      ]
+      
     }
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link rel="preconnect" href="https://www.youtube.com">
     
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500&display=swap"></noscript>
@@ -79,6 +126,9 @@
              <path d="M12 2.1c5.4 0 9.8 4.4 9.8 9.8s-4.4 9.8-9.8 9.8-9.8-4.4-9.8-9.8" stroke="currentColor" stroke-opacity="0.3"/>
              <path d="M12 2.1C6.6 2.1 2.2 6.5 2.2 11.9" stroke="currentColor" />
         </symbol>
+        <symbol id="icon-external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+        </symbol>
     </svg>
 
     <header class="navbar"> 
@@ -91,6 +141,7 @@
                 <a href="#catalogo">Galeria</a>
                 <a href="#stats">Jornada</a> 
                 <a href="#depoimentos">Depoimentos</a>
+                <a href="#faq">FAQ</a>
                 <a href="#contato">Contato</a>
                 
                 <button id="theme-toggle-mobile" title="Mudar tema">
@@ -110,6 +161,8 @@
                 <span class="bar"></span>
             </div>
         </div>
+        
+        <div class="scroll-progress-bar" id="scroll-bar"></div>
     </header>
 
     <main>
@@ -286,6 +339,39 @@
             </div>
         </section>
 
+        <section id="faq" class="section">
+            <div class="container">
+                <h2 class="fade-in">Dúvidas Frequentes (FAQ)</h2>
+                <p class="subtitulo-faq fade-in">Respostas rápidas para as dúvidas mais comuns sobre agendamento e cuidados.</p>
+                
+                <div class="faq-container fade-in">
+                    
+                    <details class="faq-item">
+                        <summary>Quanto tempo demora para fazer as tranças/locs?</summary>
+                        <div class="faq-content">
+                            <p>O tempo varia muito! Depende do estilo (Nagô, Box Braids, Locs), do comprimento e da densidade do seu cabelo. Em média, pode levar de 4 a 8 horas. Após o agendamento, faremos uma avaliação prévia.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Como devo cuidar das minhas tranças ou locs?</summary>
+                        <div class="faq-content">
+                            <p>A manutenção é fundamental. Você deve lavar o couro cabeludo com shampoo diluído (focando na raiz) 1x por semana e secar muito bem (preferencialmente com secador no frio). Evite dormir com o cabelo molhado e use uma touca de cetim para reduzir o frizz.</p>
+                        </div>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>Quais são as formas de pagamento?</summary>
+                        <div class="faq-content">
+                            <p>Para garantir seu horário, peço um sinal (via PIX) no momento do agendamento. O restante do valor pode ser pago no dia do procedimento via PIX, dinheiro ou cartão (consulte taxas).</p>
+                        </div>
+                    </details>
+
+                </div>
+            </div>
+        </section>
+
+
         <section id="contato" class="section">
             <div class="container">
                 <h2 class="fade-in">Vamos cuidar da sua coroa?</h2>
@@ -306,8 +392,10 @@
                         <span class="btn-text">Chamar no WhatsApp</span>
                         <svg class="spinner"><use href="#icon-spinner"></use></svg> 
                     </a>
-                    <a href="https://www.instagram.com/afrotunde/" target="_blank" rel="noopener noreferrer" class="cta-button">
+                    
+                    <a href="https://www.instagram.com/afrotunde/" target="_blank" rel="noopener noreferrer" class="cta-button" aria-label="Ver mais no Instagram (abre em nova aba)">
                         <span class="btn-text">Ver mais no Instagram</span>
+                        <svg class="icon-external"><use href="#icon-external-link"></use></svg>
                     </a>
                 </div>
             </div>
@@ -332,15 +420,18 @@
                 <a href="#sobre">Sobre</a>
                 <a href="#catalogo">Galeria</a>
                 <a href="#depoimentos">Depoimentos</a>
+                <a href="#faq">FAQ</a>
                 <a href="#contato">Contato</a>
             </nav>
             <p>&copy; 2025 afrotunde | Todos os direitos reservados.</p>
             
             <address class="desenvolvido-por">
                 Desenvolvido por: 
-                <a href="https://www.instagram.com/pablit0rg/" target="_blank" rel="noopener noreferrer">
+                
+                <a href="https://www.instagram.com/pablit0rg/" target="_blank" rel="noopener noreferrer" aria-label="Instagram do desenvolvedor, @pablit0rg (abre em nova aba)">
                     <svg class="icon-instagram"><use href="#icon-instagram"></use></svg>
                     @pablit0rg
+                    <svg class="icon-external"><use href="#icon-external-link"></use></svg>
                 </a>
             </address>
 
