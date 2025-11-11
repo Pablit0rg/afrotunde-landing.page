@@ -170,7 +170,25 @@ a:hover {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px); 
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    
+    /* (NOVO) Adicionado para a barra de progresso */
+    position: relative;
 }
+
+/* (NOVO) BARRA DE PROGRESSO DE SCROLL */
+.scroll-progress-bar {
+    position: absolute;
+    bottom: -1px; /* Alinha com a borda inferior da navbar */
+    left: 0;
+    height: 4px; 
+    background-color: var(--cor-acento-secundario); /* Cor Rosa Salmão */
+    width: 0%; /* Inicia em 0% */
+    z-index: 1001;
+    
+    /* Animação fluida (removido transition) */
+    /* A transição será controlada pelo JS (requestAnimationFrame) */
+}
+
 
 .navbar .container {
     display: flex;
@@ -400,6 +418,7 @@ a:hover {
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    gap: 0.5rem; /* (ATUALIZADO) Adicionado gap para o ícone */
 }
 
 .cta-button:hover {
@@ -792,7 +811,7 @@ a:hover {
     transition: background-color 0.3s ease;
 }
 
-/* ======== (NOVO) NAVEGAÇÃO DO RODAPÉ ======== */
+/* (NAVEGAÇÃO DO RODAPÉ) */
 .footer-nav {
     display: flex;
     justify-content: center;
@@ -850,6 +869,32 @@ a:hover {
     stroke: var(--cor-instagram-icon); 
 }
 
+/* ======== 7.5. ÍCONES (A11y) ======== */
+
+/* Ícone de Link Externo (para target="_blank") */
+.icon-external {
+    width: 16px;
+    height: 16px;
+    /* 'currentColor' é mágico:
+      - No botão CTA, será var(--cor-fundo-base)
+      - No link do footer, será var(--cor-destaque-ori)
+    */
+    stroke: currentColor; 
+    fill: none;
+    margin-left: 2px; /* Pequeno espaço */
+    transition: transform 0.2s ease;
+}
+
+/* Animação de hover */
+.cta-button:hover .icon-external,
+.desenvolvido-por a:hover .icon-external {
+    transform: scale(1.1);
+}
+/* Cor no hover do link do footer */
+.desenvolvido-por a:hover .icon-external {
+    stroke: var(--cor-acento-secundario);
+}
+
 
 /* ======== 8. EFEITOS (O TOQUE MESTRE) ======== */
 
@@ -886,25 +931,123 @@ a:hover {
     transform: translateY(0); 
 }
 
-/* ======== 8.5. OTIMIZAÇÃO DE PERFORMANCE (NOVO) ======== */
-/*
-  content-visibility: auto;
-  Instrui o navegador a pular a renderização (layout, pintura)
-  destas seções até que elas estejam perto de rolar para a tela.
-  Melhora drasticamente a velocidade de carregamento inicial.
-*/
+/* ======== 8.5. OTIMIZAÇÃO DE PERFORMANCE (ATUALIZADO) ======== */
 #sobre,
 #catalogo,
 #stats,
 #depoimentos,
+#faq, 
 #contato {
   content-visibility: auto;
-  /*
-    'contain-intrinsic-size' fornece um tamanho placeholder
-    para evitar "pulos" de layout (CLS) enquanto o
-    navegador não renderiza o conteúdo.
-  */
-  contain-intrinsic-size: 500px; /* Um valor genérico */
+  contain-intrinsic-size: 500px; 
+}
+
+
+/* ======== 8.6. ESTILOS DO FAQ (ACORDEÃO) ======== */
+
+.subtitulo-faq {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--cor-texto-secundario);
+    max-width: 600px;
+    margin: -0.5rem auto 2rem auto; /* Sobe um pouco */
+}
+
+.faq-container {
+    max-width: 800px; /* Limita a largura para leitura */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.faq-item {
+    background-color: var(--cor-fundo-destaque);
+    border: 1px solid var(--cor-fundo-destaque);
+    border-left: 4px solid var(--cor-destaque-ori);
+    border-radius: 8px;
+    overflow: hidden; /* Garante que o conteúdo não vaze */
+    transition: background-color 0.3s ease;
+}
+
+/* Quando o acordeão está aberto */
+.faq-item[open] {
+    background-color: var(--cor-fundo-base);
+    border-color: var(--cor-destaque-ori);
+}
+
+/* O título clicável (A Pergunta) */
+.faq-item summary {
+    font-family: var(--font-titulo);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--cor-texto-principal);
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    list-style: none; /* Remove o marcador padrão */
+    position: relative;
+    
+    /* (A11y) Garante que o outline de foco apareça */
+    outline-offset: -2px; 
+}
+
+/* Remove o marcador padrão no Webkit (Chrome/Safari) */
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Adiciona nosso próprio marcador (+) */
+.faq-item summary::after {
+    content: '+';
+    font-family: var(--font-texto); /* Usa a fonte de texto */
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--cor-destaque-ori);
+    
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(0deg);
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Gira o marcador para (x) quando aberto */
+.faq-item[open] summary::after {
+    content: '\00d7'; /* O caractere '×' (multiplicação) */
+    transform: translateY(-50%) rotate(180deg);
+    color: var(--cor-acento-secundario);
+}
+
+/* Hover na pergunta */
+.faq-item summary:hover {
+    color: var(--cor-destaque-ori);
+}
+.faq-item summary:hover::after {
+    color: var(--cor-acento-secundario);
+}
+
+/* O conteúdo (A Resposta) */
+.faq-content {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    /* Animação suave de entrada */
+    animation: fadeInFaq 0.4s ease-out;
+}
+.faq-content p {
+    color: var(--cor-texto-secundario);
+    font-size: 1rem;
+    margin: 0;
+    text-align: justify;
+}
+
+@keyframes fadeInFaq {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 
@@ -1024,9 +1167,25 @@ a:hover {
 
     h1 { font-size: 2.2rem; }
     h2 { font-size: 1.8rem; }
+
+    /* (CARROSSEL DE DEPOIMENTOS - MOBILE) */
     .depoimentos-grid {
-        grid-template-columns: 1fr; 
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 1rem;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none;  /* IE/Edge */
     }
+    .depoimentos-grid::-webkit-scrollbar {
+        display: none; /* Chrome/Safari */
+    }
+
+    .card-depoimento {
+        flex: 0 0 90%; 
+        scroll-snap-align: start;
+    }
+
 
     .pix-copy-wrapper {
         flex-direction: column; 
@@ -1077,6 +1236,19 @@ a:hover {
         width: 300px;
         height: 300px;
     }
+
+    /* Ajuste do FAQ para mobile */
+    .faq-item summary {
+        font-size: 1.15rem;
+        padding: 1rem 1.25rem;
+    }
+    .faq-item summary::after {
+        right: 1.25rem;
+    }
+    .faq-content {
+        padding: 0 1.25rem 1.25rem 1.25rem;
+    }
+
 }
 
 /* (A11Y) MEDIA QUERY DE MOVIMENTO REDUZIDO */
@@ -1121,6 +1293,11 @@ a:hover {
     .hero-watermark img {
         animation: none;
         opacity: 0.1; /* Garante a opacidade base */
+    }
+
+    /* (NOVO) Desliga a animação do FAQ */
+    .faq-content {
+        animation: none;
     }
 }
 
