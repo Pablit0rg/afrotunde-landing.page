@@ -63,15 +63,13 @@ html {
 
 body {
     font-family: var(--font-texto);
-    background-color: var(--cor-fundo-base); /* Cor sólida como fallback */
+    /* RESTAURADO: Fundo Sólido */
+    background-color: var(--cor-fundo-base); 
     color: var(--cor-texto-principal); 
     line-height: 1.6;
     transition: background-color 0.3s ease, color 0.3s ease; 
-
-    /* (MUDANÇA AQUI) Adicionando a imagem de fundo */
-    /* Lembre-se de renomear o arquivo para 'ori-background.svg' */
-    background-image: url('assets/img/ori-background.svg');
-    background-repeat: repeat; /* Repete a imagem como um padrão */
+    
+    /* REMOVIDO: background-image, background-repeat, background-size, filter, etc. */
 }
 
 body.no-scroll {
@@ -95,18 +93,11 @@ body.no-scroll {
     scroll-margin-top: 100px; 
 }
 
-/* (MUDANÇA AQUI) A seção .destaque agora só muda o fundo do TEMA ESCURO */
-/* No tema claro, ela será transparente para mostrar o SVG */
-[data-theme="dark"] .section.destaque {
-    background-color: var(--cor-fundo-destaque);
-}
-
 .section.destaque {
+    background-color: var(--cor-fundo-destaque); /* RESTAURADO: Fundo Sólido */
     border-top: 1px solid var(--cor-destaque-ori); 
     border-bottom: 1px solid var(--cor-destaque-ori); 
     transition: background-color 0.3s ease;
-    /* (MUDANÇA AQUI) Fundo transparente no tema claro */
-    background-color: transparent;
 }
 
 /* (REMOVIDO Estilos do .hero-watermark, pois não são mais usados) */
@@ -349,9 +340,8 @@ a:hover {
     z-index: 1; 
     overflow: hidden; 
 }
-/* (MUDANÇA AQUI) Fundo da Hero transparente */
 .hero.section {
-    background-color: transparent; 
+    background-color: var(--cor-fundo-base); 
 }
 
 /* (RESTAURADO) ESTILO DO SELO ORI (WATERMARK) */
@@ -606,9 +596,8 @@ a:hover {
 }
 
 /* SEÇÃO DE CONTADORES (STATS) */
-/* (MUDANÇA AQUI) Fundo transparente */
 .stats-section {
-    background-color: transparent; 
+    background-color: var(--cor-fundo-base); 
     padding-bottom: 40px; 
 }
 .stats-container {
@@ -664,10 +653,6 @@ a:hover {
 }
 
 /* (CONTATO) */
-/* (MUDANÇA AQUI) Fundo transparente */
-#contato.section {
-    background-color: transparent;
-}
 .texto-localizacao {
     text-align: center;
     font-size: 1.1rem;
@@ -820,8 +805,7 @@ a:hover {
     text-align: center;
     font-size: 0.9rem;
     color: var(--cor-texto-secundario); 
-    /* (MUDANÇA AQUI) Fundo transparente */
-    background-color: transparent; 
+    background-color: var(--cor-fundo-base); 
     transition: background-color 0.3s ease;
 }
 
