@@ -1,105 +1,65 @@
 🔱 Diário de Bordo - Afrotunde (Gemini, esta é nossa "Fonte da Verdade". Use este arquivo como sua "memória" e "manual de instruções" se o chat quebrar).
 
 ⚡ CONTEXTO DE SINCRONIZAÇÃO (IMPORTANTE)
-* **Estado dos Arquivos (v6):** `index.html` (v7), `style.css` (v7), `site.webmanifest` (v1).
-* **Debug (JS):** O `script.js` (v4) que continha a lógica da "Barra de Progresso de Scroll" causou um bug de renderização (o CSS não foi aplicado).
-* **Ação Estratégica:** Revertemos para o `script.js` (v3) (o arquivo estável anterior) para manter o site funcional. O `index.html` e `style.css` (v7) contêm os elementos da barra de scroll, mas eles estão "inertes" (desativados) até depurarmos o JS.
-* **Placeholders (v5):** As 8 thumbnails da galeria foram substituídas pela URL `i.pinimg.com`. O PIX e o link do WhatsApp foram atualizados com os dados reais da Karla.
 
----
+Estado dos Arquivos (v7): index.html (v9), style.css (v8), script.js (v3 estável), site.webmanifest (v1).
 
-🎯 Próximos Passos (To-Do)
-* (Nenhuma tarefa imediata. Vamos escolher uma do "Banco de Ideias" ou "Adiadas" na próxima sessão.)
+Debug (JS): O script.js (v4) (Barra de Progresso) ainda está pendente de depuração. Estamos no (v3) estável.
 
----
+Novos Ativos (v8): A cliente (Karla) enviou os 8 vídeos (.mp4) e 5 fotos (.jpeg).
 
-✅ Concluídas (Nesta Sessão)
-[X] **Nova Seção: FAQ (Acordeão Semântico).** (Movido do To-Do).
-    * *Plano Concluído:* Criada a seção `#faq` com `<details>` e `<summary>` (sem JS). Adicionados links de navegação no header e footer.
+Ação Estratégica (v9): Atualizamos o index.html (v9) e style.css (v8) para um novo layout de galeria com 13 cards (8 para vídeos, 5 para fotos) usando placeholders. A classe .is-image foi adicionada para diferenciar os tipos de mídia.
 
-[X] **UX (Carrossel Mobile de Depoimentos).** (Movido do Banco de Ideias).
-    * *Plano Concluído:* Usado `scroll-snap` no `style.css` para transformar a seção `#depoimentos` em um carrossel "swipe" apenas em telas móveis.
+Pendência (v9): O desenvolvedor (Meu Senhor) precisa otimizar (comprimir), hospedar (YouTube/GitHub) e substituir os 13 placeholders pelos links reais.
 
-[X] **SEO (Schema Review).** (Movido do Banco de Ideias).
-    * *Plano Concluído:* O JSON-LD `HairSalon` (no `<head>`) foi atualizado para "aninhar" a propriedade `review` com os 2 depoimentos e `ratingValue: "5"`.
+🎯 Próximos Passos (To-Do) [ ] Performance (Ativos de Imagem): * [ ] Otimizar (comprimir no Squoosh/TinyPNG) as 5 fotos reais. * [ ] Otimizar (comprimir) as 8 thumbnails dos vídeos (tirar print e comprimir). * [ ] Otimizar (comprimir) a foto da seção #sobre e og:image. * [ ] Fazer upload de todas as imagens otimizadas para o GitHub (/assets/img/).
 
-[X] **SEO (Meta Tags OG & Twitter Cards).**
-    * *Plano Concluído:* Adicionadas as tags `og:title`, `og:description`, `og:image` (placeholder) e `og:url` no `<head>` para compartilhamento no WhatsApp/Facebook e Twitter.
+[ ] Conteúdo (Vídeos): * [ ] Fazer upload dos 8 arquivos .mp4 recebidos para o YouTube (para usarmos o "Padrão de Fachada").
 
-[X] **A11y (Links Externos).** (Movido do Banco de Ideias).
-    * *Plano Concluído:* Adicionado `icon-external-link` ao SVG sprite. Adicionado ícone e `aria-label` aos 2 links do Instagram (`#contato` e `footer`) que usam `target="_blank"`.
+[ ] Conteúdo (Substituição de Links): * [ ] Substituir os 13 src e data-full-src dos placeholders da galeria (#catalogo) pelos links reais (YouTube e imagens hospedadas). * [ ] Substituir o src da foto #sobre pelo link real (assets/img/foto-karla-perfil.jpg). * [ ] Substituir as meta tags og:image e twitter:image no <head> pela URL completa da Vercel (https://afrotunde.../assets/img/foto-karla-perfil.jpg).
 
-[X] **Performance (YouTube Preconnect).**
-    * *Plano Concluído:* Adicionado `<link rel="preconnect" href="https://www.youtube.com">` no `<head>` para acelerar o carregamento do player de vídeo.
+[ ] A11y (Imagens): * [ ] Atualizar o alt text de todas as 13 thumbnails da galeria com descrições reais.
 
-[X] **SEO (Favicon & Manifesto).** (Movido do Banco de Ideias).
-    * *Plano Concluído:* Criado o novo arquivo `site.webmanifest` (v1). Adicionados os links placeholders para os favicons (`apple-touch-icon`, etc.) e o link para o manifesto no `<head>`.
+✅ Concluídas (Nesta Sessão) [X] UI (Layout Galeria): (Movido do Banco de Ideias) Implementada a nova galeria de 13 cards (8 vídeos, 5 fotos) no index.html (v9) usando placeholders.
 
-[X] **Dados (WhatsApp & PIX).**
-    * *Plano Concluído:* O número do PIX (`41992929516`) foi atualizado. Os 2 links do WhatsApp (`#whatsapp-btn-hero` e `#whatsapp-btn`) foram atualizados com o número real (`wa.me/5541992929516`) e uma mensagem automática profissional.
+[X] UI (CSS Galeria): Adicionada a classe .is-image e a regra CSS (no style.css v8) para ocultar o ícone "Play" em cards de imagem, diferenciando fotos de vídeos.
 
-[X] **Placeholders (Galeria).**
-    * *Plano Concluído:* Substituídas as 8 imagens `thumb-XX.jpg` pela nova URL placeholder `i.pinimg.com`.
+[X] Conteúdo (Hero H1): Título principal (h1) atualizado para "Tranças e Locs em Curitiba".
 
-[X] **A11y (Skip Link).**
-    * *Plano Concluído:* Confirmado que o "Skip Link" (`.skip-link`) está funcionando corretamente (só aparece no `:focus` do teclado) e não será removido, pois é uma feature de acessibilidade.
+[X] Conteúdo (Hero Subtítulo): Subtítulo (.subtitulo) atualizado para "Por Karla do Vale, Trancista e Loctician."
 
-[X] **UI (Layout Navbar & Footer).**
-    * *Plano Concluído:* Botões de tema (desktop e mobile) movidos para o início da `<nav>` no `index.html` e CSS ajustado.
-    * *Plano Concluído:* Ícone do Instagram no `footer` movido para *depois* do "@pablit0rg".
+[X] Conteúdo (Hero CTA): Texto do botão principal (#whatsapp-btn-hero) simplificado para "AGENDAR".
 
-[X] **UI (Bugs de Estilo & Refinamento).**
-    * *Plano Concluído (Bugfix):* Corrigida a regra CSS no `footer` para que a cor oficial do Instagram (`--cor-instagram-icon`) se aplique *apenas* ao `.icon-instagram` e não a outros ícones no mesmo link.
-    * *Plano Concluído (Refinamento):* Aumentado o tamanho do `#theme-toggle-mobile` no menu hamburger para `40px` para melhorar a "zona de toque".
-    * *Plano Concluído (Refinamento):* Cor do botão de Tema (desktop e mobile) alterada para Dourado (`--cor-tema-toggle`) em ambos os temas para destaque.
+[X] Conteúdo (Galeria Slogan): Frase de orgulho da galeria (#catalogo) atualizada para "Transformando sua autoestima através da arte no orí" (com ortografia corrigida).
 
-[X] **UI (Efeito de Foco no FAQ).** (Movido do Banco de Ideias).
-    * *Plano Concluído:* Adicionada regra CSS para que o `summary` da pergunta mude para a cor de acento (`--cor-acento-secundario`) quando o `<details>` estiver `[open]`.
+[X] Conteúdo (Sobre): Atualizada a seção #sobre com o novo H2 ("Um pouco sobre mim") e o novo texto biográfico autêntico da Karla.
 
----
+[X] Conteúdo (FAQ): Seção #faq totalmente reescrita: * [X] Resposta da pergunta "Tempo" atualizada com o novo texto focado em "reservar o dia". * [X] Pergunta "Cuidados" removida e substituída por duas novas: "Cuidado com os Locs" e "Cuidado com as Tranças", com textos detalhados. * [X] Opção "cartão" removida da pergunta "Formas de pagamento".
 
-🐞 Adiadas (Para Debug/Próxima Sessão)
-[ ] **UI (Indicador de Scroll):** (Movido do Banco de Ideias).
-    * **PROBLEMA:** A implementação do `script.js` (v4) quebrou a renderização do CSS (o site ficou sem estilos).
-    * **PLANO:** Na próxima sessão, vamos depurar o `script.js` (v4) com calma, garantir que a lógica do `requestAnimationFrame` está correta e que não há erros de sintaxe. Estamos atualmente no `script.js` (v3 estável).
+🐞 Adiadas (Para Debug/Próxima Sessão) [ ] UI (Indicador de Scroll): (Movido do Banco de Ideias). * PROBLEMA: A implementação do script.js (v4) quebrou a renderização do CSS. * PLANO: Depurar o script.js (v4) (lógica do requestAnimationFrame) após finalizarmos as substituições de conteúdo.
 
----
+🅿️ Adiadas (Aguardando Ativos da Cliente) (Tarefas que exigem downloads/softwares/arquivos finais)
 
-🅿️ Adiadas (Aguardando Ativos da Cliente)
-(Tarefas que exigem downloads/softwares/arquivos finais)
+[ ] Logo 3D: Criar o logo (Búzio ou Duafe) no Blender e exportar como um vídeo .mp4. [ ] Fontes Locais: Baixar os arquivos .woff2 (Cormorant Garamond e Inter) e auto-hospedar as fontes. [ ] Favicon: Gerar os ícones (favicon-32x32.png, apple-touch-icon.png, etc.) a partir do logo final e colocá-los na pasta assets/icons/.
 
-[ ] **PLACEHOLDERS (REVISÃO FINAL):**
-    * [ ] **Foto (Sobre):** Substituir a foto da seção `#sobre` pela foto real da Karla.
-    * [ ] **Foto (Open Graph):** Substituir a URL `og:image` e `twitter:image` pela foto real da Karla (MUITO IMPORTANTE).
-    * [ ] **Galeria (Thumbnails):** Substituir as 8 thumbnails `i.pinimg.com` pelos vídeos/fotos reais.
-    * [ ] **Galeria (Vídeos):** Substituir os `data-full-src="placeholder-video"` pelos links reais do YouTube.
-    * [ ] **Favicon:** Gerar os ícones (`favicon-32x32.png`, `apple-touch-icon.png`, etc.) a partir do logo final e colocá-los na pasta `assets/icons/`.
+💡 Banco de Ideias (Próximas Sugestões) [ ] Automação (Notificação): (Sua ideia) Usar new Date() no script.js para atualizar automaticamente o mês na barra de notificação (ex: "A agenda para [Próximo Mês] está aberta!"). [ ] Performance (Lazy Load YouTube Player): (CONCLUÍDO NO SCRIPT V3) Implementar o "padrão de fachada" no lightbox (carregar o player do YouTube só ao clicar no "play"). [ ] Performance (Font-Display: Swap): Adicionar &display=swap na URL de importação do Google Fonts (CSS). [A] A11y (Outline de Foco): Customizar o :focus-visible no CSS para usar as cores do projeto. [ ] Performance (Impressão): Adicionar um bloco @media print no style.css para limpar o site para impressão. [ ] UI (Efeito Hover na Galeria): (ADIADO) Adicionar box-shadow suave e filter: saturate(1.1) no hover dos cards da galeria.
 
-[ ] **Logo 3D:** Criar o logo (Búzio ou Duafe) no Blender e exportar como um vídeo .mp4.
-[ ] **Fontes Locais:** Baixar os arquivos .woff2 (Cormorant Garamond e Inter) e auto-hospedar as fontes.
+📜 Manual da Gemini (Nosso Workflow) (Instruções para a IA Gemini manter o fluxo de trabalho do dev)
 
----
+ENTREGA DE CÓDIGO: Sempre mandar os documentos (.html, .css, .js) completos, um por um.
 
-💡 Banco de Ideias (Próximas Sugestões)
-[ ] **Automação (Notificação):** (Sua ideia) Usar `new Date()` no `script.js` para atualizar automaticamente o mês na barra de notificação (ex: "A agenda para [Próximo Mês] está aberta!").
-[ ] **Performance (Lazy Load YouTube Player):** Implementar o "padrão de fachada" no lightbox (carregar o player do YouTube só ao clicar no "play").
-[ ] **Performance (Font-Display: Swap):** Adicionar `&display=swap` na URL de importação do Google Fonts (CSS).
-[ ] **A11y (Outline de Foco):** Customizar o `:focus-visible` no CSS para usar as cores do projeto.
-[ ] **Performance (Impressão):** Adicionar um bloco `@media print` no `style.css` para limpar o site para impressão.
-[ ] **UI (Efeito Hover na Galeria):** (ADIADO) Adicionar `box-shadow` suave e `filter: saturate(1.1)` no hover dos cards da galeria.
-[ ] **A11y (Imagens):** Atualizar o `alt text` das thumbnails da galeria (quando recebermos as reais).
+COMANDO DE FLUXO: Aguardar o comando "próximo Gemini" do usuário antes de enviar o próximo arquivo.
 
----
+EFICIÊNCIA: Se um arquivo não sofreu alteração, não o envie. Apenas avise: "O arquivo [nome.css] não sofreu alterações."
 
-📜 Manual da Gemini (Nosso Workflow)
-(Instruções para a IA Gemini manter o fluxo de trabalho do dev)
+PADRÃO DE CÓDIGO: O código deve ser limpo, moderno e com blocos de comentários rápidos e objetivos ("sem encher linguiça").
 
-* ENTREGA DE CÓDIGO: Sempre mandar os documentos (.html, .css, .js) completos, um por um.
-* COMANDO DE FLUXO: Aguardar o comando "próximo Gemini" do usuário antes de enviar o próximo arquivo.
-* EFICIÊNCIA: Se um arquivo não sofreu alteração, não o envie. Apenas avise: "O arquivo [nome.css] não sofreu alterações."
-* PADRÃO DE CÓDIGO: O código deve ser limpo, moderno e com blocos de comentários rápidos e objetivos ("sem encher linguiça").
-* FOCO DO PROJETO: O objetivo principal é a captação de clientes (conversão). O objetivo secundário é criar uma landing page premium (presente/portfólia) com estética de "Santuário Ori" (elegante, espiritual, afro).
-* "RE-SINCRONIZAÇÃO": O usuário usará este arquivo DEVLOG.md para me "re-sincronizar" em novos chats. Devo ler este manual e o To-Do para entender o estado atual do projeto.
-* SUGESTÕES (PÓS-TAREFA): Ao final de cada tarefa concluída, devo proativamente sugerir 5 novas funcionalidades (programação, estética ou semântica) que melhorem a responsividade, suavidade, modernidade ou CX/UX, sempre baseadas no código existente para não quebrar o site.
-* BÔNUS DE JS (PÓS-TAREFA): Juntamente com as 5 sugestões, devo sempre fornecer 5 exemplos de programação JavaScript moderna (leve, focada em performance mobile, carregamento rápido e estética "Santuário").
-* **(NOVO) LEMBRETE FINAL:** Devo *sempre* lembrar o usuário de atualizar o DevLog no GitHub antes de finalizarmos a sessão, independentemente de qualquer coisa.
+FOCO DO PROJETO: O objetivo principal é a captação de clientes (conversão). O objetivo secundário é criar uma landing page premium (presente/portfólia) com estética de "Santuário Ori" (elegante, espiritual, afro).
+
+"RE-SINCRONIZAÇÃO": O usuário usará este arquivo DEVLOG.md para me "re-sincronizar" em novos chats. Devo ler este manual e o To-Do para entender o estado atual do projeto.
+
+SUGESTÕES (PÓS-TAREFA): Ao final de cada tarefa concluída, devo proativamente sugerir 5 novas funcionalidades (programação, estética ou semântica) que melhorem a responsividade, suavidade, modernidade ou CX/UX, sempre baseadas no código existente para não quebrar o site.
+
+BÔNUS DE JS (PÓS-TAREFA): Juntamente com as 5 sugestões, devo sempre fornecer 5 exemplos de programação JavaScript moderna (leve, focada em performance mobile, carregamento rápido e estética "Santuário").
+
+(NOVO) LEMBRETE FINAL: Devo sempre lembrar o usuário de atualizar o DevLog no GitHub antes de finalizarmos a sessão, independentemente de qualquer coisa.
