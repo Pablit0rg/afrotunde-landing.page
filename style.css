@@ -175,7 +175,7 @@ a:hover {
     position: relative;
 }
 
-/* (NOVO) BARRA DE PROGRESSO DE SCROLL */
+/* (ADIADO) BARRA DE PROGRESSO DE SCROLL */
 .scroll-progress-bar {
     position: absolute;
     bottom: -1px; /* Alinha com a borda inferior da navbar */
@@ -184,9 +184,6 @@ a:hover {
     background-color: var(--cor-acento-secundario); /* Cor Rosa Salmão */
     width: 0%; /* Inicia em 0% */
     z-index: 1001;
-    
-    /* Animação fluida (removido transition) */
-    /* A transição será controlada pelo JS (requestAnimationFrame) */
 }
 
 
@@ -269,7 +266,8 @@ a:hover {
     align-items: center;
     overflow: hidden; 
     transition: transform 0.3s ease;
-    margin-left: 1.5rem; 
+    /* (MUDANÇA AQUI) Margem removida para alinhar com o flex 'gap' */
+    /* margin-left: 1.5rem; */ 
 }
 
 /* Estilos dos SVGs internos do botão de tema */
@@ -854,7 +852,8 @@ a:hover {
     color: var(--cor-acento-secundario); 
 }
 
-.footer .desenvolvido-por svg { 
+/* (MUDANÇA AQUI) Cor do ícone do Instagram corrigida para ser específica */
+.footer .desenvolvido-por .icon-instagram { 
     width: 18px; 
     height: 18px;
     stroke: var(--cor-instagram-icon); 
@@ -865,9 +864,11 @@ a:hover {
     transition: stroke 0.3s ease;
 }
 
-.footer .desenvolvido-por a:hover svg {
+/* Hover no ícone específico do Instagram não muda a cor */
+.footer .desenvolvido-por a:hover .icon-instagram {
     stroke: var(--cor-instagram-icon); 
 }
+
 
 /* ======== 7.5. ÍCONES (A11y) ======== */
 
@@ -1026,6 +1027,13 @@ a:hover {
     color: var(--cor-acento-secundario);
 }
 
+/* (MUDANÇA AQUI) Efeito de Foco (Cor) na pergunta aberta */
+.faq-item[open] summary,
+.faq-item[open] summary:hover {
+    color: var(--cor-acento-secundario);
+}
+
+
 /* O conteúdo (A Resposta) */
 .faq-content {
     padding: 0 1.5rem 1.5rem 1.5rem;
@@ -1113,6 +1121,7 @@ a:hover {
         color: var(--cor-acento-secundario); 
     }
     
+    /* (ATUALIZADO) Botão de Tema Mobile Ajustado */
     #theme-toggle-mobile {
         display: flex; 
         justify-content: center;
@@ -1124,9 +1133,11 @@ a:hover {
         padding: 0;
         border: none;
         border-radius: 0;
-        margin-top: 1.5rem; 
-        width: 32px; 
-        height: 32px;
+        /* (MUDANÇA AQUI) Ajuste de margem para o topo */
+        margin-top: 0; 
+        margin-bottom: 2rem; /* Mais espaço abaixo */
+        width: 40px;  /* Tamanho aumentado */
+        height: 40px; /* Tamanho aumentado */
         cursor: pointer;
     }
     #theme-toggle-mobile svg {
