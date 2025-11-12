@@ -577,6 +577,12 @@ a:hover {
     transition: transform 0.3s ease;
     pointer-events: none; 
 }
+
+/* (NOVA REGRA) Esconde o ícone de 'play' quando o card for uma imagem */
+.card-servico.is-image .icon-play-overlay {
+  display: none;
+}
+
 .card-servico:hover .icon-play-overlay {
     transform: scale(1.1);
 }
@@ -883,9 +889,9 @@ a:hover {
     width: 16px;
     height: 16px;
     /* 'currentColor' é mágico:
-      - No botão CTA, será var(--cor-fundo-base)
-      - No link do footer, será var(--cor-destaque-ori)
-    */
+       - No botão CTA, será var(--cor-fundo-base)
+       - No link do footer, será var(--cor-destaque-ori)
+     */
     stroke: currentColor; 
     fill: none;
     margin-left: 2px; /* Pequeno espaço */
