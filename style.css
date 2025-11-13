@@ -1,5 +1,5 @@
 /*
-  LANDING PAGE AFROTUNDE (v11 - Print Styles)
+  LANDING PAGE AFROTUNDE (v12 - Galeria Hover Fix)
   Cliente: Karla (Afrotunde)
   Desenvolvedor: Pablo Rosa Gomes (Seu Senhor)
   IA Assistente: Gemini
@@ -555,10 +555,14 @@ a:hover {
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     cursor: pointer; 
-    transition: transform 0.2s ease, background-color 0.3s ease;
+    /* (NOVO - v12) Transições atualizadas */
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
 }
 .card-servico:hover {
     transform: translateY(-5px); 
+    /* (NOVO - v12) Efeitos de hover premium */
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+    filter: saturate(1.1);
 }
 
 /* (THUMBNAIL DA GALERIA) */
@@ -1332,6 +1336,13 @@ a:hover {
     .card-servico:hover .icon-play-overlay {
         transform: none;
     }
+    
+    /* (NOVO - v12) Desliga o hover premium da galeria */
+    .card-servico:hover {
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        filter: none;
+    }
+
 
     /* (NOVO) Desliga o hover da imagem "Sobre" */
     .sobre-imagem img:hover {
