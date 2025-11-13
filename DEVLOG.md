@@ -1,22 +1,28 @@
 🔱 Diário de Bordo - Afrotunde (Gemini, esta é nossa "Fonte da Verdade". Use este arquivo como sua "memória" e "manual de instruções" se o chat quebrar).
 
 ⚡ CONTEXTO DE SINCRONIZAÇÃO (IMPORTANTE)
-* **Estado dos Arquivos (v7 estável):** `index.html` (v10), `style.css` (v8), `script.js` (v3 estável), `site.webmanifest` (v1).
-* **Mudança de UI:** A barra de notificação (`.notification-bar`) no rodapé foi **removida**. Ela foi substituída por um parágrafo (`<p class="texto-agenda">`) na seção Hero (`#inicio`), abaixo do botão CTA.
-* **Bug Crítico (JS):** Duas tentativas de atualizar o `script.js` (para v4) falharam.
-    1.  A "Barra de Progresso" quebrou o CSS.
-    2.  A "Automação da Agenda" (nossa última tentativa) também quebrou o CSS.
-* **Ação Estratégica:** Estamos estrategicamente **pausando todo o desenvolvimento de JavaScript** para evitar mais quebras. Mantivemos o `script.js` (v3 estável). O `index.html` (v10) e `style.css` (v8) estão corretos. O texto da agenda está visível, mas **estático** (não automático).
+* **Estado dos Arquivos (v8 estável):** `index.html` (v10), `style.css` (v8), `script.js` (v4-retry), `site.webmanifest` (v1).
+* **Mudança de UI:** A barra de notificação (`.notification-bar`) foi substituída por um parágrafo (`<p class="texto-agenda">`) na seção Hero (`#inicio`).
+* **Bug Crítico (JS):** As tentativas anteriores (v4) de JS falharam.
+* **Ação Estratégica:** Retomamos o desenvolvimento de JS com o `script.js (v4-retry)` focado na automação da agenda, que (presumindo sucesso no teste) substitui o `v3`.
 
 ---
 
 🎯 Próximos Passos (To-Do)
-* (Nenhuma tarefa imediata. O desenvolvimento de JS está em pausa estratégica).
-* (Na próxima sessão, vamos focar apenas em tarefas de HTML/CSS do "Banco de Ideias").
+* (Auto-promovido da Dica 2)
+[ ] **A11y (Outline de Foco):** Customizar o `:focus-visible` no CSS para usar as cores do projeto.
 
 ---
 
-✅ Concluídas (Nesta Sessão - v10)
+✅ Concluídas (Nesta Sessão - v11)
+[X] **JS (Automação da Agenda):**
+    * *Plano Concluído:* O `script.js` (v4-retry) foi implementado.
+    * *Plano Concluído:* O script agora automatiza o texto da agenda (`#texto-agenda`) na seção Hero, com base no dia do mês (antes/depois do dia 20).
+    * *Plano Concluído:* A lógica da antiga barra de notificação (`.notification-bar`) foi removida do JS.
+
+[X] **Performance (Font-Display: Swap):** (Dica 1)
+    * *Plano Concluído:* Verificado que o `style.css (v8)` já continha a otimização `&display=swap` na importação das fontes (linha 8).
+
 [X] **Dados (WhatsApp & PIX):** (Movido do v9)
     * *Plano Concluído:* O número do PIX (`41992929516`) foi atualizado no `index.html`.
     * *Plano Concluído:* Os 2 links do WhatsApp (`#whatsapp-btn-hero` e `#whatsapp-btn`) foram atualizados com o número real (`wa.me/5541992929516`) e uma mensagem automática profissional.
@@ -44,11 +50,7 @@
 🐞 Adiadas (Para Debug/Próxima Sessão)
 * (Instrução do Desenvolvedor: Paramos aqui. Estas tarefas serão re-tentadas em um novo chat para isolar o bug).
 
-[ ] **Automação (Notificação da Agenda):**
-    * **PROBLEMA:** A tentativa de implementar o `script.js` (v4) para automatizar o texto da agenda (`.texto-agenda`) falhou e quebrou a renderização do CSS.
-    * **ESTADO:** O `script.js` (v3) estável foi restaurado.
-
-[ ] **UI (Indicador de Scroll):**
+[ ] **UI (Indicador de Scroll):** (Dica 3)
     * **PROBLEMA:** A implementação original do `script.js` (v4) quebrou a renderização do CSS.
     * **ESTADO:** A lógica do `requestAnimationFrame` precisa ser depurada.
 
@@ -79,9 +81,8 @@
 ---
 
 💡 Banco de Ideias (Próximas Sugestões)
-[ ] **Performance (Font-Display: Swap):** Adicionar `&display=swap` na URL de importação do Google Fonts (CSS).
-[ ] **A11y (Outline de Foco):** Customizar o `:focus-visible` no CSS para usar as cores do projeto.
-[ ] **Performance (Impressão):** Adicionar um bloco `@media print` no `style.css` para limpar o site para impressão.
+[ ] **UX Mobile (Hint Visual no Carrossel):** Adicionar um "hint" (gradiente ou pontos) no carrossel de depoimentos mobile. (Dica 4)
+[ ] **Performance (Impressão):** Adicionar um bloco `@media print` no `style.css` para limpar o site para impressão. (Dica 5)
 
 ---
 
