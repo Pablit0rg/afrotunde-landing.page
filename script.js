@@ -1,5 +1,5 @@
 /*
-  LANDING PAGE AFROTUNDE (v3 - Paleta Terrosa)
+  LANDING PAGE AFROTUNDE (v5-retry - Indicador de Scroll)
   Cliente: Karla (Afrotunde)
   Desenvolvedor: Pablo Rosa Gomes (Seu Senhor)
   IA Assistente: Gemini
@@ -77,8 +77,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const themeToggleButtons = document.querySelectorAll('#theme-toggle-desktop, #theme-toggle-mobile');
 
-    const notificationBar = document.querySelector('.notification-bar'); 
-    const closeNotificationBtn = document.querySelector('.close-notification');
+    // (v4) Seletor da Automação da Agenda
+    const textoAgendaEl = document.querySelector('#texto-agenda'); 
+
+    // (NOVO - v5) Seletor da Barra de Scroll
+    const scrollBar = document.querySelector('#scroll-bar');
 
     const whatsappBtn = document.querySelector('#whatsapp-btn');
     const whatsappBtnHero = document.querySelector('#whatsapp-btn-hero'); 
@@ -90,8 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // ======== (A11Y) HELPERS DE ACESSIBILIDADE ========
     
     // --- 1. Helper Aria-Hidden ---
-    const elementosConteudoTotal = [header, main, voltarAoTopoBtn, notificationBar].filter(Boolean);
-    const elementosConteudoMain = [main, voltarAoTopoBtn, notificationBar].filter(Boolean);
+    const elementosConteudoTotal = [header, main, voltarAoTopoBtn].filter(Boolean);
+    const elementosConteudoMain = [main, voltarAoTopoBtn].filter(Boolean);
 
     const setAriaHidden = (elementos, hidden) => {
         elementos.forEach(el => {
@@ -132,13 +135,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const querMovimentoReduzido = motionQuery.matches;
     
-    // --- 4. (NOVO) Helper de Vibração Tátil ---
+    // --- 4. Helper de Vibração Tátil ---
     const vibrateOnClick = () => {
-        // (A11y) Só vibra se o usuário quer movimento
         if (querMovimentoReduzido) return; 
 
         if (navigator.vibrate) {
-            navigator.vibrate(50); // Vibra por 50ms (sutil)
+            navigator.vibrate(50); 
         }
     };
     
@@ -167,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         themeToggleButtons.forEach(button => {
             button.addEventListener('click', () => {
-                vibrateOnClick(); // <-- Adicionado
+                vibrateOnClick(); 
                 toggleTheme();
             });
         });
@@ -186,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const handleMenuTrapFocus = (e) => trapFocus(navMenu, e);
 
         hamburger.addEventListener('click', () => {
-            vibrateOnClick(); // <-- Adicionado
+            vibrateOnClick(); 
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
             
@@ -240,22 +242,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- LÓGICA DO LIGHTBOX (MODAL DE VÍDEO/IMAGEM) ---
-    // (PERFORMANCE) Usando Event Delegation
     if (lightboxOverlay && lightboxImage && lightboxVideoPlaceholder && lightboxClose && galeriaGrid && lightboxCaption) {
         
         const handleLightboxTrapFocus = (e) => trapFocus(lightboxOverlay, e);
 
-        // 1. Adiciona um listener único no PAI (galeria-grid)
         galeriaGrid.addEventListener('click', (e) => {
-            
-            // 2. Identifica qual 'card-servico' foi clicado
             const card = e.target.closest('.card-servico');
-            
-            // 3. Se o clique não foi em um card (foi no espaço entre eles), ignora.
             if (!card) return;
 
-            // 4. (Lógica antiga movida para cá)
-            vibrateOnClick(); // <-- Adicionado
+            vibrateOnClick(); 
             const fullSrc = card.getAttribute('data-full-src');
             const captionText = card.querySelector('h4')?.innerText || ''; 
 
@@ -287,7 +282,6 @@ document.addEventListener('DOMContentLoaded', () => {
             lightboxOverlay.addEventListener('keydown', handleLightboxTrapFocus);
         });
         
-        // (Lógica de fechar o lightbox permanece a mesma)
         const closeLightbox = () => {
             lightboxOverlay.classList.remove('active');
             if (!navMenu.classList.contains('active') && !whatsappModal.classList.contains('active')) {
@@ -300,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         lightboxClose.addEventListener('click', () => {
-            vibrateOnClick(); // <-- Adicionado
+            vibrateOnClick(); 
             closeLightbox();
         });
         
@@ -313,13 +307,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- LÓGICA DO FADE-IN AO ROLAR (IntersectionObserver) ---
     if (faders.length > 0) {
-        // (A11y) Se o usuário não quer movimento, não faz o fade-in
         if (querMovimentoReduzido) {
             faders.forEach(fader => {
                 fader.classList.add('is-visible');
             });
         } else {
-            // Animação normal
             const appearOptions = {
                 threshold: 0.1, 
                 rootMargin: "0px 0px -50px 0px" 
@@ -358,21 +350,48 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        // (A11y) Só liga o listener de scroll se o usuário quer movimento
         if (!querMovimentoReduzido) {
             window.addEventListener('scroll', () => {
                 debounce(handleScroll, 100); 
             });
         }
         
-        // (NOVO) Adiciona vibração ao clicar no botão
         voltarAoTopoBtn.addEventListener('click', vibrateOnClick);
     }
+
+    // --- (NOVO - v5) LÓGICA DO INDICADOR DE SCROLL ---
+    if (scrollBar && !querMovimentoReduzido) {
+        let ticking = false;
+
+        const updateScrollProgress = () => {
+            const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+            
+            // Evita divisão por zero se o conteúdo for menor que a tela
+            if (scrollHeight === clientHeight) {
+                scrollBar.style.width = '0%';
+                return;
+            }
+
+            const scrollPercent = (scrollTop / (scrollHeight - clientHeight)) * 100;
+            scrollBar.style.width = `${scrollPercent}%`;
+        };
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    updateScrollProgress();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+    }
+
 
     // --- LÓGICA DO CLICK TO COPY (PIX) ---
     if (copyPixBtn && pixKeyText && tooltip) {
         copyPixBtn.addEventListener('click', () => {
-            vibrateOnClick(); // <-- Adicionado
+            vibrateOnClick(); 
             const keyToCopy = pixKeyText.innerText;
 
             navigator.clipboard.writeText(keyToCopy).then(() => {
@@ -396,15 +415,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- LÓGICA DO CONTADOR ANIMADO ---
     if (statNumbers.length > 0) {
         
-        // (A11y) Se o usuário quer movimento reduzido,
-        // apenas define o número final e não anima.
         if (querMovimentoReduzido) {
             statNumbers.forEach(number => {
                 const goal = number.getAttribute('data-goal');
                 number.innerText = `${goal}+`;
             });
         } else {
-            // Animação normal
             const animateCounter = (el) => {
                 const goal = parseInt(el.getAttribute('data-goal'), 10);
                 let current = 0;
@@ -438,28 +454,39 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- LÓGICA DA BARRA DE NOTIFICAÇÃO ---
-    // (FIX) Corrigida a lógica para usar o 'closeNotificationBtn' que foi definido
-    if (notificationBar && closeNotificationBtn) {
+    // --- (v4) LÓGICA DE AUTOMAÇÃO DA AGENDA ---
+    if (textoAgendaEl) {
         try {
-            if (localStorage.getItem('notificationClosed') === 'true') {
-                notificationBar.classList.add('is-hidden');
-            }
-        } catch (e) {
-            console.warn('localStorage não está disponível.');
-        }
+            const dataAtual = new Date();
+            const mesAtual = dataAtual.getMonth(); // 0 = Jan, 11 = Dez
+            const diaDoMes = dataAtual.getDate();
 
-        closeNotificationBtn.addEventListener('click', () => {
-            vibrateOnClick(); // <-- Adicionado
-            notificationBar.classList.add('is-hidden'); 
-            try {
-                localStorage.setItem('notificationClosed', 'true');
-            } catch (e) {
-                console.warn('localStorage não está disponível.');
+            const nomesMeses = [
+                "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+                "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+            ];
+
+            let nomeMesSeguinte = nomesMeses[(mesAtual + 1) % 12];
+            let statusAgenda = "";
+
+            // REGRA DE NEGÓCIO:
+            // - Dias 1-19: Agenda do mês seguinte "em breve".
+            // - Dias 20-31: Agenda do mês seguinte "aberta".
+            if (diaDoMes < 20) {
+                statusAgenda = `abrirá em breve (dia 20/${mesAtual + 1})`;
+            } else {
+                statusAgenda = "está aberta";
             }
-        });
+            
+            // Atualiza o texto
+            textoAgendaEl.innerText = `A agenda para ${nomeMesSeguinte} ${statusAgenda}! Garanta seu horário.`;
+            
+        } catch (e) {
+            console.error("Falha ao automatizar o texto da agenda:", e);
+        }
     }
     
+
     // --- LÓGICA DO MODAL WHATSAPP ---
     if (whatsappModal && modalCloseBtn && modalConfirmBtn && modalCancelBtn) {
         
@@ -486,29 +513,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (whatsappBtn) {
             whatsappBtn.addEventListener('click', (e) => {
-                vibrateOnClick(); // <-- Adicionado
+                vibrateOnClick(); 
                 openModal(e);
             });
         }
         if (whatsappBtnHero) { 
             whatsappBtnHero.addEventListener('click', (e) => {
-                vibrateOnClick(); // <-- Adicionado
+                vibrateOnClick(); 
                 openModal(e);
             });
         }
 
         modalCancelBtn.addEventListener('click', () => {
-            vibrateOnClick(); // <-- Adicionado
+            vibrateOnClick(); 
             closeModal();
         }); 
         
         modalCloseBtn.addEventListener('click', () => {
-            vibrateOnClick(); // <-- Adicionado
+            vibrateOnClick(); 
             closeModal();
         }); 
 
         modalConfirmBtn.addEventListener('click', () => {
-            vibrateOnClick(); // <-- Adicionado
+            vibrateOnClick(); 
             const whatsappLink = whatsappBtnHero.getAttribute('href');
             if(whatsappLink !== "[SEU_LINK_WHATSAPP_AQUI]") {
                 window.open(whatsappLink, '_blank'); 
