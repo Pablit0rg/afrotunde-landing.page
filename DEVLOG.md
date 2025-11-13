@@ -1,53 +1,56 @@
 🔱 Diário de Bordo - Afrotunde (Gemini, esta é nossa "Fonte da Verdade". Use este arquivo como sua "memória" e "manual de instruções" se o chat quebrar).
 
 ⚡ CONTEXTO DE SINCRONIZAÇÃO (IMPORTANTE)
-* **Estado dos Arquivos (v7):** `index.html` (v9), `style.css` (v8), `script.js` (v3 estável), `site.webmanifest` (v1).
-* **Debug (JS):** O `script.js` (v4) (Barra de Progresso) ainda está pendente de depuração. Estamos no (v3) estável.
-* **Novos Ativos (v8):** A cliente (Karla) enviou os 8 vídeos (.mp4) e 5 fotos (.jpeg).
-* **Ação Estratégica (v10):** Por decisão do desenvolvedor, o upload, otimização e linkagem de todos os ativos (fotos/vídeos) foi movido para a **ÚLTIMA ETAPA** do projeto (ver seção "Adiadas") para não bloquear o desenvolvimento do código.
+* **Estado dos Arquivos (v7 estável):** `index.html` (v10), `style.css` (v8), `script.js` (v3 estável), `site.webmanifest` (v1).
+* **Mudança de UI:** A barra de notificação (`.notification-bar`) no rodapé foi **removida**. Ela foi substituída por um parágrafo (`<p class="texto-agenda">`) na seção Hero (`#inicio`), abaixo do botão CTA.
+* **Bug Crítico (JS):** Duas tentativas de atualizar o `script.js` (para v4) falharam.
+    1.  A "Barra de Progresso" quebrou o CSS.
+    2.  A "Automação da Agenda" (nossa última tentativa) também quebrou o CSS.
+* **Ação Estratégica:** Estamos estrategicamente **pausando todo o desenvolvimento de JavaScript** para evitar mais quebras. Mantivemos o `script.js` (v3 estável). O `index.html` (v10) e `style.css` (v8) estão corretos. O texto da agenda está visível, mas **estático** (não automático).
 
 ---
 
 🎯 Próximos Passos (To-Do)
-* (Nenhuma tarefa imediata. O bloco de "Substituição de Ativos" foi movido para "Adiadas" por estratégia).
-* (Na próxima sessão, vamos depurar o `script.js` (v4) ou escolher uma tarefa do "Banco de Ideias").
+* (Nenhuma tarefa imediata. O desenvolvimento de JS está em pausa estratégica).
+* (Na próxima sessão, vamos focar apenas em tarefas de HTML/CSS do "Banco de Ideias").
 
 ---
 
-✅ Concluídas (Nesta Sessão - v9)
-[X] UI (Layout Galeria): (Movido do Banco de Ideias) Implementada a nova galeria de 13 cards (8 vídeos, 5 fotos) no index.html (v9) usando placeholders.
-[X] UI (CSS Galeria): Adicionada a classe `.is-image` e a regra CSS (no `style.css` v8) para ocultar o ícone "Play" em cards de imagem, diferenciando fotos de vídeos.
-[X] Conteúdo (Hero H1): Título principal (`h1`) atualizado para "Tranças e Locs em Curitiba".
-[X] Conteúdo (Hero Subtítulo): Subtítulo (`.subtitulo`) atualizado para "Por Karla do Vale, Trancista e Loctician."
-[X] Conteúdo (Hero CTA): Texto do botão principal (`#whatsapp-btn-hero`) simplificado para "AGENDAR".
-[X] Conteúdo (Galeria Slogan): Frase de orgulho da galeria (`#catalogo`) atualizada para "Transformando sua autoestima através da arte no orí" (com ortografia corrigida).
-[X] Conteúdo (Sobre): Atualizada a seção `#sobre` com o novo H2 ("Um pouco sobre mim") e o novo texto biográfico autêntico da Karla.
-[X] Conteúdo (FAQ): Seção `#faq` totalmente reescrita:
-    * [X] Resposta da pergunta "Tempo" atualizada com o novo texto focado em "reservar o dia".
-    * [X] Pergunta "Cuidados" removida e substituída por duas novas: "Cuidado com os Locs" e "Cuidado com as Tranças", com textos detalhados.
-    * [X] Opção "cartão" removida da pergunta "Formas de pagamento".
+✅ Concluídas (Nesta Sessão - v10)
+[X] **Dados (WhatsApp & PIX):** (Movido do v9)
+    * *Plano Concluído:* O número do PIX (`41992929516`) foi atualizado no `index.html`.
+    * *Plano Concluído:* Os 2 links do WhatsApp (`#whatsapp-btn-hero` e `#whatsapp-btn`) foram atualizados com o número real (`wa.me/5541992929516`) e uma mensagem automática profissional.
 
---- (Concluídas em Sessões Anteriores - v1 a v8) ---
-[X] Nova Seção: FAQ (Acordeão Semântico).
-[X] UX (Carrossel Mobile de Depoimentos).
-[X] SEO (Schema Review).
-[X] SEO (Meta Tags OG & Twitter Cards).
-[X] A11y (Links Externos).
-[X] Performance (YouTube Preconnect).
-[X] SEO (Favicon & Manifesto).
-[X] Dados (WhatsApp & PIX).
-[X] A11y (Skip Link).
-[X] UI (Layout Navbar & Footer).
-[X] UI (Bugs de Estilo & Refinamento - Botão Dourado, Botão Mobile, Cor Ícone Footer).
-[X] UI (Efeito de Foco no FAQ).
-[X] UI (Efeito Hover na Galeria).
+[X] **A11y (Skip Link):** (Movido do v9)
+    * *Plano Concluído:* Confirmado que o "Skip Link" (`.skip-link`) está funcionando corretamente (só aparece no `:focus` do teclado).
+
+[X] **UI (Layout Navbar & Footer):** (Movido do v9)
+    * *Plano Concluído:* Botões de tema (desktop e mobile) movidos para o início da `<nav>` no `index.html` (v7).
+    * *Plano Concluído:* Ícone do Instagram no `footer` movido para *depois* do "@pablit0rg" no `index.html` (v7).
+
+[X] **UI (Bugs de Estilo & Refinamento):** (Movido do v9)
+    * *Plano Concluído (Bugfix):* Corrigida a regra CSS no `footer` (`style.css` v7) para que a cor oficial do Instagram (`--cor-instagram-icon`) se aplique *apenas* ao `.icon-instagram`.
+    * *Plano Concluído (Refinamento):* Aumentado o tamanho do `#theme-toggle-mobile` no menu hamburger para `40px` (`style.css` v7).
+    * *Plano Concluído (Refinamento):* Cor do botão de Tema (desktop e mobile) alterada para Dourado (`--cor-tema-toggle`) em ambos os temas (`style.css` v7).
+
+[X] **UI (Efeito de Foco no FAQ):** (Movido do v9)
+    * *Plano Concluído:* Adicionada regra CSS (`.faq-item[open] summary`) no `style.css` (v7) para que a pergunta mude para a cor de acento.
+
+[X] **UI (Efeito Hover na Galeria):** (Movido do v9)
+    * *Plano Concluído:* Adicionado `box-shadow` suave e `filter: saturate(1.1)` no hover dos `.card-servico` (`style.css` v8).
 
 ---
 
 🐞 Adiadas (Para Debug/Próxima Sessão)
-[ ] **UI (Indicador de Scroll):** (Movido do Banco de Ideias).
-    * **PROBLEMA:** A implementação do `script.js` (v4) quebrou a renderização do CSS.
-    * **PLANO:** Depurar o `script.js` (v4) (lógica do `requestAnimationFrame`) após finalizarmos as tarefas do "Banco de Ideias".
+* (Instrução do Desenvolvedor: Paramos aqui. Estas tarefas serão re-tentadas em um novo chat para isolar o bug).
+
+[ ] **Automação (Notificação da Agenda):**
+    * **PROBLEMA:** A tentativa de implementar o `script.js` (v4) para automatizar o texto da agenda (`.texto-agenda`) falhou e quebrou a renderização do CSS.
+    * **ESTADO:** O `script.js` (v3) estável foi restaurado.
+
+[ ] **UI (Indicador de Scroll):**
+    * **PROBLEMA:** A implementação original do `script.js` (v4) quebrou a renderização do CSS.
+    * **ESTADO:** A lógica do `requestAnimationFrame` precisa ser depurada.
 
 ---
 
@@ -76,7 +79,6 @@
 ---
 
 💡 Banco de Ideias (Próximas Sugestões)
-[ ] **Automação (Notificação):** (Sua ideia) Usar `new Date()` no `script.js` para atualizar automaticamente o mês na barra de notificação (ex: "A agenda para [Próximo Mês] está aberta!").
 [ ] **Performance (Font-Display: Swap):** Adicionar `&display=swap` na URL de importação do Google Fonts (CSS).
 [ ] **A11y (Outline de Foco):** Customizar o `:focus-visible` no CSS para usar as cores do projeto.
 [ ] **Performance (Impressão):** Adicionar um bloco `@media print` no `style.css` para limpar o site para impressão.
