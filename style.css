@@ -1,5 +1,5 @@
 /*
-  LANDING PAGE AFROTUNDE (v3 - Paleta Terrosa)
+  LANDING PAGE AFROTUNDE (v11 - Print Styles)
   Cliente: Karla (Afrotunde)
   Desenvolvedor: Pablo Rosa Gomes (Seu Senhor)
   IA Assistente: Gemini
@@ -162,6 +162,24 @@ a:hover {
 }
 .skip-link:focus {
     top: 0; 
+}
+
+/* (NOVO - v9) ESTILO DE FOCO CUSTOMIZADO (A11Y) */
+:focus-visible {
+    /* Outline premium alinhado com a paleta */
+    outline: 2px dashed var(--cor-destaque-ori);
+    outline-offset: 4px; /* Espaçamento */
+    border-radius: 4px; /* Suaviza o outline */
+}
+/* Garante que o Skip Link mantenha seu foco padrão */
+.skip-link:focus,
+.skip-link:focus-visible {
+    outline: none; /* Já é visualmente óbvio */
+    outline-offset: 0;
+}
+/* No tema escuro, o outline fica mais vibrante (Dourado) */
+[data-theme="dark"] :focus-visible {
+     outline-color: var(--cor-destaque-ori); /* Já é Dourado */
 }
 
 
@@ -1001,7 +1019,8 @@ a:hover {
     position: relative;
     
     /* (A11y) Garante que o outline de foco apareça */
-    outline-offset: -2px; 
+    /* (v9) Removido pois agora temos o :focus-visible global */
+    /* outline-offset: -2px; */
 }
 
 /* Remove o marcador padrão no Webkit (Chrome/Safari) */
@@ -1191,6 +1210,14 @@ a:hover {
     h1 { font-size: 2.2rem; }
     h2 { font-size: 1.8rem; }
 
+    /* (NOVO - v10) HINT DO CARROSSEL DE DEPOIMENTOS */
+    .depoimentos-wrapper {
+        position: relative;
+        /* Aplica um fade na direita para indicar rolagem */
+        -webkit-mask-image: linear-gradient(to right, black 90%, transparent 100%);
+        mask-image: linear-gradient(to right, black 90%, transparent 100%);
+    }
+
     /* (CARROSSEL DE DEPOIMENTOS - MOBILE) */
     .depoimentos-grid {
         display: flex;
@@ -1321,6 +1348,12 @@ a:hover {
     /* (NOVO) Desliga a animação do FAQ */
     .faq-content {
         animation: none;
+    }
+    
+    /* (NOVO - v10) Desliga a máscara de gradiente */
+    .depoimentos-wrapper {
+        -webkit-mask-image: none;
+        mask-image: none;
     }
 }
 
@@ -1600,4 +1633,97 @@ a:hover {
     background-color: var(--cor-acento-secundario); 
     color: var(--cor-fundo-base); 
     opacity: 1;
+}
+
+/* ======== 13. ESTILOS DE IMPRESSÃO (A11y/UX) ======== */
+
+@media print {
+    /* 1. Reset Global */
+    * {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+        border-color: #dddddd !important;
+    }
+
+    body {
+        font-size: 12pt;
+        line-height: 1.4;
+    }
+
+    /* 2. Ocultar Elementos de UI */
+    .navbar, 
+    .hero, 
+    #stats, 
+    #catalogo, 
+    #depoimentos, 
+    #contato, 
+    .notification-bar, 
+    .footer, 
+    .voltar-ao-topo, 
+    .lightbox-overlay, 
+    .modal-overlay,
+    .sobre-imagem { /* Esconde a foto de perfil */
+        display: none !important;
+    }
+
+    /* 3. Mostrar Conteúdo Relevante */
+    main,
+    .section,
+    #sobre,
+    #faq,
+    .sobre-texto,
+    .faq-container {
+        display: block !important;
+        padding: 0 !important;
+        margin: 0 0 1.5rem 0 !important;
+    }
+    
+    .container {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* 4. Forçar Abertura do FAQ */
+    .faq-item {
+        page-break-inside: avoid; /* Evita que o item quebre no meio */
+    }
+    
+    .faq-item details {
+        display: block !important;
+        page-break-inside: avoid;
+    }
+    
+    .faq-item details[open] {
+        display: block !important;
+    }
+
+    .faq-item summary {
+        font-weight: bold;
+    }
+    
+    /* Esconde o ícone '+' */
+    .faq-item summary::after {
+        display: none !important;
+    }
+    
+    .faq-content {
+        display: block !Timportant;
+        padding: 0 1rem 1rem 1rem !important;
+        animation: none !important;
+    }
+
+    /* 5. Estilo de Links (para mostrar URLs) */
+    a {
+        color: #000 !important;
+        text-decoration: underline !important;
+    }
+    /* Mostra o URL de links externos (ignora internos/js) */
+    a[href^="http"]:not([href*="afrotunde"])::after {
+        content: " (" attr(href) ")";
+        font-size: 9pt;
+    }
 }
