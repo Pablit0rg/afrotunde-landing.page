@@ -1,47 +1,57 @@
 🔱 Diário de Bordo - Afrotunde (Gemini, esta é nossa "Fonte da Verdade". Use este arquivo como sua "memória" e "manual de instruções" se o chat quebrar).
 
 ⚡ CONTEXTO DE SINCRONIZAÇÃO (IMPORTANTE)
-* **Estado dos Arquivos (v9 estável):** `index.html` (v12), `style.css` (v11), `script.js` (v5-retry), `site.webmanifest` (v1).
-* **Bugs Anteriores:** As tentativas de JS (v4) falharam, mas as v5-retry (Scrollbar) e v4-retry (Agenda) parecem estáveis.
-* **Foco Atual:** Refinamento de UI/UX e A11y.
+* **Estado dos Arquivos (v10 estável):** `index.html` (v13), `style.css` (v14), `script.js` (v6), `site.webmanifest` (v1).
+* **Foco Atual:** Refinamento de performance, UX Mobile e refatoração de código limpo.
 
 ---
 
 🎯 Próximos Passos (To-Do)
 * (Auto-promovido da Dica 2)
-[ ] **UI (Correção Hover Galeria):** Adicionar `box-shadow` e `filter: saturate(1.1)` no hover dos `.card-servico` no `style.css` (conforme planejado no DEVLOG v8).
+[ ] **Performance (Formato WebP):** Usar a tag `<picture>` no `index.html` para as imagens principais (ex: seção `#sobre`) para servir `.webp` com fallback `.jpg`.
 
 ---
 
-✅ Concluídas (Nesta Sessão - v12)
-[X] **A11y (Semântica dos Modais):** (Dica 1)
-    * *Plano Concluído:* O `index.html` (v12) foi atualizado.
-    * *Plano Concluído:* Adicionados `role="dialog"`, `aria-modal="true"` e `aria-labelledby` aos `.lightbox-content` e `.modal-content`.
-    * *Plano Concluído:* Adicionados IDs (`#lightbox-titulo`, `#modal-titulo-wpp`) aos títulos dos modais para o `aria-labelledby`.
+✅ Concluídas (Nesta Sessão - v13)
+[X] **UX Mobile (Hint Carrossel Dinâmico):** (Dica 1)
+    * *Plano Concluído:* O `script.js` (v6) foi atualizado.
+    * *Plano Concluído:* O `style.css` (v14) foi atualizado.
+    * *Plano Concluído:* Adicionada lógica JS (`onscroll`) que adiciona a classe `.is-scrolled-to-end` ao `.depoimentos-wrapper` quando o scroll horizontal termina.
+    * *Plano Concluído:* A classe `.is-scrolled-to-end` agora remove o `mask-image`, dando feedback de "fim do conteúdo".
 
-[X] **Performance (Estilos de Impressão):** (Dica 5)
-    * *Plano Concluído:* Adicionado bloco `@media print` ao `style.css` (v11).
-    * *Plano Concluído:* A impressão agora oculta UI (`navbar`, `footer`, botões) e força o texto para preto/branco, focando no conteúdo (como o `FAQ`).
+[X] **Performance (Refatorar Spinner):**
+    * *Plano Concluído:* Removido o `<symbol id="icon-spinner">` do `index.html` (v13).
+    * *Plano Concluído:* Substituído o `<svg class="spinner">` por `<span class="spinner">`.
+    * *Plano Concluído:* Atualizado o `style.css` (v13) com uma animação de `border` (CSS puro) para o `.spinner`.
 
-[X] **UX Mobile (Hint Carrossel Estático):** (Dica 4)
+[X] **UI (Correção Hover Galeria):**
+    * *Plano Concluído:* O `style.css` (v12) foi atualizado para incluir `box-shadow` e `filter: saturate(1.1)` no hover do `.card-servico`, conforme planejado no DEVLOG v8.
+
+[X] **A11y (Semântica dos Modais):**
+    * *Plano Concluído:* O `index.html` (v12) foi atualizado com `role="dialog"`, `aria-modal="true"` e `aria-labelledby` nos modais.
+    * *Plano Concluído:* Adicionados IDs (`#lightbox-titulo`, `#modal-titulo-wpp`) aos títulos dos modais.
+
+[X] **Performance (Estilos de Impressão):**
+    * *Plano Concluído:* Adicionado bloco `@media print` ao `style.css` (v11) para otimizar a impressão (focada no FAQ).
+
+[X] **UX Mobile (Hint Carrossel Estático):**
     * *Plano Concluído:* Adicionado `.depoimentos-wrapper` ao `index.html` (v11).
-    * *Plano Concluído:* Adicionado `mask-image` (gradiente) ao `style.css` (v10) para criar um "hint" visual de rolagem no mobile.
+    * *Plano Concluído:* Adicionado `mask-image` (gradiente) ao `style.css` (v10) no mobile.
 
-[X] **UI (Indicador de Scroll):** (Dica 3 - Retomada)
+[X] **UI (Indicador de Scroll):**
     * *Plano Concluído:* O `script.js` (v5-retry) foi implementado com `requestAnimationFrame` para controlar a barra `#scroll-bar`.
-    * *Plano Concluído:* A lógica respeita `prefers-reduced-motion`.
 
-[X] **A11y (Outline de Foco):** (Dica 2)
-    * *Plano Concluído:* Adicionada regra global `:focus-visible` ao `style.css` (v9) usando a paleta de cores do projeto (Terracota/Dourado).
+[X] **A11y (Outline de Foco):**
+    * *Plano Concluído:* Adicionada regra global `:focus-visible` ao `style.css` (v9) usando a paleta do projeto.
 
-[X] **JS (Automação da Agenda):** (Dica 1 - Retomada)
-    * *Plano Concluído:* O `script.js` (v4-retry) agora automatiza o texto da agenda (`#texto-agenda`) com base no dia do mês (antes/depois do dia 20).
+[X] **JS (Automação da Agenda):**
+    * *Plano Concluído:* O `script.js` (v4-retry) agora automatiza o texto da agenda (`#texto-agenda`).
 
 [X] **Performance (Font-Display: Swap):**
-    * *Plano Concluído:* Verificado que o `style.css` já continha a otimização `&display=swap`.
+    * *Plano Concluído:* Verificado que o `style.css` já continha `&display=swap`.
 
 [X] **Dados (WhatsApp & PIX):**
-    * *Plano Concluído:* Número do PIX (`41992929516`) e links do WhatsApp (`wa.me/5541992929516`) atualizados no `index.html` (v10).
+    * *Plano Concluído:* Links de WhatsApp e PIX atualizados no `index.html` (v10).
 
 [X] **UI (Refinamentos v7/v8):**
     * *Plano Concluído:* Layout da Navbar/Footer, cores de ícones (Instagram/Tema) e hover do FAQ (`.faq-item[open] summary`) implementados.
@@ -49,7 +59,7 @@
 ---
 
 🐞 Adiadas (Bugs Conhecidos)
-* (Nenhum bug ativo. As implementações de JS v4-retry e v5-retry precisam de teste de estabilidade).
+* (Nenhum bug ativo. As implementações de JS v4-v6 precisam de teste de estabilidade).
 
 ---
 
@@ -78,9 +88,6 @@
 ---
 
 💡 Banco de Ideias (Próximas Sugestões)
-[ ] **Performance (Refatorar Spinner):** Substituir o SVG `#icon-spinner` por uma animação CSS pura.
-[ ] **UX Mobile (Hint Carrossel Dinâmico):** Usar JS (`onscroll`) para remover a `mask-image` do carrossel quando o usuário chegar ao fim.
-[ ] **Performance (Formato WebP):** Usar a tag `<picture>` para servir imagens `.webp` com fallback `.jpg`.
 [ ] **Refatoração JS (DRY WhatsApp):** Usar uma classe comum (`.whatsapp-trigger`) para os botões de agendamento e otimizar o `script.js`.
 [ ] **Refatoração JS (Intl.DateTimeFormat):** Modernizar a lógica da agenda no `script.js` para usar a API `Intl` em vez de um array de meses.
 [ ] **UX (Scroll Suave JS):** Implementar `scrollIntoView({ behavior: 'smooth' })` no JS para o botão "Voltar ao Topo".
