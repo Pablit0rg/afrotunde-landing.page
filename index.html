@@ -398,14 +398,15 @@
             <div class="container">
                 <h2 class="fade-in">Vozes de quem cuidou do Ori</h2>
                 
-                <div class="depoimentos-grid fade-in">
-                    <div class="card-depoimento">
-                        <p>"Simplesmente incrível! A Karla tem mãos de fada e uma energia que renova a gente. Minha autoestima é outra!"</p>
-                        <span>- Cliente Satisfeita (via WhatsApp)</span>
-                    </div>
-                     <div class="card-depoimento">
-                        <p>"Profissional excelente, super atenciosa e o trabalho ficou perfeito. Recomendo de olhos felchados."</p>
-                        <span>- Cliente Satisfeita (via Instagram)</span>
+                <div class="depoimentos-wrapper fade-in">
+                    <div class="depoimentos-grid"> <div class="card-depoimento">
+                            <p>"Simplesmente incrível! A Karla tem mãos de fada e uma energia que renova a gente. Minha autoestima é outra!"</p>
+                            <span>- Cliente Satisfeita (via WhatsApp)</span>
+                        </div>
+                         <div class="card-depoimento">
+                            <p>"Profissional excelente, super atenciosa e o trabalho ficou perfeito. Recomendo de olhos felchados."</p>
+                            <span>- Cliente Satisfeita (via Instagram)</span>
+                        </div>
                     </div>
                 </div>
                 
@@ -524,14 +525,14 @@
 
     
 <div class="lightbox-overlay">
-        <div class="lightbox-content">
+        <div class="lightbox-content" role="dialog" aria-modal="true" aria-labelledby="lightbox-titulo">
             
             <img src="" alt="Imagem Ampliada" class="lightbox-image">
             <div class="lightbox-video-placeholder">
                 <svg class="icon-video-lightbox"><use href="#icon-video"></use></svg>
             </div> 
             
-            <p class="lightbox-caption"></p>
+            <p class="lightbox-caption" id="lightbox-titulo"></p>
 
             <button class="lightbox-close" title="Fechar">
                 <svg><use href="#icon-close"></use></svg>
@@ -540,13 +541,13 @@
     </div>
 
 <div class="modal-overlay" id="whatsapp-modal">
-    <div class="modal-content fade-in">
+    <div class="modal-content fade-in" role="dialog" aria-modal="true" aria-labelledby="modal-titulo-wpp">
         
         <button class="modal-close" id="modal-close-btn" title="Fechar" aria-label="Fechar modal de redirecionamento">
             <svg><use href="#icon-close"></use></svg>
         </button>
         
-        <h3>Redirecionando...</h3>
+        <h3 id="modal-titulo-wpp">Redirecionando...</h3>
         <p>Você está sendo redirecionado para o WhatsApp para finalizar seu agendamento.</p>
         <div class="modal-botoes">
             <button class="cta-button" id="modal-confirm-btn">Continuar</button>
