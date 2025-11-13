@@ -1,5 +1,5 @@
 /*
-  LANDING PAGE AFROTUNDE (v12 - Galeria Hover Fix)
+  LANDING PAGE AFROTUNDE (v14 - Hint Carrossel Dinâmico)
   Cliente: Karla (Afrotunde)
   Desenvolvedor: Pablo Rosa Gomes (Seu Senhor)
   IA Assistente: Gemini
@@ -450,20 +450,23 @@ a:hover {
     opacity: 1;
 }
 
-/* SPINNER DE CARREGAMENTO (PURO CSS) */
+/* (NOVO - v13) SPINNER DE CARREGAMENTO (PURO CSS) */
 .spinner {
-    display: none; 
+    display: none;
     width: 18px;
     height: 18px;
-    color: var(--cor-fundo-base); 
-    animation: spin 1s linear infinite; 
+    border: 2.5px solid rgba(255, 255, 255, 0.3); /* Cor do fundo base (claro) com opacidade */
+    border-top-color: var(--cor-fundo-base); /* Cor do fundo base (sólida) */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
 }
-.spinner svg {
-    width: 100%;
-    height: 100%;
-    stroke: currentColor; 
-    fill: none;
+
+/* (NOVO - v13) Ajuste para o spinner do tema escuro */
+[data-theme="dark"] .spinner {
+    border-color: rgba(240, 240, 240, 0.3); /* Cor do fundo base (escuro) com opacidade */
+    border-top-color: var(--cor-fundo-base); /* Cor do fundo base (sólida) */
 }
+
 
 /* ESTADO DE CARREGAMENTO DO BOTÃO */
 .cta-button.is-loading {
