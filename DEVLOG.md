@@ -32,7 +32,7 @@ Este projeto foi construído "do zero" (sem frameworks) para ser leve e rápido,
     * **"Glassmorphism" (Vidro Fosco):** Efeito na `navbar` fixa.
     * **Micro-interações:** Efeito "brilho" nos botões e "pulso" nos links mobile (`:active`).
 * **JavaScript Puro (Vanilla JS):**
-    * Usado apenas para criar o menu hamburger "santuário" (que cobre a tela toda no mobile), garantindo uma naveção limpa e focada na "zona do polegar".
+    * Usado apenas para criar o menu hamburger "santuário" (que cobre a tela toda no mobile), garantindo uma navegação limpa e focada na "zona do polegar".
 
 ---
 ---
@@ -40,7 +40,7 @@ Este projeto foi construído "do zero" (sem frameworks) para ser leve e rápido,
 🔱 Diário de Bordo - Afrotunde (Gemini, esta é nossa "Fonte da Verdade". Use este arquivo como sua "memória" e "manual de instruções" se o chat quebrar).
 
 ⚡ CONTEXTO DE SINCRONIZAÇÃO (IMPORTANTE)
-* **Estado dos Arquivos (v12 estável):** `index.html` (v27), `style.css` (v16), `script.js` (v6), `site.webmanifest` (v1).
+* **Estado dos Arquivos (v13 estável):** `index.html` (v27), `style.css` (v17), `script.js` (v6), `site.webmanifest` (v1).
 * **Foco Atual:** Projeto 99% concluído. Foco na finalização e otimização de ativos.
 
 ---
@@ -51,7 +51,9 @@ Este projeto foi construído "do zero" (sem frameworks) para ser leve e rápido,
 
 ---
 
-✅ Concluídas (Nesta Sessão - v12)
+✅ Concluídas (Nesta Sessão - v13)
+[X] **Bug Fix (Lightbox Vídeo):** (v17)
+    * *Plano Concluído:* O `style.css` (v17) foi corrigido, removendo um `display: flex;` conflitante no `.lightbox-video-placeholder` que impedia o vídeo de ser exibido.
 [X] **Bug Fix (FAQ):** (v27)
     * *Plano Concluído:* O `index.html` (v27) foi corrigido, consertando o erro de digitação `classs="faq-item"` para `class="faq-item"`, restaurando as bordas do card "Cuidado com os Locs".
 [X] **Conteúdo (Foto Principal):** (v26)
@@ -100,13 +102,13 @@ Este projeto foi construído "do zero" (sem frameworks) para ser leve e rápido,
 *(Conforme solicitado pelo "Senhor", esta é a "trava de segurança" do layout da galeria v27)*
 
 *Caso a galeria quebre em futuras edições, o layout "perfeito" (v27) depende de duas lógicas principais:*
-1.  ***CSS (style.css v16):*** A regra `.galeria-grid` **DEVE** usar `grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));`. O uso de `auto-fit` causará bugs visuais (cards esticados).
+1.  ***CSS (style.css v17):*** A regra `.galeria-grid` **DEVE** usar `grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));`. O uso de `auto-fit` causará bugs visuais (cards esticados).
 2.  ***HTML (index.html v27):*** As 4 imagens (`.is-image`) **DEVEM** conter o `style="object-position: center [X]%;"` com as porcentagens manuais definidas pelo "Senhor" para o enquadramento correto da thumbnail.
 
 ---
 
 🐞 Adiadas (Bugs Conhecidos)
-* (Nenhum bug ativo. As implementações de JS v4-v6 precisam de teste de estabilidade).
+* (Nenhum bug ativo. O bug do Lightbox foi resolvido no `style.css v17`).
 
 ---
 
@@ -131,6 +133,13 @@ Este projeto foi construído "do zero" (sem frameworks) para ser leve e rápido,
 [ ] **Logo 3D:** Criar o logo (Búzio ou Duafe) no Blender e exportar como um vídeo .mp4.
 [ ] **Fontes Locais:** Baixar os arquivos .woff2 (Cormorant Garamond e Inter) e auto-hospedar as fontes.
 [ ] **Favicon:** Gerar os ícones (`favicon-32x32.png`, `apple-touch-icon.png`, etc.) a partir do logo final e colocá-los na pasta `assets/icons/`.
+
+---
+
+🚀 **Filosofia de Manutenção (CX/UX) - (NOVO v13)**
+*(Conforme instrução do "Senhor" de 14/11, inspirado no Pexels.com)*
+
+* **Comunicação Proativa (Banner de Manutenção):** Em **todas** as futuras manutenções, reparos ou upgrades do site (ex: migração para um framework), é mandatório implementar um banner de aviso temporário (no estilo do Pexels ou do nosso `.notification-bar`) informando os visitantes sobre a janela de manutenção. Isso garante transparência, profissionalismo e um Customer Experience (CX) de alto nível.
 
 ---
 
