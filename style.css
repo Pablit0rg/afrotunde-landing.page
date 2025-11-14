@@ -1,5 +1,5 @@
 /*
-  LANDING PAGE AFROTUNDE (v14 - Hint Carrossel Dinâmico)
+  LANDING PAGE AFROTUNDE (v15 - Card Thumbnail Fix)
   Cliente: Karla (Afrotunde)
   Desenvolvedor: Pablo Rosa Gomes (Seu Senhor)
   IA Assistente: Gemini
@@ -577,18 +577,26 @@ a:hover {
     justify-content: center;
     align-items: center;
     overflow: hidden; 
+    /* (NOVO - v15) Cor de fundo movida da <img> para o <div> pai */
+    background-color: #dbe6db; 
 }
 .galeria-imagem {
     width: 100%;
     height: 100%; 
     object-fit: cover; 
     display: block;
-    background-color: #dbe6db; 
+    /* (REMOVIDO - v15) Cor de fundo movida */
+    /* background-color: #dbe6db; */
     transition: transform 0.3s ease;
 }
 
-[data-theme="dark"] .galeria-imagem {
+[data-theme="dark"] .card-video-thumb {
+    /* (NOVO - v15) Cor de fundo escura para o <div> pai */
     background-color: #3e4a3e; 
+}
+[data-theme="dark"] .galeria-imagem {
+    /* (REMOVIDO - v15) Cor de fundo movida */
+    /* background-color: #3e4a3e; */
 }
 
 /* Ícone de "Play" sobreposto */
@@ -1223,7 +1231,16 @@ a:hover {
         /* Aplica um fade na direita para indicar rolagem */
         -webkit-mask-image: linear-gradient(to right, black 90%, transparent 100%);
         mask-image: linear-gradient(to right, black 90%, transparent 100%);
+        /* (NOVO - v14) Transição para a máscara */
+        transition: -webkit-mask-image 0.3s ease, mask-image 0.3s ease;
     }
+    
+    /* (NOVO - v14) Classe JS para remover a máscara */
+    .depoimentos-wrapper.is-scrolled-to-end {
+        -webkit-mask-image: none;
+        mask-image: none;
+    }
+
 
     /* (CARROSSEL DE DEPOIMENTOS - MOBILE) */
     .depoimentos-grid {
