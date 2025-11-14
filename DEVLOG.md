@@ -40,18 +40,31 @@ Este projeto foi construído "do zero" (sem frameworks) para ser leve e rápido,
 🔱 Diário de Bordo - Afrotunde (Gemini, esta é nossa "Fonte da Verdade". Use este arquivo como sua "memória" e "manual de instruções" se o chat quebrar).
 
 ⚡ CONTEXTO DE SINCRONIZAÇÃO (IMPORTANTE)
-* **Estado dos Arquivos (v13 estável):** `index.html` (v27), `style.css` (v17), `script.js` (v6), `site.webmanifest` (v1).
+* **Estado dos Arquivos (v14 estável):** `index.html` (v27), `style.css` (v17), `script.js` (v6), `site.webmanifest` (v1).
 * **Foco Atual:** Projeto 99% concluído. Foco na finalização e otimização de ativos.
 
 ---
 
-🎯 Próximos Passos (To-Do)
+🚀 **PRIORIDADE MÁXIMA (Pós-Lançamento v2.0) - (NOVO v14)**
+*(Instrução direta do "Senhor" em 14/11/2025: Esta é a primeira tarefa da próxima grande manutenção/reparo, estimada para ~Fev/Mar 2026).*
+
+[ ] **Refatoração com Vue.js (v2.0):**
+    * **Plano:** Migrar o projeto de JavaScript Puro para Vue.js 3 (via CDN/`<script>`, compatível com Chromebook, como discutido).
+    * **Objetivo:** Limpar o `index.html`, tornando-o um "molde" (template).
+    * **Objetivo:** Transferir toda a lógica e dados (o "estado") para o JavaScript (ex: `isModalOpen`, `tema`, e principalmente o *array* da galeria de fotos/vídeos).
+    * **Resultado Esperado:** Facilitar manutenções futuras na "velocidade da luz", permitindo adicionar/remover/reordenar fotos e vídeos da galeria apenas editando um *array* no JS, sem tocar no HTML.
+
+---
+
+🎯 Próximos Passos (To-Do - v1.0)
 * (Auto-promovido da Dica 2)
 [ ] **Performance (Formato WebP):** Usar a tag `<picture>` no `index.html` para as imagens principais (ex: seção `#sobre`) para servir `.webp` com fallback `.jpg`.
 
 ---
 
-✅ Concluídas (Nesta Sessão - v13)
+✅ Concluídas (Nesta Sessão - v14)
+[X] **Filosofia de Manutenção (CX/UX):** (v13)
+    * *Plano Concluído:* Registrada a nova "regra de ouro" (inspirada no Pexels) de sempre usar um banner de aviso proativo durante manutenções futuras para garantir um CX de alto nível.
 [X] **Bug Fix (Lightbox Vídeo):** (v17)
     * *Plano Concluído:* O `style.css` (v17) foi corrigido, removendo um `display: flex;` conflitante no `.lightbox-video-placeholder` que impedia o vídeo de ser exibido.
 [X] **Bug Fix (FAQ):** (v27)
@@ -136,7 +149,7 @@ Este projeto foi construído "do zero" (sem frameworks) para ser leve e rápido,
 
 ---
 
-🚀 **Filosofia de Manutenção (CX/UX) - (NOVO v13)**
+🚀 **Filosofia de Manutenção (CX/UX) - (v13)**
 *(Conforme instrução do "Senhor" de 14/11, inspirado no Pexels.com)*
 
 * **Comunicação Proativa (Banner de Manutenção):** Em **todas** as futuras manutenções, reparos ou upgrades do site (ex: migração para um framework), é mandatório implementar um banner de aviso temporário (no estilo do Pexels ou do nosso `.notification-bar`) informando os visitantes sobre a janela de manutenção. Isso garante transparência, profissionalismo e um Customer Experience (CX) de alto nível.
