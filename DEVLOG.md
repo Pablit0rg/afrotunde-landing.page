@@ -32,7 +32,7 @@ Este projeto foi construído "do zero" (sem frameworks) para ser leve e rápido,
     * **"Glassmorphism" (Vidro Fosco):** Efeito na `navbar` fixa.
     * **Micro-interações:** Efeito "brilho" nos botões e "pulso" nos links mobile (`:active`).
 * **JavaScript Puro (Vanilla JS):**
-    * Usado apenas para criar o menu hamburger "santuário" (que cobre a tela toda no mobile), garantindo uma navegação limpa e focada na "zona do polegar".
+    * Usado apenas para criar o menu hamburger "santuário" (que cobre a tela toda no mobile), garantindo uma naveção limpa e focada na "zona do polegar".
 
 ---
 ---
@@ -40,7 +40,7 @@ Este projeto foi construído "do zero" (sem frameworks) para ser leve e rápido,
 🔱 Diário de Bordo - Afrotunde (Gemini, esta é nossa "Fonte da Verdade". Use este arquivo como sua "memória" e "manual de instruções" se o chat quebrar).
 
 ⚡ CONTEXTO DE SINCRONIZAÇÃO (IMPORTANTE)
-* **Estado dos Arquivos (v11 estável):** `index.html` (v25), `style.css` (v16), `script.js` (v6), `site.webmanifest` (v1).
+* **Estado dos Arquivos (v12 estável):** `index.html` (v27), `style.css` (v16), `script.js` (v6), `site.webmanifest` (v1).
 * **Foco Atual:** Projeto 99% concluído. Foco na finalização e otimização de ativos.
 
 ---
@@ -51,65 +51,57 @@ Este projeto foi construído "do zero" (sem frameworks) para ser leve e rápido,
 
 ---
 
-✅ Concluídas (Nesta Sessão - v11)
+✅ Concluídas (Nesta Sessão - v12)
+[X] **Bug Fix (FAQ):** (v27)
+    * *Plano Concluído:* O `index.html` (v27) foi corrigido, consertando o erro de digitação `classs="faq-item"` para `class="faq-item"`, restaurando as bordas do card "Cuidado com os Locs".
+[X] **Conteúdo (Foto Principal):** (v26)
+    * *Plano Concluído:* O `index.html` (v26) foi atualizado, substituindo a foto placeholder da modelo na seção `#sobre` pela foto real otimizada (`foto-karla-perfil.webp`).
+    * *Plano Concluído:* Atualizadas as meta tags `og:image`, `twitter:image` e `alt` tags para refletir a nova imagem real.
 [X] **Layout Galeria (Correção de Path):** (v25)
     * *Plano Concluído:* O `index.html` (v25) foi corrigido, consertando o `src` quebrado (`assets.img` -> `assets/img`) da imagem "Trança Nagô".
 [X] **Layout Galeria (Re-priorização UX):** (v24)
     * *Plano Concluído:* O `index.html` (v24) foi atualizado para trocar a posição dos cards "Twist" (Foto) e "Manutenção" (Foto), melhorando a ordem de visualização.
 [X] **Layout Galeria (Estratégia de Conversão):** (v23)
-    * *Plano Concluído:* O `index.html` (v23) foi reordenado. Os 4 cards de Imagem (Fotos) agora aparecem *antes* dos 8 cards de Vídeo, alinhado com a estratégia de UX do "Senhor" (mostrar resultado antes do processo).
+    * *Plano Concluído:* O `index.html` (v23) foi reordenado. Os 4 cards de Imagem (Fotos) agora aparecem *antes* dos 8 cards de Vídeo.
 [X] **UI Galeria (Ajuste Fino das Thumbnails):** (v22-manual)
     * *Plano Concluído:* O `index.html` (base v22) foi atualizado pelo "Senhor" com os ajustes manuais de `object-position` (em porcentagem) para um enquadramento perfeito das thumbnails:
-        * `Twist`: `35%`
-        * `Gypsy Braids`: `20%`
         * `Manutenção`: `72%`
+        * `Gypsy Braids`: `20%`
+        * `Twist`: `35%`
         * `Trança Nagô`: `62%`
 [X] **Conteúdo Galeria (Novas Imagens):** (v17)
-    * *Plano Concluído:* O `index.html` (v17) foi populado com as 4 novas imagens `.webp`, incluindo `alt` tags, `data-full-src` e títulos atualizados.
+    * *Plano Concluído:* O `index.html` (v17) foi populado com as 4 novas imagens `.webp`.
 [X] **Layout Galeria (Bug do Grid):** (v16)
-    * *Plano Concluído:* O `style.css` (v16) foi atualizado, trocando `grid-template-columns: repeat(auto-fit, ...)` por `repeat(auto-fill, ...)` para impedir que os cards da galeria se estiquem e quebrem o layout em resoluções maiores.
-[X] **Layout Galeria (Estrutura HTML):** (v14-v15)
-    * *Plano Concluído:* O `index.html` foi debugado (removendo e recriando os cards de imagem) para estabilizar a base do layout da galeria.
+    * *Plano Concluído:* O `style.css` (v16) foi atualizado, trocando `grid-template-columns: repeat(auto-fit, ...)` por `repeat(auto-fill, ...)`.
 [X] **UX Mobile (Hint Carrossel Dinâmico):** (Dica 1)
     * *Plano Concluído:* O `script.js` (v6) foi atualizado.
     * *Plano Concluído:* O `style.css` (v14) foi atualizado.
-    * *Plano Concluído:* Adicionada lógica JS (`onscroll`) que adiciona a classe `.is-scrolled-to-end` ao `.depoimentos-wrapper` quando o scroll horizontal termina.
-    * *Plano Concluído:* A classe `.is-scrolled-to-end` agora remove o `mask-image`, dando feedback de "fim do conteúdo".
+    * *Plano Concluído:* Adicionada lógica JS (`onscroll`) que adiciona a classe `.is-scrolled-to-end`.
 [X] **Performance (Refatorar Spinner):**
-    * *Plano Concluído:* Removido o `<symbol id="icon-spinner">` do `index.html` (v13).
-    * *Plano Concluído:* Substituído o `<svg class="spinner">` por `<span class="spinner">`.
-    * *Plano Concluído:* Atualizado o `style.css` (v13) com uma animação de `border` (CSS puro) para o `.spinner`.
+    * *Plano Concluído:* O `style.css` (v13) foi atualizado com um spinner de CSS puro.
 [X] **UI (Correção Hover Galeria):**
-    * *Plano Concluído:* O `style.css` (v12) foi atualizado para incluir `box-shadow` e `filter: saturate(1.1)` no hover do `.card-servico`, conforme planejado no DEVLOG v8.
+    * *Plano Concluído:* O `style.css` (v12) foi atualizado para incluir `box-shadow` e `filter: saturate(1.1)` no hover do `.card-servico`.
 [X] **A11y (Semântica dos Modais):**
     * *Plano Concluído:* O `index.html` (v12) foi atualizado com `role="dialog"`, `aria-modal="true"` e `aria-labelledby` nos modais.
-    * *Plano Concluído:* Adicionados IDs (`#lightbox-titulo`, `#modal-titulo-wpp`) aos títulos dos modais.
 [X] **Performance (Estilos de Impressão):**
-    * *Plano Concluído:* Adicionado bloco `@media print` ao `style.css` (v11) para otimizar a impressão (focada no FAQ).
+    * *Plano Concluído:* Adicionado bloco `@media print` ao `style.css` (v11).
 [X] **UX Mobile (Hint Carrossel Estático):**
-    * *Plano Concluído:* Adicionado `.depoimentos-wrapper` ao `index.html` (v11).
     * *Plano Concluído:* Adicionado `mask-image` (gradiente) ao `style.css` (v10) no mobile.
 [X] **UI (Indicador de Scroll):**
     * *Plano Concluído:* O `script.js` (v5-retry) foi implementado com `requestAnimationFrame` para controlar a barra `#scroll-bar`.
 [X] **A11y (Outline de Foco):**
-    * *Plano Concluído:* Adicionada regra global `:focus-visible` ao `style.css` (v9) usando a paleta do projeto.
+    * *Plano Concluído:* Adicionada regra global `:focus-visible` ao `style.css` (v9).
 [X] **JS (Automação da Agenda):**
     * *Plano Concluído:* O `script.js` (v4-retry) agora automatiza o texto da agenda (`#texto-agenda`).
-[X] **Performance (Font-Display: Swap):**
-    * *Plano Concluído:* Verificado que o `style.css` já continha `&display=swap`.
-[X] **Dados (WhatsApp & PIX):**
-    * *Plano Concluído:* Links de WhatsApp e PIX atualizados no `index.html` (v10).
-[X] **UI (Refinamentos v7/v8):**
-    * *Plano Concluído:* Layout da Navbar/Footer, cores de ícones (Instagram/Tema) e hover do FAQ (`.faq-item[open] summary`) implementados.
 
 ---
 
 🐞 **RECUPERAÇÃO DE LAYOUT (NOTA DE ESTABILIDADE)**
-*(Conforme solicitado pelo "Senhor", esta é a "trava de segurança" do layout da galeria v25)*
+*(Conforme solicitado pelo "Senhor", esta é a "trava de segurança" do layout da galeria v27)*
 
-*Caso a galeria quebre em futuras edições, o layout "perfeito" (v25) depende de duas lógicas principais:*
+*Caso a galeria quebre em futuras edições, o layout "perfeito" (v27) depende de duas lógicas principais:*
 1.  ***CSS (style.css v16):*** A regra `.galeria-grid` **DEVE** usar `grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));`. O uso de `auto-fit` causará bugs visuais (cards esticados).
-2.  ***HTML (index.html v25):*** As 4 imagens (`.is-image`) **DEVEM** conter o `style="object-position: center [X]%;"` com as porcentagens manuais definidas pelo "Senhor" para o enquadramento correto da thumbnail.
+2.  ***HTML (index.html v27):*** As 4 imagens (`.is-image`) **DEVEM** conter o `style="object-position: center [X]%;"` com as porcentagens manuais definidas pelo "Senhor" para o enquadramento correto da thumbnail.
 
 ---
 
