@@ -1,83 +1,73 @@
 🔱 Diário de Bordo - Afrotunde (Gemini, esta é nossa "Fonte da Verdade". Use este arquivo como sua "memória" e "manual de instruções" se o chat quebrar).
 
 ⚡ CONTEXTO DE SINCRONIZAÇÃO (IMPORTANTE)
-* **Estado dos Arquivos (v10 estável):** `index.html` (v13), `style.css` (v14), `script.js` (v6), `site.webmanifest` (v1).
-* **Foco Atual:** Refinamento de performance, UX Mobile e refatoração de código limpo.
+* **Estado dos Arquivos (v11 estável):** `index.html` (v18), `style.css` (v15 - Bugado), `script.js` (v6).
+* **Progresso dos Ativos:** Os 8 links de vídeo `data-full-src` foram inseridos no `index.html (v18)`.
+* **Bug Crítico (Layout):** O layout da galeria (`#catalogo`) está quebrado **apenas** para os cards de imagem (Cards 9-13). Eles estão 'colados' e 'desproporcionais', sem altura definida (250px) após a remoção das `<img>` (placeholders).
+* **Ação Estratégica (Instrução do Senhor):** Estamos iniciando um novo chat para isolar este bug de CSS, pois o chat atual pode estar "sobrecarregado".
 
 ---
 
 🎯 Próximos Passos (To-Do)
-* (Auto-promovido da Dica 2)
-[ ] **Performance (Formato WebP):** Usar a tag `<picture>` no `index.html` para as imagens principais (ex: seção `#sobre`) para servir `.webp` com fallback `.jpg`.
+[ ] **(NOVA PRIORIDADE MÁXIMA) Correção de Layout (Cards de Imagem):**
+    * **PROBLEMA:** Os cards de imagem (9-13) estão com tamanho desproporcional (sem altura) e "grudados", quebrando o grid. Isso ocorreu porque o `style.css (v15)` falhou em aplicar a altura e a cor de fundo (placeholder) aos `.card-video-thumb` que também possuem a classe `.is-image`.
+    * **AÇÃO:** Modificar o `style.css` para forçar a altura (`height: 250px`) e o `background-color` (placeholder) no `.card-video-thumb` de **todos** os 13 cards, incluindo os `.is-image`.
+    * **PROIBIDO (Instrução do Senhor):** É estritamente proibido alterar o HTML ou CSS dos cards de vídeo (1-8) ou os links de vídeo já inseridos. Eles estão perfeitos e não podem ser mexidos.
+    * **OBJETIVO:** Fazer esta correção de layout levará o projeto a 99.9% de conclusão.
 
 ---
 
-✅ Concluídas (Nesta Sessão - v13)
-[X] **UX Mobile (Hint Carrossel Dinâmico):** (Dica 1)
-    * *Plano Concluído:* O `script.js` (v6) foi atualizado.
-    * *Plano Concluído:* O `style.css` (v14) foi atualizado.
-    * *Plano Concluído:* Adicionada lógica JS (`onscroll`) que adiciona a classe `.is-scrolled-to-end` ao `.depoimentos-wrapper` quando o scroll horizontal termina.
-    * *Plano Concluído:* A classe `.is-scrolled-to-end` agora remove o `mask-image`, dando feedback de "fim do conteúdo".
+✅ Concluídas (Nesta Sessão - v14)
+[X] **PACOTE DE ATIVOS (Parcial): Links dos Vídeos (Cards 1-8):**
+    * *Plano Concluído (Quebra de Protocolo):* A pedido do Senhor, a etapa final de ativos foi adiantada.
+    * *Plano Concluído:* Os 8 títulos e 8 links de vídeo (`watch?v=...`) foram inseridos no `index.html (v18)`.
+    * *Plano Concluído:* As 8 `<img>` tags (placeholders) dos cards de vídeo foram removidas.
+    * *Plano Concluído:* Um `ASSETS.md` foi criado no GitHub para inventariar os links.
+    * *Plano Concluído (Teste):* O teste com o link "Não listado" foi bem-sucedido na Vercel.
+
+[X] **UX Mobile (Hint Carrossel Dinâmico):**
+    * *Plano Concluído:* `script.js` (v6) e `style.css` (v14) adicionam a classe `.is-scrolled-to-end` para remover dinamicamente a `mask-image` no scroll.
 
 [X] **Performance (Refatorar Spinner):**
-    * *Plano Concluído:* Removido o `<symbol id="icon-spinner">` do `index.html` (v13).
-    * *Plano Concluído:* Substituído o `<svg class="spinner">` por `<span class="spinner">`.
-    * *Plano Concluído:* Atualizado o `style.css` (v13) com uma animação de `border` (CSS puro) para o `.spinner`.
+    * *Plano Concluído:* Removido `<symbol id="icon-spinner">` do `index.html` (v13) e substituído por `<span class="spinner">`.
+    * *Plano Concluído:* Atualizado `style.css` (v13) com animação CSS pura.
 
 [X] **UI (Correção Hover Galeria):**
-    * *Plano Concluído:* O `style.css` (v12) foi atualizado para incluir `box-shadow` e `filter: saturate(1.1)` no hover do `.card-servico`, conforme planejado no DEVLOG v8.
+    * *Plano Concluído:* `style.css` (v12) atualizado com `box-shadow` e `filter: saturate(1.1)` no hover do `.card-servico`.
 
 [X] **A11y (Semântica dos Modais):**
-    * *Plano Concluído:* O `index.html` (v12) foi atualizado com `role="dialog"`, `aria-modal="true"` e `aria-labelledby` nos modais.
-    * *Plano Concluído:* Adicionados IDs (`#lightbox-titulo`, `#modal-titulo-wpp`) aos títulos dos modais.
+    * *Plano Concluído:* `index.html` (v12) atualizado com `role="dialog"`, `aria-modal="true"` e `aria-labelledby` nos modais.
 
 [X] **Performance (Estilos de Impressão):**
-    * *Plano Concluído:* Adicionado bloco `@media print` ao `style.css` (v11) para otimizar a impressão (focada no FAQ).
+    * *Plano Concluído:* Adicionado bloco `@media print` ao `style.css` (v11).
 
 [X] **UX Mobile (Hint Carrossel Estático):**
-    * *Plano Concluído:* Adicionado `.depoimentos-wrapper` ao `index.html` (v11).
-    * *Plano Concluído:* Adicionado `mask-image` (gradiente) ao `style.css` (v10) no mobile.
+    * *Plano Concluído:* Adicionado `.depoimentos-wrapper` ao `index.html` (v11) e `mask-image` ao `style.css` (v10).
 
 [X] **UI (Indicador de Scroll):**
-    * *Plano Concluído:* O `script.js` (v5-retry) foi implementado com `requestAnimationFrame` para controlar a barra `#scroll-bar`.
+    * *Plano Concluído:* `script.js` (v5-retry) implementado com `requestAnimationFrame` para `#scroll-bar`.
 
 [X] **A11y (Outline de Foco):**
-    * *Plano Concluído:* Adicionada regra global `:focus-visible` ao `style.css` (v9) usando a paleta do projeto.
+    * *Plano Concluído:* Adicionada regra `:focus-visible` ao `style.css` (v9).
 
 [X] **JS (Automação da Agenda):**
-    * *Plano Concluído:* O `script.js` (v4-retry) agora automatiza o texto da agenda (`#texto-agenda`).
-
-[X] **Performance (Font-Display: Swap):**
-    * *Plano Concluído:* Verificado que o `style.css` já continha `&display=swap`.
-
-[X] **Dados (WhatsApp & PIX):**
-    * *Plano Concluído:* Links de WhatsApp e PIX atualizados no `index.html` (v10).
-
-[X] **UI (Refinamentos v7/v8):**
-    * *Plano Concluído:* Layout da Navbar/Footer, cores de ícones (Instagram/Tema) e hover do FAQ (`.faq-item[open] summary`) implementados.
-
----
-
-🐞 Adiadas (Bugs Conhecidos)
-* (Nenhum bug ativo. As implementações de JS v4-v6 precisam de teste de estabilidade).
+    * *Plano Concluído:* `script.js` (v4-retry) agora automatiza o `#texto-agenda`.
 
 ---
 
 🅿️ Adiadas (FINALIZAÇÃO DO PROJETO - ÚLTIMA ETAPA)
-*(Por instrução direta do "Senhor", este bloco é a ÚLTIMA etapa do projeto, a ser feita apenas após todo o código estar 100% pronto e depurado).*
+*(O DEVLOG foi atualizado. Esta é a nova lista de pendências)*
 
 [ ] **PACOTE DE ATIVOS (FINALIZAÇÃO):**
     [ ] **Performance (Ativos de Imagem):**
-        [ ] Otimizar (comprimir no Squoosh/TinyPNG) as 5 fotos reais.
-        [ ] Otimizar (comprimir) as 8 thumbnails dos vídeos (tirar print e comprimir).
-        [ ] Otimizar (comprimir) a foto da seção `#sobre` e `og:image`.
-        [ ] Fazer upload de todas as imagens otimizadas para o GitHub (`/assets/img/`).
-    [ ] **Conteúdo (Vídeos):**
-        [ ] Fazer upload dos 8 arquivos .mp4 recebidos para o YouTube (ou Vimeo, se o YouTube falhar) para usarmos o "Padrão de Fachada".
-    [D] **Conteúdo (Substituição de Links):**
-        [ ] Substituir os 13 `src` e `data-full-src` dos placeholders da galeria (`#catalogo`) pelos links reais (YouTube e imagens hospedadas).
-        [ ] Substituir o `src` da foto `#sobre` pelo link real (`assets/img/foto-karla-perfil.jpg`).
-        [ ] Substituir as meta tags `og:image` e `twitter:image` no `<head>` pela URL completa da Vercel (https://afrotunde.../assets/img/foto-karla-perfil.jpg).
+        [ ] Otimizar (comprimir no Squoosh) as 8 thumbnails dos vídeos (prints `.webp`).
+        [ ] Otimizar (comprimir no Squoosh) as 5 fotos reais (`.webp`).
+        [ ] Fazer upload de todas as 13 imagens `.webp` para o GitHub (`/assets/img/`).
+    [ ] **Conteúdo (Substituição de Links):**
+        [ ] (Após correção do layout) Inserir as 13 tags `<img>` (atualmente removidas) com os links `.webp` otimizados.
+        [ ] Substituir os 5 `data-full-src` das fotos (Cards 9-13) pelos links `.webp` otimizados.
+        [ ] Substituir o `src` da foto `#sobre` pelo link real (`.webp`).
+        [ ] Substituir as meta tags `og:image` e `twitter:image` no `<head>` pela URL completa da Vercel.
     [ ] **A11y (Imagens):**
         [ ] Atualizar o `alt text` de todas as 13 thumbnails da galeria com descrições reais.
 
@@ -88,8 +78,9 @@
 ---
 
 💡 Banco de Ideias (Próximas Sugestões)
+[ ] **Performance (Formato WebP):** (Movido de volta para o banco de ideias, já que estamos focando nos ativos primeiro).
 [ ] **Refatoração JS (DRY WhatsApp):** Usar uma classe comum (`.whatsapp-trigger`) para os botões de agendamento e otimizar o `script.js`.
-[ ] **Refatoração JS (Intl.DateTimeFormat):** Modernizar a lógica da agenda no `script.js` para usar a API `Intl` em vez de um array de meses.
+[ ] **Refatoração JS (Intl.DateTimeFormat):** Modernizar a lógica da agenda no `script.js` para usar a API `Intl`.
 [ ] **UX (Scroll Suave JS):** Implementar `scrollIntoView({ behavior: 'smooth' })` no JS para o botão "Voltar ao Topo".
 
 ---
